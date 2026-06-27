@@ -1,0 +1,144 @@
+.hero{
+    max-width:1400px;
+    margin:auto;
+    padding:80px 60px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:70px;
+
+    min-height:90vh;
+
+    background: transparent;
+}
+
+.hero-left{
+    flex:1;
+}
+
+.welcome-box{
+    display:inline-block;
+    background: var(--card);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    padding:12px 20px;
+    border-radius:30px;
+    margin-bottom:30px;
+    box-shadow: var(--shadow-sm);
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.hero h1{
+    font-size:68px;
+    line-height:1.05;
+    color: var(--primary);
+    margin-bottom:25px;
+    font-family: var(--font-heading);
+}
+
+.hero p{
+    font-size:18px;
+    color: var(--secondary);
+    max-width:600px;
+    line-height:1.8;
+    margin-bottom:40px;
+    font-family: var(--font-body);
+}
+
+.hero-buttons{
+    display:flex;
+    gap:20px;
+}
+
+.hero-right{
+    flex:1;
+    display:flex;
+    justify-content:center;
+}
+
+.inspiration-card{
+    width:420px;
+    background: var(--card);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid var(--border);
+    padding:35px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    transition: all 0.35s ease;
+}
+
+.inspiration-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-md);
+}
+
+.inspiration-card h2{
+    margin-bottom:20px;
+    color: var(--primary);
+    font-family: var(--font-heading);
+}
+
+.inspiration-card input{
+    width:100%;
+    padding:15px;
+    border: 1px solid var(--border);
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-sm);
+    margin-bottom:25px;
+    outline: none;
+    font-family: var(--font-body);
+    transition: border-color 0.3s;
+}
+
+.inspiration-card input:focus{
+    border-color: var(--accent);
+}
+
+.collection{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.collection-item{
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-sm);
+    color: var(--primary);
+    font-family: var(--font-body);
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.collection-item:hover{
+    background: var(--primary);
+    color: white;
+    cursor:pointer;
+    transform: translateX(6px);
+}
+
+@media(max-width:1000px){
+
+.hero{
+flex-direction:column;
+padding:50px 25px;
+}
+
+.hero h1{
+font-size:46px;
+}
+
+.inspiration-card{
+width:100%;
+}
+
+.hero-buttons{
+flex-direction:column;
+}
+
+}

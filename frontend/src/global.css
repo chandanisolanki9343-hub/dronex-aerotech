@@ -1,0 +1,195 @@
+/* =========================
+   DRONEX AEROTECH UI SYSTEM
+   PREMIUM DESIGN UPGRADE
+========================= */
+
+:root {
+  /* Background (warm premium gradient system) */
+  --bg: #F6F1E8;
+  --bg-soft: #FBF8F3;
+
+  /* Primary text (deep charcoal) */
+  --primary: #1A1A1A;
+
+  /* Secondary text */
+  --secondary: #6B6B6B;
+
+  /* Accent (kept premium gold) */
+  --accent: #B8893C;
+
+  /* Card surface */
+  --card: rgba(255, 255, 255, 0.75);
+
+  /* Borders */
+  --border: rgba(0, 0, 0, 0.08);
+
+  /* Typography */
+  --font-heading: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  /* Layout */
+  --container: 1200px;
+
+  /* Radius */
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+
+  /* Shadows (soft dashboard style) */
+  --shadow-sm: 0 8px 20px rgba(0,0,0,0.06);
+  --shadow-md: 0 18px 45px rgba(0,0,0,0.10);
+}
+
+/* =========================
+   BASE RESET
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(
+    135deg,
+    #F6F1E8 0%,
+    #FBF8F3 50%,
+    #FFFFFF 100%
+  );
+
+  color: var(--primary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.6px;
+}
+
+p {
+  color: var(--secondary);
+}
+
+/* =========================
+   LAYOUT
+========================= */
+
+.container {
+  max-width: var(--container);
+  margin: auto;
+  padding: 0 24px;
+}
+
+section {
+  padding: 100px 0;
+}
+
+/* =========================
+   GLASS CARD (PREMIUM UI)
+========================= */
+
+.card {
+  background: var(--card);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+
+  padding: 22px;
+
+  box-shadow: var(--shadow-sm);
+
+  transition: all 0.35s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-md);
+}
+
+/* =========================
+   BUTTON SYSTEM
+========================= */
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  padding: 12px 26px;
+  border-radius: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  font-family: var(--font-body);
+}
+
+.btn-primary {
+  background: #1A1A1A;
+  color: #FFFFFF;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+}
+
+.btn-primary:hover {
+  background: #000000;
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+}
+
+.btn-secondary {
+  background: rgba(255,255,255,0.6);
+  border: 1px solid var(--border);
+  color: var(--primary);
+  backdrop-filter: blur(12px);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeUp 0.8s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+}
+
+/* =========================
+   UTILITY
+========================= */
+
+.text-accent {
+  color: var(--accent);
+}
