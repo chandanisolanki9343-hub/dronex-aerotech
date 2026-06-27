@@ -20,16 +20,16 @@ function Navbar() {
       <div className="navbar-logo">
         <Link to="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
           <div style={{
-            padding: "4px 14px",
-            borderRadius: "10px",
+            padding: "3px 10px",
+            borderRadius: "8px",
             background: "#000000",
             border: "1px solid var(--accent)",
-            boxShadow: "0 4px 12px rgba(184, 137, 60, 0.15)",
+            boxShadow: "0 4px 10px rgba(184, 137, 60, 0.15)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center"
           }} className="logo-badge">
-            <img src="/logo.png" alt="Dronex AeroTech" style={{ height: "32px", objectFit: "contain" }} />
+            <img src="/logo.png" alt="Dronex AeroTech" style={{ height: "24px", objectFit: "contain" }} />
           </div>
         </Link>
       </div>

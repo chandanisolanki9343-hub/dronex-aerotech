@@ -12,18 +12,18 @@ function Footer() {
         <div className="footer-section">
 
           <div style={{
-            padding: "6px 16px",
-            borderRadius: "10px",
+            padding: "4px 12px",
+            borderRadius: "8px",
             background: "#000000",
             border: "1px solid var(--accent)",
-            boxShadow: "0 4px 12px rgba(184, 137, 60, 0.15)",
+            boxShadow: "0 4px 10px rgba(184, 137, 60, 0.15)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             marginBottom: "15px",
             width: "fit-content"
           }}>
-            <img src="/logo.png" alt="Dronex AeroTech" style={{ height: "35px", objectFit: "contain" }} />
+            <img src="/logo.png" alt="Dronex AeroTech" style={{ height: "24px", objectFit: "contain" }} />
           </div>
 
           <p>

@@ -55,20 +55,8 @@ function AdminLogin() {
           className="admin-login-card"
           onSubmit={handleSubmit}
         >
-          <div style={{
-            padding: "8px 20px",
-            borderRadius: "10px",
-            background: "#000000",
-            border: "1px solid var(--accent)",
-            boxShadow: "0 4px 12px rgba(184, 137, 60, 0.15)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: "20px",
-            width: "fit-content",
-            alignSelf: "center"
-          }}>
-            <img src="/logo.png" alt="Dronex AeroTech" style={{ height: "35px", objectFit: "contain" }} />
+          <div className="logo">
+            <span className="bold">Dronex</span> <span className="light">Aerotech</span>
           </div>
 
           <hr />
