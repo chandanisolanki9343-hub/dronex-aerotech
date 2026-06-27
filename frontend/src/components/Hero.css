@@ -122,23 +122,35 @@
     transform: translateX(6px);
 }
 
-@media(max-width:1000px){
-
-.hero{
-flex-direction:column;
-padding:50px 25px;
+@media(max-width: 1100px) {
+    .hero {
+        padding: 60px 40px;
+        gap: 40px;
+    }
+    .inspiration-card {
+        width: 350px;
+        padding: 25px;
+    }
+    .hero h1 {
+        font-size: 52px;
+    }
 }
 
-.hero h1{
-font-size:46px;
-}
-
-.inspiration-card{
-width:100%;
-}
-
-.hero-buttons{
-flex-direction:column;
-}
-
+@media(max-width: 850px) {
+    .hero {
+        flex-direction: column;
+        padding: 50px 25px;
+        gap: 40px;
+    }
+    .hero h1 {
+        font-size: 44px;
+    }
+    .inspiration-card {
+        width: 100%;
+        max-width: 420px;
+    }
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
 }
