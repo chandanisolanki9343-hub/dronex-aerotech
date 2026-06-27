@@ -91,6 +91,7 @@ function AdminEvents() {
   };
 
   const deleteEvent = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this event?")) return;
     try {
       await api.delete(`/events/${id}`);
       alert("Event Deleted");

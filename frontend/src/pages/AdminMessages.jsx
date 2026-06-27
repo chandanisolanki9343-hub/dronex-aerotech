@@ -18,6 +18,7 @@ function AdminMessages() {
   }, []);
 
   const deleteMessage = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this message?")) return;
     try {
       await api.delete(`/contact/${id}`);
       alert("Message Deleted");

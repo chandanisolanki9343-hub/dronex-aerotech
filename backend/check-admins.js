@@ -23,7 +23,7 @@ const checkOrSeedAdmins = async () => {
       console.log("No admins found in the database. Creating a default admin account...");
       
       const defaultEmail = "admin@dronex.com";
-      const defaultPassword = "admin123";
+      const defaultPassword = "DronexAdmin#2026";
       const hashedPassword = await bcrypt.hash(defaultPassword, 10);
       
       const newAdmin = await Admin.create({

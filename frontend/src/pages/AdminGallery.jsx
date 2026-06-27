@@ -87,6 +87,7 @@ function AdminGallery() {
   };
 
   const deleteItem = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this gallery item?")) return;
     try {
       await api.delete(`/gallery/${id}`);
       alert("Gallery Item Deleted");

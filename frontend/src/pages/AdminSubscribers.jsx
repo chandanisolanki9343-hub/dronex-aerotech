@@ -18,6 +18,7 @@ function AdminSubscribers() {
   }, []);
 
   const deleteSubscriber = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this subscriber?")) return;
     try {
       await api.delete(`/newsletter/${id}`);
       alert("Subscriber Deleted");

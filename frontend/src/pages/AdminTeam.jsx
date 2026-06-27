@@ -96,6 +96,7 @@ function AdminTeam() {
   };
 
   const deleteMember = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this team member?")) return;
     try {
       await api.delete(`/team/${id}`);
       alert("Member Deleted");

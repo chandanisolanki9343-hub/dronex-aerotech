@@ -18,6 +18,7 @@ function AdminRecruitment() {
   }, []);
 
   const deleteApplication = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this application?")) return;
     try {
       await api.delete(`/recruitment/${id}`);
       alert("Application Deleted Successfully");

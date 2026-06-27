@@ -12,7 +12,7 @@ const resetPassword = async () => {
     await mongoose.connect(process.env.MONGO_URI);
     console.log("MongoDB connected.");
 
-    const newPassword = "admin123";
+    const newPassword = "DronexAdmin#2026";
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
     const admin = await Admin.findOneAndUpdate(
@@ -24,7 +24,7 @@ const resetPassword = async () => {
     if (admin) {
       console.log(`Password reset successful for ${admin.email}!`);
       console.log(`Email: admin@dronex.com`);
-      console.log(`Password: admin123`);
+      console.log(`Password: DronexAdmin#2026`);
     } else {
       console.log("Admin account not found. Creating a new one instead...");
       await Admin.create({
@@ -35,7 +35,7 @@ const resetPassword = async () => {
       });
       console.log(`Admin account created!`);
       console.log(`Email: admin@dronex.com`);
-      console.log(`Password: admin123`);
+      console.log(`Password: DronexAdmin#2026`);
     }
   } catch (error) {
     console.error("Password reset failed:", error);
