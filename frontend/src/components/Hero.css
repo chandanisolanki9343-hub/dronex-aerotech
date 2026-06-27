@@ -1,14 +1,14 @@
 .hero{
     max-width:1400px;
     margin:auto;
-    padding:80px 60px;
+    padding:40px 60px;
 
     display:flex;
     justify-content:space-between;
     align-items:center;
     gap:70px;
 
-    min-height:90vh;
+    min-height:60vh;
 
     background: transparent;
 }
@@ -125,8 +125,9 @@
 
 @media(max-width: 1100px) {
     .hero {
-        padding: 90px 40px 60px;
+        padding: 30px 40px;
         gap: 30px;
+        min-height: auto;
     }
     .inspiration-card {
         width: 350px;
@@ -143,8 +144,9 @@
 @media(max-width: 850px) {
     .hero {
         flex-direction: column;
-        padding: 50px 25px;
+        padding: 20px 25px;
         gap: 40px;
+        min-height: auto;
     }
     .hero h1 {
         font-size: 44px;
