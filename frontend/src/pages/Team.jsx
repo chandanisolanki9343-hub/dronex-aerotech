@@ -107,8 +107,10 @@ function Team() {
     );
   };
 
+  const studentTeam = team.filter((m) => m.position !== "Club Coordinator");
+
   // Group members by department
-  const groupedTeam = team.reduce((acc, member) => {
+  const groupedTeam = studentTeam.reduce((acc, member) => {
     const dept = member.department || "Other";
     if (!acc[dept]) acc[dept] = [];
     acc[dept].push(member);
@@ -118,9 +120,35 @@ function Team() {
   return (
     <div className="container" style={{ padding: "100px 24px", minHeight: "80vh" }}>
       <div className="section-header" style={{ marginBottom: "40px" }}>
-        <h2>Meet Our Team</h2>
+        <h2>Meet Our Members</h2>
         <p>Passionate students, developers, designers, and innovators building the future of drone and aerospace technology.</p>
       </div>
+
+      {/* Club Coordinator Section */}
+      {team.find((m) => m.position === "Club Coordinator") && (
+        <div className="coordinator-section" style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          marginBottom: "60px",
+          textAlign: "center"
+        }}>
+          <h3 style={{
+            fontSize: "14px",
+            textTransform: "uppercase",
+            letterSpacing: "3px",
+            color: "var(--accent)",
+            marginBottom: "20px",
+            fontFamily: "var(--font-body)",
+            fontWeight: 600
+          }}>
+            Club Coordinator
+          </h3>
+          <div style={{ maxWidth: "350px", width: "100%" }}>
+            <TeamPreview member={team.find((m) => m.position === "Club Coordinator")} />
+          </div>
+        </div>
+      )}
 
       {/* Tabs for filtering */}
       <div className="team-tabs" style={{ 

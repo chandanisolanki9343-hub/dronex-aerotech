@@ -48,3 +48,36 @@
     line-height:1.6;
     margin-bottom:18px;
 }
+
+.badge-completed {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #d97706; /* premium amber/gold color */
+  color: white;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+.event-completed {
+  opacity: 1;
+}
+
+.event-completed img {
+  height: 420px; /* Taller height to show vertical poster details clearly */
+  object-fit: cover;
+  object-position: center;
+  filter: contrast(102%);
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 380px));
+  gap: 30px;
+}

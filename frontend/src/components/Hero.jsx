@@ -8,7 +8,7 @@ function Hero() {
       <div className="hero-left">
 
         <div className="welcome-box">
-          🚀 Welcome to Dronex AeroTech
+          Welcome to Dronex AeroTech
         </div>
 
         <h1>

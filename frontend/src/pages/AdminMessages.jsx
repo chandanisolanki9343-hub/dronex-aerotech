@@ -6,7 +6,7 @@ function AdminMessages() {
 
   const fetchMessages = async () => {
     try {
-      const res = await api.get("/contact");
+      const res = await api.get("/messages");
       setMessages(res.data.messages || []);
     } catch (error) {
       console.log(error);
@@ -20,7 +20,7 @@ function AdminMessages() {
   const deleteMessage = async (id) => {
     if (!window.confirm("Are you sure you want to delete this message?")) return;
     try {
-      await api.delete(`/contact/${id}`);
+      await api.delete(`/messages/${id}`);
       alert("Message Deleted");
       fetchMessages();
     } catch (error) {

@@ -67,9 +67,9 @@ function Footer() {
 
           <p>📧 dronexaerotech@gmail.com</p>
 
-          <p>📍 Your College Name</p>
+          <p>📍 College Campus, Drone School</p>
 
-          <p>📞 +91 XXXXX XXXXX</p>
+          <p>📞 +91 9425168627</p>
 
         </div>
 
@@ -77,12 +77,31 @@ function Footer() {
 
       <hr />
 
+      {/* Developer Credit and Copyright Section */}
       <div className="footer-bottom">
-
-        <p>
-          © 2026 Dronex AeroTech. All Rights Reserved.
+        <p className="copyright-text">
+          © 2026 Dronex AeroTech Club. All rights reserved.
         </p>
+        
+        <div className="developed-by">
+          <span>Developed by</span>
+          <img 
+            src="/chandani.jpg" 
+            alt="Chandani Solanki" 
+            className="developer-avatar"
+          />
+          <span className="developer-name">Chandani Solanki</span>
+          <span className="developer-separator">•</span>
+          <span className="developer-details">Information Technology, 3rd Year</span>
+        </div>
 
+        <div className="developer-links">
+          <Link to="/portfolio">Portfolio ↗</Link>
+          <span className="link-separator">|</span>
+          <a href="https://github.com/chandanisolanki9343-hub" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <span className="link-separator">|</span>
+          <a href="https://www.linkedin.com/in/chandani-solanki-78299834a" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+        </div>
       </div>
 
     </footer>

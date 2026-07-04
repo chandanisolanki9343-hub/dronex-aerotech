@@ -48,7 +48,7 @@ function TeamPreview({ member }) {
 
         <p>{member.department}</p>
 
-        <div className="social-links">
+        <div className="social-links" onClick={(e) => e.stopPropagation()}>
 
           {member.linkedin && (
             <a

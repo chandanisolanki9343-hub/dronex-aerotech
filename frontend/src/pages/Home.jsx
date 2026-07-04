@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../services/api";
 
 import Hero from "../components/Hero";
@@ -12,6 +12,7 @@ import WhyChoose from "../components/WhyChoose";
 import JoinCTA from "../components/JoinCTA";
 
 function Home() {
+  const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [events, setEvents] = useState([]);
   const [team, setTeam] = useState([]);
@@ -83,19 +84,25 @@ function Home() {
           <p>Workshops, Competitions and Drone Activities</p>
         </div>
 
-        <div className="projects-grid">
-          {events.slice(0, 3).map((event) => (
-            <EventPreview key={event._id} event={event} />
-          ))}
-        </div>
+        {events.filter(event => !event.isCompleted).length > 0 ? (
+          <div className="projects-grid">
+            {events.filter(event => !event.isCompleted).slice(0, 3).map((event) => (
+              <EventPreview key={event._id} event={event} />
+            ))}
+          </div>
+        ) : (
+          <p style={{ textAlign: "center", color: "var(--secondary)", width: "100%", marginTop: "20px" }}>
+            No upcoming events scheduled. Keep an eye out for updates!
+          </p>
+        )}
       </section>
 
       <section className="home-team">
         <div className="section-header">
-          <h2>Meet Our Team</h2>
+          <h2>Meet Our Members</h2>
           <p>Passionate students building the future of drones.</p>
         </div>
-
+ 
         {/* Club President Card Prominently Center-Aligned */}
         {team.find((member) => member.position === "Club President") && (
           <div className="president-section" style={{ 
@@ -115,17 +122,16 @@ function Home() {
             }}>
               Club President
             </h3>
-            <div style={{ maxWidth: "350px", width: "100%" }} className="president-card-wrap">
-              <Link
-                to="/team?department=President"
-                style={{ textDecoration: "none", color: "inherit", display: "block" }}
-              >
-                <TeamPreview member={team.find((member) => member.position === "Club President")} />
-              </Link>
+            <div 
+              style={{ maxWidth: "350px", width: "100%", cursor: "pointer" }} 
+              className="president-card-wrap"
+              onClick={() => navigate("/team?department=President")}
+            >
+              <TeamPreview member={team.find((member) => member.position === "Club President")} />
             </div>
           </div>
         )}
-
+ 
         <div className="section-header" style={{ marginBottom: "30px", marginTop: "20px" }}>
           <h3 style={{ 
             fontSize: "14px", 
@@ -135,22 +141,22 @@ function Home() {
             fontFamily: "var(--font-body)",
             fontWeight: 600
           }}>
-            Domain Leads
+            Meet My Members
           </h3>
         </div>
-
+ 
         <div className="projects-grid">
           {team
-            .filter((member) => member.isLeader && member.position !== "Club President")
+            .filter((member) => member.isLeader && member.position !== "Club President" && member.position !== "Club Coordinator")
             .map((member) => (
-              <Link
-                to={`/team?department=${encodeURIComponent(member.department)}`}
+              <div
                 key={member._id}
                 className="team-leader-link"
-                style={{ textDecoration: "none", color: "inherit", display: "block" }}
+                style={{ cursor: "pointer", display: "block" }}
+                onClick={() => navigate(`/team?department=${encodeURIComponent(member.department)}`)}
               >
                 <TeamPreview member={member} />
-              </Link>
+              </div>
             ))}
         </div>
       </section>

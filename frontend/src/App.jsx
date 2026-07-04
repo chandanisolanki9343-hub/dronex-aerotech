@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -10,6 +11,7 @@ import Events from "./pages/Events";
 import Gallery from "./pages/Gallery";
 import Recruitment from "./pages/Recruitment";
 import Contact from "./pages/Contact";
+import Portfolio from "./pages/Portfolio";
 import AdminLogin from "./pages/AdminLogin";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -24,6 +26,11 @@ import AdminRecruitment from "./pages/AdminRecruitment";
 
 function App() {
   const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   const isAdminPage = location.pathname.startsWith("/dashboard") || location.pathname === "/admin-login";
 
   return (
@@ -38,6 +45,7 @@ function App() {
       <Route path="/gallery" element={<Gallery />} />
       <Route path="/recruitment" element={<Recruitment />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/portfolio" element={<Portfolio />} />
 
       <Route path="/admin-login" element={<AdminLogin />} />
       <Route path="/dashboard" element={<Dashboard />} />
