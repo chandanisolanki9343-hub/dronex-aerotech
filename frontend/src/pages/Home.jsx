@@ -83,9 +83,11 @@ function Home() {
               alt="Dronex AeroTech Drone" 
               style={{ 
                 width: "100%", 
-                maxWidth: "400px",
+                maxWidth: "480px",
                 height: "auto", 
-                objectFit: "contain",
+                objectFit: "cover",
+                borderRadius: "16px",
+                boxShadow: "0 10px 30px rgba(0, 0, 0, 0.12)",
                 display: "block"
               }} 
             />
