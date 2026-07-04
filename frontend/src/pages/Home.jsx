@@ -55,6 +55,108 @@ function Home() {
     <>
       <Hero />
 
+      {/* Premium About Section */}
+      <section className="home-about-section" style={{
+        padding: "100px 24px",
+        background: "radial-gradient(circle at top right, rgba(0, 86, 179, 0.08), transparent 50%), radial-gradient(circle at bottom left, rgba(0, 0, 0, 0.4), transparent 70%)",
+        borderBottom: "1px solid rgba(255, 255, 255, 0.05)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+      }}>
+        <div style={{
+          maxWidth: "1200px",
+          width: "100%",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+          gap: "60px",
+          alignItems: "center"
+        }}>
+          {/* Left Column: Visual Emblem/Logo */}
+          <div style={{
+            display: "flex",
+            justifyContent: "center",
+            position: "relative"
+          }}>
+            {/* Glowing Backdrop */}
+            <div style={{
+              position: "absolute",
+              width: "220px",
+              height: "220px",
+              borderRadius: "50%",
+              background: "var(--accent, #0056b3)",
+              filter: "blur(60px)",
+              opacity: 0.15,
+              zIndex: 0
+            }}></div>
+            
+            <div style={{
+              position: "relative",
+              zIndex: 1,
+              background: "rgba(255, 255, 255, 0.02)",
+              backdropFilter: "blur(12px)",
+              border: "1px solid rgba(255, 255, 255, 0.08)",
+              padding: "40px",
+              borderRadius: "24px",
+              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)",
+              textAlign: "center",
+              maxWidth: "340px",
+              width: "100%"
+            }}>
+              <div style={{
+                width: "80px",
+                height: "80px",
+                margin: "0 auto 20px auto",
+                borderRadius: "50%",
+                background: "linear-gradient(135deg, var(--accent, #0056b3), #003366)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "36px",
+                boxShadow: "0 10px 20px rgba(0, 86, 179, 0.3)"
+              }}>
+                🚀
+              </div>
+              <h3 style={{ fontSize: "22px", fontWeight: "600", margin: "0 0 10px 0", color: "#fff" }}>Dronex AeroTech</h3>
+              <p style={{ fontSize: "14px", color: "#888", margin: 0 }}>Research & Development Club</p>
+            </div>
+          </div>
+
+          {/* Right Column: Content */}
+          <div style={{ zIndex: 1, textAlign: "left" }}>
+            <span style={{
+              fontSize: "13px",
+              fontWeight: "750",
+              textTransform: "uppercase",
+              letterSpacing: "3px",
+              color: "var(--accent, #0056b3)",
+              display: "block",
+              marginBottom: "12px"
+            }}>
+              Who We Are
+            </span>
+            <h2 style={{
+              fontSize: "38px",
+              fontWeight: "850",
+              lineHeight: "1.2",
+              margin: "0 0 20px 0",
+              fontFamily: "var(--font-heading)",
+              color: "var(--primary)"
+            }}>
+              About Our Mission
+            </h2>
+            <p style={{
+              fontSize: "17px",
+              color: "var(--secondary)",
+              lineHeight: "1.8",
+              margin: 0
+            }}>
+              Dronex AeroTech is a premium research and development club dedicated to advancing the frontiers of autonomous flight, robotics, embedded systems, and aerospace engineering. Our mission is to inspire student engineers to design, build, and fly next-generation drone technologies.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section className="home-projects">
         <div className="section-header">
           <h2>Continue Exploring</h2>
@@ -103,16 +205,6 @@ function Home() {
       <StatsSection />
       <WhyChoose />
       <JoinCTA />
-
-      {/* Merged About Section */}
-      <section className="home-about" style={{ padding: "80px 24px", maxWidth: "1200px", margin: "0 auto", textAlign: "center", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-        <h2 style={{ fontSize: "42px", fontWeight: "700", marginBottom: "24px", fontFamily: "var(--font-heading)", color: "var(--primary)" }}>
-          About Dronex AeroTech
-        </h2>
-        <p style={{ fontSize: "19px", color: "var(--secondary)", lineHeight: "1.8", maxWidth: "900px", margin: "0 auto" }}>
-          Dronex AeroTech is a premium research and development club dedicated to advancing the frontiers of autonomous flight, robotics, embedded systems, and aerospace engineering. Our mission is to inspire student engineers to design, build, and fly next-generation drone technologies.
-        </p>
-      </section>
     </>
   );
 }
