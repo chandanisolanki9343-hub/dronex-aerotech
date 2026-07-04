@@ -46,7 +46,9 @@ function TeamPreview({ member }) {
 
         <span>{member.position}</span>
 
-        <p>{member.department}</p>
+        {member.department && member.department.toLowerCase() !== "president" && (
+          <p>{member.department}</p>
+        )}
 
         <div className="social-links" onClick={(e) => e.stopPropagation()}>
 
