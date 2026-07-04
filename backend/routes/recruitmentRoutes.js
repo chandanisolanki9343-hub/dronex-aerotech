@@ -9,9 +9,9 @@ import authMiddleware from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/", authMiddleware, createApplication);
+router.post("/", createApplication);
 
-router.get("/", getApplications);
+router.get("/", authMiddleware, getApplications);
 
 router.put("/:id", authMiddleware, updateApplicationStatus);
 
