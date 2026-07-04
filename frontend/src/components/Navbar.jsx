@@ -37,8 +37,6 @@ function Navbar() {
       <div className="navbar-links">
         <NavLink to="/">Home</NavLink>
 
-        <NavLink to="/about">About</NavLink>
-
         <NavLink to="/projects">Projects</NavLink>
 
         <NavLink to="/members">Members</NavLink>

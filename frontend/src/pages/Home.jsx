@@ -55,16 +55,6 @@ function Home() {
     <>
       <Hero />
 
-      {/* Merged About Section */}
-      <section className="home-about" style={{ padding: "80px 24px", maxWidth: "1200px", margin: "0 auto", textAlign: "center" }}>
-        <h2 style={{ fontSize: "42px", fontWeight: "700", marginBottom: "24px", fontFamily: "var(--font-heading)", color: "var(--primary)" }}>
-          About Dronex AeroTech
-        </h2>
-        <p style={{ fontSize: "19px", color: "var(--secondary)", lineHeight: "1.8", maxWidth: "900px", margin: "0 auto" }}>
-          Dronex AeroTech is a premium research and development club dedicated to advancing the frontiers of autonomous flight, robotics, embedded systems, and aerospace engineering. Our mission is to inspire student engineers to design, build, and fly next-generation drone technologies.
-        </p>
-      </section>
-
       <section className="home-projects">
         <div className="section-header">
           <h2>Continue Exploring</h2>
@@ -113,6 +103,16 @@ function Home() {
       <StatsSection />
       <WhyChoose />
       <JoinCTA />
+
+      {/* Merged About Section */}
+      <section className="home-about" style={{ padding: "80px 24px", maxWidth: "1200px", margin: "0 auto", textAlign: "center", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <h2 style={{ fontSize: "42px", fontWeight: "700", marginBottom: "24px", fontFamily: "var(--font-heading)", color: "var(--primary)" }}>
+          About Dronex AeroTech
+        </h2>
+        <p style={{ fontSize: "19px", color: "var(--secondary)", lineHeight: "1.8", maxWidth: "900px", margin: "0 auto" }}>
+          Dronex AeroTech is a premium research and development club dedicated to advancing the frontiers of autonomous flight, robotics, embedded systems, and aerospace engineering. Our mission is to inspire student engineers to design, build, and fly next-generation drone technologies.
+        </p>
+      </section>
     </>
   );
 }
