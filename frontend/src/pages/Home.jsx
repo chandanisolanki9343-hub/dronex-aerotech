@@ -58,8 +58,8 @@ function Home() {
       {/* Premium About Section */}
       <section className="home-about-section" style={{
         padding: "100px 24px",
-        background: "radial-gradient(circle at top right, rgba(0, 86, 179, 0.08), transparent 50%), radial-gradient(circle at bottom left, rgba(0, 0, 0, 0.4), transparent 70%)",
-        borderBottom: "1px solid rgba(255, 255, 255, 0.05)",
+        background: "var(--bg-soft)",
+        borderBottom: "1px solid var(--border)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center"
@@ -72,53 +72,37 @@ function Home() {
           gap: "60px",
           alignItems: "center"
         }}>
-          {/* Left Column: Visual Emblem/Logo */}
+          {/* Left Column: Premium Drone Image */}
           <div style={{
             display: "flex",
             justifyContent: "center",
             position: "relative"
           }}>
-            {/* Glowing Backdrop */}
-            <div style={{
-              position: "absolute",
-              width: "220px",
-              height: "220px",
-              borderRadius: "50%",
-              background: "var(--accent, #0056b3)",
-              filter: "blur(60px)",
-              opacity: 0.15,
-              zIndex: 0
-            }}></div>
-            
             <div style={{
               position: "relative",
               zIndex: 1,
-              background: "rgba(255, 255, 255, 0.02)",
-              backdropFilter: "blur(12px)",
-              border: "1px solid rgba(255, 255, 255, 0.08)",
-              padding: "40px",
-              borderRadius: "24px",
-              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)",
+              background: "var(--card)",
+              backdropFilter: "blur(18px)",
+              border: "1px solid var(--border)",
+              padding: "16px",
+              borderRadius: "var(--radius-md, 18px)",
+              boxShadow: "var(--shadow-sm)",
               textAlign: "center",
-              maxWidth: "340px",
-              width: "100%"
+              maxWidth: "450px",
+              width: "100%",
+              overflow: "hidden"
             }}>
-              <div style={{
-                width: "80px",
-                height: "80px",
-                margin: "0 auto 20px auto",
-                borderRadius: "50%",
-                background: "linear-gradient(135deg, var(--accent, #0056b3), #003366)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "36px",
-                boxShadow: "0 10px 20px rgba(0, 86, 179, 0.3)"
-              }}>
-                🚀
-              </div>
-              <h3 style={{ fontSize: "22px", fontWeight: "600", margin: "0 0 10px 0", color: "#fff" }}>Dronex AeroTech</h3>
-              <p style={{ fontSize: "14px", color: "#888", margin: 0 }}>Research & Development Club</p>
+              <img 
+                src="/drone-about.png" 
+                alt="Dronex AeroTech Drone" 
+                style={{ 
+                  width: "100%", 
+                  height: "280px", 
+                  objectFit: "contain",
+                  borderRadius: "12px",
+                  display: "block"
+                }} 
+              />
             </div>
           </div>
 
@@ -126,10 +110,10 @@ function Home() {
           <div style={{ zIndex: 1, textAlign: "left" }}>
             <span style={{
               fontSize: "13px",
-              fontWeight: "750",
+              fontWeight: "700",
               textTransform: "uppercase",
               letterSpacing: "3px",
-              color: "var(--accent, #0056b3)",
+              color: "var(--accent)",
               display: "block",
               marginBottom: "12px"
             }}>
@@ -137,7 +121,7 @@ function Home() {
             </span>
             <h2 style={{
               fontSize: "38px",
-              fontWeight: "850",
+              fontWeight: "700",
               lineHeight: "1.2",
               margin: "0 0 20px 0",
               fontFamily: "var(--font-heading)",
@@ -153,6 +137,18 @@ function Home() {
             }}>
               Dronex AeroTech is a premium research and development club dedicated to advancing the frontiers of autonomous flight, robotics, embedded systems, and aerospace engineering. Our mission is to inspire student engineers to design, build, and fly next-generation drone technologies.
             </p>
+
+            <div style={{ display: "flex", gap: "30px", marginTop: "30px" }}>
+              <div>
+                <h4 style={{ fontSize: "28px", fontWeight: "700", color: "var(--accent)", margin: 0, fontFamily: "var(--font-heading)" }}>R&D</h4>
+                <span style={{ fontSize: "14px", color: "var(--secondary)" }}>Focused Research</span>
+              </div>
+              <div style={{ width: "1px", background: "var(--border)", height: "40px" }}></div>
+              <div>
+                <h4 style={{ fontSize: "28px", fontWeight: "700", color: "var(--accent)", margin: 0, fontFamily: "var(--font-heading)" }}>100%</h4>
+                <span style={{ fontSize: "14px", color: "var(--secondary)" }}>Hands-on Learning</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
