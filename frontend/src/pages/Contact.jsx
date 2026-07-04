@@ -62,7 +62,7 @@ function Contact() {
             </div>
             <div className="contact-method-content">
               <h3>Email Us</h3>
-              <p><a href="mailto:dronexaerotech@gmail.com">dronexaerotech@gmail.com</a></p>
+              <p><a href="mailto:soniparths555@gmail.com">soniparths555@gmail.com</a></p>
             </div>
           </div>
 

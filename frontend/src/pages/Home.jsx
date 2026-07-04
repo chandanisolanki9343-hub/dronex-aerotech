@@ -146,9 +146,19 @@ function Home() {
         </div>
  
         <div className="projects-grid">
-          {team
-            .filter((member) => member.isLeader && member.position !== "Club President" && member.position !== "Club Coordinator")
-            .map((member) => (
+          {(() => {
+            const leads = team.filter((member) => 
+              member.isLeader && 
+              member.position !== "Club President" && 
+              member.position !== "Club Coordinator" &&
+              member.position !== "Vice President" &&
+              member.position !== "Vice president" &&
+              member.position !== "Secretary" &&
+              member.position !== "Secratary"
+            );
+            const arpita = team.find((member) => member.name === "Arpita Makwana" || member.name === "Arpita makwana");
+            const displayedMembers = arpita ? [...leads, arpita] : leads;
+            return displayedMembers.map((member) => (
               <div
                 key={member._id}
                 className="team-leader-link"
@@ -157,7 +167,8 @@ function Home() {
               >
                 <TeamPreview member={member} />
               </div>
-            ))}
+            ));
+          })()}
         </div>
       </section>
 

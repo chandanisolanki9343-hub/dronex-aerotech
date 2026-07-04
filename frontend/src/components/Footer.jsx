@@ -65,7 +65,7 @@ function Footer() {
 
           <h3>Contact</h3>
 
-          <p>📧 dronexaerotech@gmail.com</p>
+          <p>📧 soniparths555@gmail.com</p>
 
           <p>📍 College Campus, Drone School</p>
 

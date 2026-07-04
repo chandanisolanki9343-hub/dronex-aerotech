@@ -45,8 +45,27 @@ function Team() {
 
   // Helper to render a group of members with the leader highlighted
   const renderDepartmentGroup = (deptName, members) => {
-    const leader = members.find(m => m.isLeader);
-    const subTeam = members.filter(m => !m.isLeader);
+    // Sort members so that Club President is first, Vice President is second, Secretary is third
+    // and Arpita Makwana is sorted first among remaining sub-team members.
+    const sortedMembers = [...members].sort((a, b) => {
+      const order = {
+        "Club President": 1,
+        "Vice President": 2,
+        "Vice president": 2,
+        "Secretary": 3,
+        "Secratary": 3,
+      };
+      const nameOrder = {
+        "Arpita Makwana": 4,
+        "Arpita makwana": 4,
+      };
+      const rankA = order[a.position] || nameOrder[a.name] || 99;
+      const rankB = order[b.position] || nameOrder[b.name] || 99;
+      return rankA - rankB;
+    });
+
+    const leaders = sortedMembers.filter(m => m.isLeader);
+    const subTeam = sortedMembers.filter(m => !m.isLeader);
 
     return (
       <div key={deptName} className="dept-group" style={{ marginBottom: "60px" }}>
@@ -64,7 +83,7 @@ function Team() {
           {deptName}
         </h3>
 
-        {leader && (
+        {leaders.length > 0 && (
           <div className="leader-container" style={{ marginBottom: "40px" }}>
             <h4 style={{ 
               fontSize: "14px", 
@@ -75,10 +94,14 @@ function Team() {
               fontFamily: "var(--font-body)",
               fontWeight: 600
             }}>
-              Domain Lead
+              {leaders.length > 1 ? "Domain Leads / Executive" : "Domain Lead"}
             </h4>
-            <div style={{ maxWidth: "350px" }}>
-              <TeamPreview member={leader} />
+            <div className="projects-grid">
+              {leaders.map((leader) => (
+                <div key={leader._id} style={{ maxWidth: "350px", width: "100%" }}>
+                  <TeamPreview member={leader} />
+                </div>
+              ))}
             </div>
           </div>
         )}
