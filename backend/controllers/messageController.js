@@ -147,3 +147,74 @@ export const deleteMessage = async (req, res) => {
     });
   }
 };
+
+// Reply to Message
+export const replyToMessage = async (req, res) => {
+  try {
+    const { replyText } = req.body;
+    const message = await Message.findById(req.params.id);
+
+    if (!message) {
+      return res.status(404).json({
+        success: false,
+        message: "Message not found",
+      });
+    }
+
+    // Send email using transporter
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: message.email,
+      subject: `Re: ${message.subject} - Dronex AeroTech`,
+      html: `
+        <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff; color: #333333;">
+          <div style="text-align: center; border-bottom: 2px solid #0056b3; padding-bottom: 15px; margin-bottom: 25px;">
+            <h2 style="color: #0056b3; margin: 0; font-size: 24px; letter-spacing: 1px;">DRONEX AEROTECH</h2>
+            <p style="font-size: 14px; color: #666666; margin: 5px 0 0 0;">Official Reply to Your Inquiry</p>
+          </div>
+          
+          <div style="line-height: 1.6; font-size: 16px;">
+            <p>Dear <strong>${message.name}</strong>,</p>
+            
+            <p>This is in response to your recent inquiry regarding "<strong>${message.subject}</strong>".</p>
+            
+            <div style="background-color: #f7f9fa; border-left: 4px solid #0056b3; padding: 15px; margin: 20px 0; border-radius: 0 4px 4px 0;">
+              <p style="margin: 0; color: #333333; white-space: pre-wrap;">${replyText}</p>
+            </div>
+            
+            <p>If you have any further questions, feel free to reply directly to this thread.</p>
+          </div>
+          
+          <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
+          
+          <div style="font-size: 13px; color: #666666; background-color: #fafafa; padding: 12px; border-radius: 6px;">
+            <strong style="display: block; margin-bottom: 5px; color: #777;">Your Original Message:</strong>
+            <p style="margin: 0; font-style: italic;">"${message.message}"</p>
+          </div>
+          
+          <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e0e0e0; font-size: 14px; color: #777777;">
+            <p style="margin: 0 0 5px 0;">Best regards,</p>
+            <p style="margin: 0; font-weight: bold; color: #0056b3;">The Dronex AeroTech Support Team</p>
+          </div>
+        </div>
+      `,
+    });
+
+    // Update Message document in DB
+    message.isReplied = true;
+    message.replyText = replyText;
+    message.repliedAt = new Date();
+    await message.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Reply sent successfully",
+      messageData: message,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
