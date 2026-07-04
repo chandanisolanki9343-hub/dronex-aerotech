@@ -58,8 +58,7 @@ function Home() {
       {/* Premium About Section */}
       <section className="home-about-section" style={{
         padding: "100px 24px",
-        background: "var(--bg-soft)",
-        borderBottom: "1px solid var(--border)",
+        background: "transparent",
         display: "flex",
         justifyContent: "center",
         alignItems: "center"
@@ -76,34 +75,20 @@ function Home() {
           <div style={{
             display: "flex",
             justifyContent: "center",
-            position: "relative"
+            position: "relative",
+            width: "100%"
           }}>
-            <div style={{
-              position: "relative",
-              zIndex: 1,
-              background: "var(--card)",
-              backdropFilter: "blur(18px)",
-              border: "1px solid var(--border)",
-              padding: "16px",
-              borderRadius: "var(--radius-md, 18px)",
-              boxShadow: "var(--shadow-sm)",
-              textAlign: "center",
-              maxWidth: "450px",
-              width: "100%",
-              overflow: "hidden"
-            }}>
-              <img 
-                src="/drone-about.png" 
-                alt="Dronex AeroTech Drone" 
-                style={{ 
-                  width: "100%", 
-                  height: "280px", 
-                  objectFit: "contain",
-                  borderRadius: "12px",
-                  display: "block"
-                }} 
-              />
-            </div>
+            <img 
+              src="/drone-about.png" 
+              alt="Dronex AeroTech Drone" 
+              style={{ 
+                width: "100%", 
+                maxWidth: "400px",
+                height: "auto", 
+                objectFit: "contain",
+                display: "block"
+              }} 
+            />
           </div>
 
           {/* Right Column: Content */}
