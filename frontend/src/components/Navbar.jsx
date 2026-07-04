@@ -41,7 +41,7 @@ function Navbar() {
 
         <NavLink to="/projects">Projects</NavLink>
 
-        <NavLink to="/team">Team</NavLink>
+        <NavLink to="/members">Members</NavLink>
 
         <NavLink to="/events">Events</NavLink>
 

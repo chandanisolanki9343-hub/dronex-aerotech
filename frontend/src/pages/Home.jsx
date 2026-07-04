@@ -5,7 +5,6 @@ import api from "../services/api";
 import Hero from "../components/Hero";
 import ProjectCard from "../components/ProjectCard";
 import EventPreview from "../components/EventPreview";
-import TeamPreview from "../components/TeamPreview";
 import GalleryPreview from "../components/GalleryPreview";
 import StatsSection from "../components/StatsSection";
 import WhyChoose from "../components/WhyChoose";
@@ -15,13 +14,11 @@ function Home() {
   const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [events, setEvents] = useState([]);
-  const [team, setTeam] = useState([]);
   const [gallery, setGallery] = useState([]);
 
   useEffect(() => {
     fetchProjects();
     fetchEvents();
-    fetchTeam();
     fetchGallery();
   }, []);
 
@@ -43,14 +40,7 @@ function Home() {
     }
   };
 
-  const fetchTeam = async () => {
-    try {
-      const res = await api.get("/team");
-      setTeam(res.data.members || []);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
 
   const fetchGallery = async () => {
     try {
@@ -64,6 +54,16 @@ function Home() {
   return (
     <>
       <Hero />
+
+      {/* Merged About Section */}
+      <section className="home-about" style={{ padding: "80px 24px", maxWidth: "1200px", margin: "0 auto", textAlign: "center" }}>
+        <h2 style={{ fontSize: "42px", fontWeight: "700", marginBottom: "24px", fontFamily: "var(--font-heading)", color: "var(--primary)" }}>
+          About Dronex AeroTech
+        </h2>
+        <p style={{ fontSize: "19px", color: "var(--secondary)", lineHeight: "1.8", maxWidth: "900px", margin: "0 auto" }}>
+          Dronex AeroTech is a premium research and development club dedicated to advancing the frontiers of autonomous flight, robotics, embedded systems, and aerospace engineering. Our mission is to inspire student engineers to design, build, and fly next-generation drone technologies.
+        </p>
+      </section>
 
       <section className="home-projects">
         <div className="section-header">
@@ -95,81 +95,6 @@ function Home() {
             No upcoming events scheduled. Keep an eye out for updates!
           </p>
         )}
-      </section>
-
-      <section className="home-team">
-        <div className="section-header">
-          <h2>Meet Our Members</h2>
-          <p>Passionate students building the future of drones.</p>
-        </div>
- 
-        {/* Club President Card Prominently Center-Aligned */}
-        {team.find((member) => member.position === "Club President") && (
-          <div className="president-section" style={{ 
-            display: "flex", 
-            flexDirection: "column",
-            alignItems: "center",
-            marginBottom: "50px"
-          }}>
-            <h3 style={{ 
-              fontSize: "14px", 
-              textTransform: "uppercase", 
-              letterSpacing: "3px", 
-              color: "var(--accent)", 
-              marginBottom: "20px",
-              fontFamily: "var(--font-body)",
-              fontWeight: 600
-            }}>
-              Club President
-            </h3>
-            <div 
-              style={{ maxWidth: "350px", width: "100%", cursor: "pointer" }} 
-              className="president-card-wrap"
-              onClick={() => navigate("/team?department=President")}
-            >
-              <TeamPreview member={team.find((member) => member.position === "Club President")} />
-            </div>
-          </div>
-        )}
- 
-        <div className="section-header" style={{ marginBottom: "30px", marginTop: "20px" }}>
-          <h3 style={{ 
-            fontSize: "14px", 
-            textTransform: "uppercase", 
-            letterSpacing: "3px", 
-            color: "var(--secondary)", 
-            fontFamily: "var(--font-body)",
-            fontWeight: 600
-          }}>
-            Meet My Members
-          </h3>
-        </div>
- 
-        <div className="projects-grid">
-          {(() => {
-            const leads = team.filter((member) => 
-              member.isLeader && 
-              member.position !== "Club President" && 
-              member.position !== "Club Coordinator" &&
-              member.position !== "Vice President" &&
-              member.position !== "Vice president" &&
-              member.position !== "Secretary" &&
-              member.position !== "Secratary"
-            );
-            const arpita = team.find((member) => member.name === "Arpita Makwana" || member.name === "Arpita makwana");
-            const displayedMembers = arpita ? [...leads, arpita] : leads;
-            return displayedMembers.map((member) => (
-              <div
-                key={member._id}
-                className="team-leader-link"
-                style={{ cursor: "pointer", display: "block" }}
-                onClick={() => navigate(`/team?department=${encodeURIComponent(member.department)}`)}
-              >
-                <TeamPreview member={member} />
-              </div>
-            ));
-          })()}
-        </div>
       </section>
 
       <section className="home-gallery">
