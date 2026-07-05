@@ -324,3 +324,111 @@ export const scheduleInterview = async (req, res) => {
     });
   }
 };
+
+// Bulk Schedule Interviews
+export const bulkScheduleInterviews = async (req, res) => {
+  try {
+    const { interviewDate, interviewTime, interviewLocation } = req.body;
+
+    if (!interviewDate || !interviewTime || !interviewLocation) {
+      return res.status(400).json({
+        success: false,
+        message: "Date, Time, and Location are required",
+      });
+    }
+
+    // 1. Fetch all candidates who are currently "Selected"
+    const candidates = await Recruitment.find({ status: "Selected" });
+
+    if (candidates.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "No selected candidates found to schedule interviews for",
+      });
+    }
+
+    // 2. Update all of these candidates in the database
+    await Recruitment.updateMany(
+      { status: "Selected" },
+      {
+        status: "Interview Scheduled",
+        interviewDate,
+        interviewTime,
+        interviewLocation,
+      }
+    );
+
+    // 3. Send emails in parallel to all updated candidates
+    await Promise.all(
+      candidates.map(async (candidate) => {
+        try {
+          await transporter.sendMail({
+            from: process.env.EMAIL_USER,
+            to: candidate.email,
+            subject: "Interview Scheduled - Dronex AeroTech 🚀",
+            html: `
+              <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff; color: #333333;">
+                <div style="text-align: center; border-bottom: 2px solid #007bff; padding-bottom: 15px; margin-bottom: 25px;">
+                  <h2 style="color: #007bff; margin: 0; font-size: 24px; letter-spacing: 1px;">INTERVIEW SCHEDULED</h2>
+                  <p style="font-size: 14px; color: #666666; margin: 5px 0 0 0;">Dronex AeroTech Recruitment Team</p>
+                </div>
+                
+                <div style="line-height: 1.6; font-size: 16px;">
+                  <p>Dear <strong>${candidate.name}</strong>,</p>
+                  
+                  <p>We are pleased to inform you that your application for joining <strong>Dronex AeroTech</strong> has been shortlisted! We would like to invite you for an interview to discuss your skills and interests further.</p>
+                  
+                  <div style="background-color: #f0f7ff; border-left: 4px solid #007bff; padding: 15px; margin: 20px 0; border-radius: 0 4px 4px 0;">
+                    <h4 style="margin: 0 0 10px 0; color: #007bff;">Interview Details</h4>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                      <tr>
+                        <td style="padding: 4px 0; font-weight: bold; width: 100px; vertical-align: top;">Date:</td>
+                        <td style="padding: 4px 0; color: #555555;">${interviewDate}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 4px 0; font-weight: bold; vertical-align: top;">Time:</td>
+                        <td style="padding: 4px 0; color: #555555;">${interviewTime}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 4px 0; font-weight: bold; vertical-align: top;">Venue/Location:</td>
+                        <td style="padding: 4px 0; color: #555555; font-weight: 500;">${interviewLocation}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 4px 0; font-weight: bold; vertical-align: top;">Department:</td>
+                        <td style="padding: 4px 0; color: #555555;">${candidate.domain || candidate.skills || "Technical"}</td>
+                      </tr>
+                    </table>
+                  </div>
+                  
+                  <p><strong>Preparation Details:</strong></p>
+                  <ul style="padding-left: 20px; font-size: 14px; color: #555555;">
+                    <li style="margin-bottom: 8px;">Please join the session / arrive at the venue on time.</li>
+                    <li style="margin-bottom: 8px;">Be prepared to share any past projects, design sheets, or coding repositories related to your domain.</li>
+                    <li style="margin-bottom: 0;">The interview will be conducted by our technical leads and coordinators.</li>
+                  </ul>
+                </div>
+                
+                <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e0e0e0; font-size: 14px; color: #777777;">
+                  <p style="margin: 0 0 5px 0;">Clear skies and happy flying,</p>
+                  <p style="margin: 0; font-weight: bold; color: #007bff;">The Dronex AeroTech Recruitment Team</p>
+                </div>
+              </div>
+            `,
+          });
+        } catch (mailError) {
+          console.error(`Failed to send bulk interview email to ${candidate.email}:`, mailError.message);
+        }
+      })
+    );
+
+    res.status(200).json({
+      success: true,
+      message: `Successfully scheduled interviews for ${candidates.length} candidate(s)`,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};

@@ -3,44 +3,12 @@ import api from "../services/api";
 
 function AdminRecruitment() {
   const [applications, setApplications] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedAppId, setSelectedAppId] = useState(null);
-  const [interviewDate, setInterviewDate] = useState("");
-  const [interviewTime, setInterviewTime] = useState("");
-  const [interviewLocation, setInterviewLocation] = useState("");
-  const [submitting, setSubmitting] = useState(false);
-
-  const openScheduleModal = (id, defaultDate, defaultTime, defaultLocation) => {
-    setSelectedAppId(id);
-    setInterviewDate(defaultDate || "");
-    setInterviewTime(defaultTime || "");
-    setInterviewLocation(defaultLocation || "");
-    setIsModalOpen(true);
-  };
-
-  const handleScheduleSubmit = async (e) => {
-    e.preventDefault();
-    if (!interviewDate || !interviewTime) {
-      alert("Please fill in both Date and Time");
-      return;
-    }
-
-    setSubmitting(true);
-    try {
-      await api.put(`/recruitment/${selectedAppId}/schedule`, {
-        interviewDate,
-        interviewTime,
-        interviewLocation
-      });
-      alert("Interview Scheduled Successfully & Email Sent to Applicant!");
-      setIsModalOpen(false);
-      fetchApplications();
-    } catch (error) {
-      console.error(error);
-      alert("Failed to schedule interview");
-    }
-    setSubmitting(false);
-  };
+  
+  // Bulk Scheduler states
+  const [bulkDate, setBulkDate] = useState("");
+  const [bulkTime, setBulkTime] = useState("");
+  const [bulkLocation, setBulkLocation] = useState("");
+  const [bulkSubmitting, setBulkSubmitting] = useState(false);
 
   const fetchApplications = async () => {
     try {
@@ -55,13 +23,50 @@ function AdminRecruitment() {
     fetchApplications();
   }, []);
 
+  // Count candidates whose status is "Selected"
+  const selectedCount = applications.filter((app) => app.status === "Selected").length;
+
+  const handleBulkSchedule = async (e) => {
+    e.preventDefault();
+    if (!bulkDate || !bulkTime || !bulkLocation) {
+      alert("Please fill in Date, Time, and Venue/Classroom");
+      return;
+    }
+
+    if (selectedCount === 0) {
+      alert("No selected candidates found to schedule");
+      return;
+    }
+
+    if (!window.confirm(`Are you sure you want to schedule interviews and notify all ${selectedCount} selected candidate(s)?`)) return;
+
+    setBulkSubmitting(true);
+    try {
+      await api.put("/recruitment/schedule/bulk", {
+        interviewDate: bulkDate,
+        interviewTime: bulkTime,
+        interviewLocation: bulkLocation
+      });
+      alert(`Interview Scheduled and emails sent to all ${selectedCount} selected candidate(s) successfully!`);
+      // Clear inputs
+      setBulkDate("");
+      setBulkTime("");
+      setBulkLocation("");
+      fetchApplications();
+    } catch (error) {
+      console.error(error);
+      alert(error.response?.data?.message || "Failed to bulk schedule interviews");
+    }
+    setBulkSubmitting(false);
+  };
+
   const updateStatus = async (id, status) => {
     const actionText = status === "Selected" ? "approve and select" : "reject";
     if (!window.confirm(`Are you sure you want to ${actionText} this applicant?`)) return;
     
     try {
       await api.put(`/recruitment/${id}`, { status });
-      alert(`Application successfully ${status === "Selected" ? "Approved" : "Rejected"}`);
+      alert(`Application successfully ${status === "Selected" ? "Approved & Selected" : "Rejected"}`);
       fetchApplications();
     } catch (error) {
       console.log(error);
@@ -101,6 +106,103 @@ function AdminRecruitment() {
         <h1 style={{ fontSize: "32px", fontWeight: "700", letterSpacing: "-0.5px" }}>Recruitment Applications</h1>
         <p style={{ color: "#777", marginTop: "5px" }}>Manage, review, approve, or reject applicants for Dronex AeroTech.</p>
       </div>
+
+      {/* Batch Interview Scheduler Panel */}
+      {applications.length > 0 && (
+        <div style={{
+          background: "var(--card-bg, rgba(255, 255, 255, 0.02))",
+          border: "1px solid var(--border, rgba(255, 255, 255, 0.08))",
+          borderRadius: "14px",
+          padding: "24px",
+          marginBottom: "30px",
+          boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)",
+        }}>
+          <h2 style={{ fontSize: "20px", fontWeight: "600", margin: "0 0 10px 0", color: "#fff" }}>Batch Interview Scheduler</h2>
+          <p style={{ color: "#aaa", fontSize: "14px", margin: "0 0 20px 0" }}>
+            Schedule interviews in bulk for all selected/approved candidates. They will automatically receive the interview details email.
+          </p>
+          
+          <form onSubmit={handleBulkSchedule} style={{ display: "flex", flexWrap: "wrap", gap: "15px", alignItems: "flex-end" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px", minWidth: "150px", flex: 1 }}>
+              <label style={{ fontSize: "12px", color: "#888", fontWeight: "600" }}>DATE</label>
+              <input
+                type="date"
+                required
+                value={bulkDate}
+                onChange={(e) => setBulkDate(e.target.value)}
+                style={{
+                  background: "#1a1a1a",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  color: "white",
+                  padding: "10px",
+                  borderRadius: "8px",
+                  fontSize: "14px"
+                }}
+              />
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px", minWidth: "120px", flex: 1 }}>
+              <label style={{ fontSize: "12px", color: "#888", fontWeight: "600" }}>TIME</label>
+              <input
+                type="time"
+                required
+                value={bulkTime}
+                onChange={(e) => setBulkTime(e.target.value)}
+                style={{
+                  background: "#1a1a1a",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  color: "white",
+                  padding: "10px",
+                  borderRadius: "8px",
+                  fontSize: "14px"
+                }}
+              />
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px", minWidth: "220px", flex: 2 }}>
+              <label style={{ fontSize: "12px", color: "#888", fontWeight: "600" }}>VENUE / CLASSROOM / BUILDING</label>
+              <input
+                type="text"
+                required
+                placeholder="e.g. Classroom 102, Aero Block"
+                value={bulkLocation}
+                onChange={(e) => setBulkLocation(e.target.value)}
+                style={{
+                  background: "#1a1a1a",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  color: "white",
+                  padding: "10px",
+                  borderRadius: "8px",
+                  fontSize: "14px"
+                }}
+              />
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "10px", minWidth: "200px" }}>
+              <span style={{ fontSize: "13px", color: selectedCount > 0 ? "#28a745" : "#ffc107", fontWeight: "500", paddingBottom: "5px" }}>
+                ● {selectedCount} Selected applicant(s) ready to schedule
+              </span>
+              <button
+                type="submit"
+                disabled={bulkSubmitting || selectedCount === 0}
+                style={{
+                  background: selectedCount > 0 ? "#007bff" : "rgba(255,255,255,0.05)",
+                  color: selectedCount > 0 ? "white" : "#666",
+                  border: "none",
+                  padding: "11px 24px",
+                  borderRadius: "8px",
+                  cursor: selectedCount > 0 ? "pointer" : "not-allowed",
+                  fontSize: "14px",
+                  fontWeight: "600",
+                  transition: "all 0.2s"
+                }}
+              >
+                {bulkSubmitting ? "Scheduling..." : "Schedule & Notify All"}
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
 
       {applications.length === 0 ? (
         <div style={{ textAlign: "center", padding: "80px 20px", background: "rgba(255,255,255,0.03)", borderRadius: "12px", border: "1px dashed rgba(255,255,255,0.1)" }}>
@@ -193,59 +295,43 @@ function AdminRecruitment() {
 
               {/* Action Buttons */}
               <div style={{ display: "flex", justifyContent: "flex-end", gap: "12px", marginTop: "10px", flexWrap: "wrap" }}>
-                {(app.status === "Pending" || app.status === "Interview Scheduled") && (
-                  <>
-                    <button
-                      onClick={() => openScheduleModal(app._id, app.interviewDate, app.interviewTime, app.interviewLocation)}
-                      style={{
-                        background: "rgba(0, 123, 255, 0.15)",
-                        color: "#007bff",
-                        border: "1px solid rgba(0, 123, 255, 0.3)",
-                        padding: "9px 20px",
-                        borderRadius: "8px",
-                        cursor: "pointer",
-                        fontWeight: "600",
-                        fontSize: "14px",
-                        transition: "all 0.2s"
-                      }}
-                    >
-                      {app.status === "Interview Scheduled" ? "Reschedule" : "Schedule Interview"}
-                    </button>
-                    <button
-                      onClick={() => updateStatus(app._id, "Selected")}
-                      style={{
-                        background: "#28a745",
-                        color: "white",
-                        border: "none",
-                        padding: "10px 20px",
-                        borderRadius: "8px",
-                        cursor: "pointer",
-                        fontWeight: "600",
-                        fontSize: "14px",
-                        transition: "all 0.2s"
-                      }}
-                      className="btn-approve"
-                    >
-                      Approve & Select
-                    </button>
-                    <button
-                      onClick={() => updateStatus(app._id, "Rejected")}
-                      style={{
-                        background: "rgba(220, 53, 69, 0.15)",
-                        color: "#dc3545",
-                        border: "1px solid rgba(220, 53, 69, 0.3)",
-                        padding: "9px 20px",
-                        borderRadius: "8px",
-                        cursor: "pointer",
-                        fontWeight: "600",
-                        fontSize: "14px",
-                        transition: "all 0.2s"
-                      }}
-                      className="btn-reject"
-                    >
-                      Reject
-                    </button>
-                  </>
+                {app.status === "Pending" && (
+                  <button
+                    onClick={() => updateStatus(app._id, "Selected")}
+                    style={{
+                      background: "#28a745",
+                      color: "white",
+                      border: "none",
+                      padding: "10px 20px",
+                      borderRadius: "8px",
+                      cursor: "pointer",
+                      fontWeight: "600",
+                      fontSize: "14px",
+                      transition: "all 0.2s"
+                    }}
+                    className="btn-approve"
+                  >
+                    Approve & Select
+                  </button>
+                )}
+                {app.status !== "Rejected" && (
+                  <button
+                    onClick={() => updateStatus(app._id, "Rejected")}
+                    style={{
+                      background: "rgba(220, 53, 69, 0.15)",
+                      color: "#dc3545",
+                      border: "1px solid rgba(220, 53, 69, 0.3)",
+                      padding: "9px 20px",
+                      borderRadius: "8px",
+                      cursor: "pointer",
+                      fontWeight: "600",
+                      fontSize: "14px",
+                      transition: "all 0.2s"
+                    }}
+                    className="btn-reject"
+                  >
+                    Reject
+                  </button>
                 )}
                 <button
                   onClick={() => deleteApplication(app._id)}
@@ -267,121 +353,6 @@ function AdminRecruitment() {
               </div>
             </div>
           ))}
-        </div>
-      )}
-
-      {/* Interview Scheduling Modal */}
-      {isModalOpen && (
-        <div style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          background: "rgba(0,0,0,0.8)",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          zIndex: 1000
-        }}>
-          <div style={{
-            background: "#1e1e1e",
-            border: "1px solid rgba(255,255,255,0.1)",
-            padding: "30px",
-            borderRadius: "14px",
-            width: "90%",
-            maxWidth: "450px",
-            boxShadow: "0 10px 30px rgba(0,0,0,0.5)"
-          }}>
-            <h3 style={{ margin: "0 0 20px 0", fontSize: "22px", color: "white" }}>Schedule Interview</h3>
-            <form onSubmit={handleScheduleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                <label style={{ fontSize: "14px", color: "#aaa" }}>Select Date</label>
-                <input
-                  type="date"
-                  required
-                  value={interviewDate}
-                  onChange={(e) => setInterviewDate(e.target.value)}
-                  style={{
-                    background: "#2a2a2a",
-                    border: "1px solid rgba(255,255,255,0.15)",
-                    color: "white",
-                    padding: "10px",
-                    borderRadius: "8px",
-                    fontSize: "15px"
-                  }}
-                />
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                <label style={{ fontSize: "14px", color: "#aaa" }}>Select Time</label>
-                <input
-                  type="time"
-                  required
-                  value={interviewTime}
-                  onChange={(e) => setInterviewTime(e.target.value)}
-                  style={{
-                    background: "#2a2a2a",
-                    border: "1px solid rgba(255,255,255,0.15)",
-                    color: "white",
-                    padding: "10px",
-                    borderRadius: "8px",
-                    fontSize: "15px"
-                  }}
-                />
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                <label style={{ fontSize: "14px", color: "#aaa" }}>Venue / Classroom / Building</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Classroom 102, Main Building or Meet link"
-                  value={interviewLocation}
-                  onChange={(e) => setInterviewLocation(e.target.value)}
-                  style={{
-                    background: "#2a2a2a",
-                    border: "1px solid rgba(255,255,255,0.15)",
-                    color: "white",
-                    padding: "10px",
-                    borderRadius: "8px",
-                    fontSize: "15px"
-                  }}
-                />
-              </div>
-              <div style={{ display: "flex", justifyContent: "flex-end", gap: "12px", marginTop: "10px" }}>
-                <button
-                  type="button"
-                  onClick={() => setIsModalOpen(false)}
-                  style={{
-                    background: "transparent",
-                    color: "#aaa",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    padding: "9px 20px",
-                    borderRadius: "8px",
-                    cursor: "pointer",
-                    fontSize: "14px"
-                  }}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  style={{
-                    background: "#007bff",
-                    color: "white",
-                    border: "none",
-                    padding: "10px 20px",
-                    borderRadius: "8px",
-                    cursor: "pointer",
-                    fontSize: "14px",
-                    fontWeight: "600"
-                  }}
-                >
-                  {submitting ? "Scheduling..." : "Confirm Schedule"}
-                </button>
-              </div>
-            </form>
-          </div>
         </div>
       )}
     </div>

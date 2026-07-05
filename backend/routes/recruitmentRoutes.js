@@ -5,6 +5,7 @@ import {
   updateApplicationStatus,
   deleteApplication,
   scheduleInterview,
+  bulkScheduleInterviews,
 } from "../controllers/recruitmentController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 
@@ -14,6 +15,7 @@ router.post("/", createApplication);
 
 router.get("/", authMiddleware, getApplications);
 
+router.put("/schedule/bulk", authMiddleware, bulkScheduleInterviews);
 router.put("/:id", authMiddleware, updateApplicationStatus);
 router.put("/:id/schedule", authMiddleware, scheduleInterview);
 
