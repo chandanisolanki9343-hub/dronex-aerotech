@@ -2,8 +2,11 @@ import mongoose from "mongoose";
 import dns from "dns";
 
 // Override default DNS servers for Node's internal resolver (c-ares)
-// to prevent querySrv ECONNREFUSED errors on some local networks.
-dns.setServers(["8.8.8.8", "8.8.4.4"]);
+// only on local environments to prevent querySrv ECONNREFUSED errors.
+// On Render, we use the default system DNS resolver.
+if (!process.env.RENDER) {
+    dns.setServers(["8.8.8.8", "8.8.4.4"]);
+}
 
 const connectDB = async () => {
     try {
