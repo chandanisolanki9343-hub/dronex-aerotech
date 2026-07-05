@@ -17,15 +17,20 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+const getBrevoApiKey = () => {
+  return process.env.BREVO_API_KEY || process.env.BREVO__API__KEY;
+};
+
 // Unified sendMail function that automatically switches to Brevo HTTPS API on Render Free Tier
 export const sendEmail = async ({ to, subject, html, text }) => {
-  if (process.env.BREVO_API_KEY) {
+  const brevoApiKey = getBrevoApiKey();
+  if (brevoApiKey) {
     console.log("Using Brevo HTTP API to send email to:", to);
     const response = await fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       headers: {
         "accept": "application/json",
-        "api-key": process.env.BREVO_API_KEY,
+        "api-key": brevoApiKey,
         "content-type": "application/json",
       },
       body: JSON.stringify({
@@ -65,7 +70,7 @@ const mailer = {
     return sendEmail({ to, subject, html, text });
   },
   verify: (callback) => {
-    if (process.env.BREVO_API_KEY) {
+    if (getBrevoApiKey()) {
       console.log("Brevo API active - verification skipped (always active)");
       callback(null, true);
     } else {
