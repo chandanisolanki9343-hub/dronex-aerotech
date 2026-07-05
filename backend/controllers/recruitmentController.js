@@ -231,7 +231,7 @@ export const deleteApplication = async (req, res) => {
 // Schedule Interview
 export const scheduleInterview = async (req, res) => {
   try {
-    const { interviewDate, interviewTime } = req.body;
+    const { interviewDate, interviewTime, interviewLocation } = req.body;
 
     const application = await Recruitment.findByIdAndUpdate(
       req.params.id,
@@ -239,6 +239,7 @@ export const scheduleInterview = async (req, res) => {
         status: "Interview Scheduled",
         interviewDate,
         interviewTime,
+        interviewLocation,
       },
       {
         new: true,
@@ -282,6 +283,10 @@ export const scheduleInterview = async (req, res) => {
                     <td style="padding: 4px 0; color: #555555;">${interviewTime}</td>
                   </tr>
                   <tr>
+                    <td style="padding: 4px 0; font-weight: bold; vertical-align: top;">Venue/Location:</td>
+                    <td style="padding: 4px 0; color: #555555; font-weight: 500;">${interviewLocation || "Will be informed soon / Online"}</td>
+                  </tr>
+                  <tr>
                     <td style="padding: 4px 0; font-weight: bold; vertical-align: top;">Department:</td>
                     <td style="padding: 4px 0; color: #555555;">${application.domain || application.skills || "Technical"}</td>
                   </tr>
@@ -290,7 +295,7 @@ export const scheduleInterview = async (req, res) => {
               
               <p><strong>Preparation Details:</strong></p>
               <ul style="padding-left: 20px; font-size: 14px; color: #555555;">
-                <li style="margin-bottom: 8px;">Please join the session on time.</li>
+                <li style="margin-bottom: 8px;">Please join the session / arrive at the venue on time.</li>
                 <li style="margin-bottom: 8px;">Be prepared to share any past projects, design sheets, or coding repositories related to your domain.</li>
                 <li style="margin-bottom: 0;">The interview will be conducted by our technical leads and coordinators.</li>
               </ul>

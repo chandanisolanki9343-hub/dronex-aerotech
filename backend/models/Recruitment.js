@@ -56,6 +56,9 @@ const recruitmentSchema = new mongoose.Schema(
     interviewTime: {
       type: String,
     },
+    interviewLocation: {
+      type: String,
+    },
 
     status: {
       type: String,

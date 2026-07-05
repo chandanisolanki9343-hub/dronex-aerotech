@@ -7,12 +7,14 @@ function AdminRecruitment() {
   const [selectedAppId, setSelectedAppId] = useState(null);
   const [interviewDate, setInterviewDate] = useState("");
   const [interviewTime, setInterviewTime] = useState("");
+  const [interviewLocation, setInterviewLocation] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  const openScheduleModal = (id, defaultDate, defaultTime) => {
+  const openScheduleModal = (id, defaultDate, defaultTime, defaultLocation) => {
     setSelectedAppId(id);
     setInterviewDate(defaultDate || "");
     setInterviewTime(defaultTime || "");
+    setInterviewLocation(defaultLocation || "");
     setIsModalOpen(true);
   };
 
@@ -27,7 +29,8 @@ function AdminRecruitment() {
     try {
       await api.put(`/recruitment/${selectedAppId}/schedule`, {
         interviewDate,
-        interviewTime
+        interviewTime,
+        interviewLocation
       });
       alert("Interview Scheduled Successfully & Email Sent to Applicant!");
       setIsModalOpen(false);
@@ -180,6 +183,11 @@ function AdminRecruitment() {
                   <p style={{ margin: 0, fontSize: "14px", color: "#ccc" }}>
                     Date: <strong>{app.interviewDate}</strong> | Time: <strong>{app.interviewTime}</strong>
                   </p>
+                  {app.interviewLocation && (
+                    <p style={{ margin: "4px 0 0 0", fontSize: "14px", color: "#ccc" }}>
+                      Venue: <strong>{app.interviewLocation}</strong>
+                    </p>
+                  )}
                 </div>
               )}
 
@@ -188,7 +196,7 @@ function AdminRecruitment() {
                 {(app.status === "Pending" || app.status === "Interview Scheduled") && (
                   <>
                     <button
-                      onClick={() => openScheduleModal(app._id, app.interviewDate, app.interviewTime)}
+                      onClick={() => openScheduleModal(app._id, app.interviewDate, app.interviewTime, app.interviewLocation)}
                       style={{
                         background: "rgba(0, 123, 255, 0.15)",
                         color: "#007bff",
@@ -311,6 +319,24 @@ function AdminRecruitment() {
                   required
                   value={interviewTime}
                   onChange={(e) => setInterviewTime(e.target.value)}
+                  style={{
+                    background: "#2a2a2a",
+                    border: "1px solid rgba(255,255,255,0.15)",
+                    color: "white",
+                    padding: "10px",
+                    borderRadius: "8px",
+                    fontSize: "15px"
+                  }}
+                />
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                <label style={{ fontSize: "14px", color: "#aaa" }}>Venue / Classroom / Building</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Classroom 102, Main Building or Meet link"
+                  value={interviewLocation}
+                  onChange={(e) => setInterviewLocation(e.target.value)}
                   style={{
                     background: "#2a2a2a",
                     border: "1px solid rgba(255,255,255,0.15)",
