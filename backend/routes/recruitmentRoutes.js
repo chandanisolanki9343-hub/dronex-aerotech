@@ -4,6 +4,7 @@ import {
   getApplications,
   updateApplicationStatus,
   deleteApplication,
+  scheduleInterview,
 } from "../controllers/recruitmentController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 
@@ -14,6 +15,7 @@ router.post("/", createApplication);
 router.get("/", authMiddleware, getApplications);
 
 router.put("/:id", authMiddleware, updateApplicationStatus);
+router.put("/:id/schedule", authMiddleware, scheduleInterview);
 
 router.delete("/:id", authMiddleware, deleteApplication);
 

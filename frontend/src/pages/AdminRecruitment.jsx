@@ -3,6 +3,41 @@ import api from "../services/api";
 
 function AdminRecruitment() {
   const [applications, setApplications] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedAppId, setSelectedAppId] = useState(null);
+  const [interviewDate, setInterviewDate] = useState("");
+  const [interviewTime, setInterviewTime] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
+  const openScheduleModal = (id, defaultDate, defaultTime) => {
+    setSelectedAppId(id);
+    setInterviewDate(defaultDate || "");
+    setInterviewTime(defaultTime || "");
+    setIsModalOpen(true);
+  };
+
+  const handleScheduleSubmit = async (e) => {
+    e.preventDefault();
+    if (!interviewDate || !interviewTime) {
+      alert("Please fill in both Date and Time");
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      await api.put(`/recruitment/${selectedAppId}/schedule`, {
+        interviewDate,
+        interviewTime
+      });
+      alert("Interview Scheduled Successfully & Email Sent to Applicant!");
+      setIsModalOpen(false);
+      fetchApplications();
+    } catch (error) {
+      console.error(error);
+      alert("Failed to schedule interview");
+    }
+    setSubmitting(false);
+  };
 
   const fetchApplications = async () => {
     try {
@@ -50,6 +85,8 @@ function AdminRecruitment() {
         return { backgroundColor: "rgba(40, 167, 69, 0.15)", color: "#28a745", border: "1px solid rgba(40, 167, 69, 0.3)" };
       case "Rejected":
         return { backgroundColor: "rgba(220, 53, 69, 0.15)", color: "#dc3545", border: "1px solid rgba(220, 53, 69, 0.3)" };
+      case "Interview Scheduled":
+        return { backgroundColor: "rgba(0, 123, 255, 0.15)", color: "#007bff", border: "1px solid rgba(0, 123, 255, 0.3)" };
       default:
         return { backgroundColor: "rgba(255, 193, 7, 0.15)", color: "#ffc107", border: "1px solid rgba(255, 193, 7, 0.3)" };
     }
@@ -136,10 +173,36 @@ function AdminRecruitment() {
                 </p>
               </div>
 
+              {/* Display interview details if scheduled */}
+              {(app.status === "Interview Scheduled" || (app.interviewDate && app.interviewTime)) && (
+                <div style={{ background: "rgba(0, 123, 255, 0.03)", borderRadius: "8px", padding: "16px", borderLeft: "3px solid #007bff" }}>
+                  <span style={{ fontSize: "12px", textTransform: "uppercase", color: "#007bff", fontWeight: "600", display: "block", marginBottom: "4px" }}>Scheduled Interview</span>
+                  <p style={{ margin: 0, fontSize: "14px", color: "#ccc" }}>
+                    Date: <strong>{app.interviewDate}</strong> | Time: <strong>{app.interviewTime}</strong>
+                  </p>
+                </div>
+              )}
+
               {/* Action Buttons */}
               <div style={{ display: "flex", justifyContent: "flex-end", gap: "12px", marginTop: "10px", flexWrap: "wrap" }}>
-                {app.status === "Pending" && (
+                {(app.status === "Pending" || app.status === "Interview Scheduled") && (
                   <>
+                    <button
+                      onClick={() => openScheduleModal(app._id, app.interviewDate, app.interviewTime)}
+                      style={{
+                        background: "rgba(0, 123, 255, 0.15)",
+                        color: "#007bff",
+                        border: "1px solid rgba(0, 123, 255, 0.3)",
+                        padding: "9px 20px",
+                        borderRadius: "8px",
+                        cursor: "pointer",
+                        fontWeight: "600",
+                        fontSize: "14px",
+                        transition: "all 0.2s"
+                      }}
+                    >
+                      {app.status === "Interview Scheduled" ? "Reschedule" : "Schedule Interview"}
+                    </button>
                     <button
                       onClick={() => updateStatus(app._id, "Selected")}
                       style={{
@@ -196,6 +259,103 @@ function AdminRecruitment() {
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Interview Scheduling Modal */}
+      {isModalOpen && (
+        <div style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background: "rgba(0,0,0,0.8)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          zIndex: 1000
+        }}>
+          <div style={{
+            background: "#1e1e1e",
+            border: "1px solid rgba(255,255,255,0.1)",
+            padding: "30px",
+            borderRadius: "14px",
+            width: "90%",
+            maxWidth: "450px",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.5)"
+          }}>
+            <h3 style={{ margin: "0 0 20px 0", fontSize: "22px", color: "white" }}>Schedule Interview</h3>
+            <form onSubmit={handleScheduleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                <label style={{ fontSize: "14px", color: "#aaa" }}>Select Date</label>
+                <input
+                  type="date"
+                  required
+                  value={interviewDate}
+                  onChange={(e) => setInterviewDate(e.target.value)}
+                  style={{
+                    background: "#2a2a2a",
+                    border: "1px solid rgba(255,255,255,0.15)",
+                    color: "white",
+                    padding: "10px",
+                    borderRadius: "8px",
+                    fontSize: "15px"
+                  }}
+                />
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                <label style={{ fontSize: "14px", color: "#aaa" }}>Select Time</label>
+                <input
+                  type="time"
+                  required
+                  value={interviewTime}
+                  onChange={(e) => setInterviewTime(e.target.value)}
+                  style={{
+                    background: "#2a2a2a",
+                    border: "1px solid rgba(255,255,255,0.15)",
+                    color: "white",
+                    padding: "10px",
+                    borderRadius: "8px",
+                    fontSize: "15px"
+                  }}
+                />
+              </div>
+              <div style={{ display: "flex", justifyContent: "flex-end", gap: "12px", marginTop: "10px" }}>
+                <button
+                  type="button"
+                  onClick={() => setIsModalOpen(false)}
+                  style={{
+                    background: "transparent",
+                    color: "#aaa",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    padding: "9px 20px",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                    fontSize: "14px"
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  style={{
+                    background: "#007bff",
+                    color: "white",
+                    border: "none",
+                    padding: "10px 20px",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                    fontSize: "14px",
+                    fontWeight: "600"
+                  }}
+                >
+                  {submitting ? "Scheduling..." : "Confirm Schedule"}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
     </div>
