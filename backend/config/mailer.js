@@ -18,7 +18,11 @@ const transporter = nodemailer.createTransport({
 });
 
 const getBrevoApiKey = () => {
-  return process.env.BREVO_API_KEY || process.env.BREVO__API__KEY;
+  const k1 = process.env.BREVO_API_KEY;
+  const k2 = process.env.BREVO__API__KEY;
+  if (k1 && k1.startsWith("xkeysib-")) return k1;
+  if (k2 && k2.startsWith("xkeysib-")) return k2;
+  return k1 || k2; // fallback if neither starts with xkeysib-
 };
 
 // Unified sendMail function that automatically switches to Brevo HTTPS API on Render Free Tier
