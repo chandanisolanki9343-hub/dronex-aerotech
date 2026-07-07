@@ -70,6 +70,20 @@ padding-left:8px;
 
 }
 
+.footer-section p a {
+  display: inline;
+  color: #cfcfcf;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  margin-bottom: 0;
+}
+
+.footer-section p a:hover {
+  color: var(--accent, #b8893c);
+  text-decoration: underline;
+  padding-left: 0;
+}
+
 .footer hr{
 
 margin:50px 0 25px;

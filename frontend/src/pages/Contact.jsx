@@ -76,7 +76,7 @@ function Contact() {
             </div>
             <div className="contact-method-content">
               <h3>Our Location</h3>
-              <p>College Campus, Drone School</p>
+              <p>College Campus</p>
             </div>
           </div>
 

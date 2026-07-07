@@ -33,6 +33,7 @@ function Team() {
   const departments = [
     "All",
     "President",
+    "Secretary",
     "Event Management",
     "Photo & Video Editing",
     "Promotion & Social Media",
@@ -85,17 +86,19 @@ function Team() {
 
         {leaders.length > 0 && (
           <div className="leader-container" style={{ marginBottom: "40px" }}>
-            <h4 style={{ 
-              fontSize: "14px", 
-              textTransform: "uppercase", 
-              letterSpacing: "2px", 
-              color: "var(--accent)", 
-              marginBottom: "15px",
-              fontFamily: "var(--font-body)",
-              fontWeight: 600
-            }}>
-              {leaders.length > 1 ? "Domain Leads / Executive" : "Domain Lead"}
-            </h4>
+            {deptName !== "President" && deptName !== "Secretary" && (
+              <h4 style={{ 
+                fontSize: "14px", 
+                textTransform: "uppercase", 
+                letterSpacing: "2px", 
+                color: "var(--accent)", 
+                marginBottom: "15px",
+                fontFamily: "var(--font-body)",
+                fontWeight: 600
+              }}>
+                {leaders.length > 1 ? "Domain Leads / Executive" : "Domain Lead"}
+              </h4>
+            )}
             <div className="projects-grid">
               {leaders.map((leader) => (
                 <div key={leader._id} style={{ maxWidth: "350px", width: "100%" }}>

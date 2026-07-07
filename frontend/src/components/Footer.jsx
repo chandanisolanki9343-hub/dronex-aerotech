@@ -63,13 +63,13 @@ function Footer() {
 
         <div className="footer-section">
 
-          <h3>Contact</h3>
+          <h3><Link to="/contact" style={{ color: "inherit", textDecoration: "none" }}>Contact</Link></h3>
 
-          <p>📧 soniparths555@gmail.com</p>
+          <p>📧 <a href="mailto:soniparths555@gmail.com">soniparths555@gmail.com</a></p>
 
-          <p>📍 College Campus, Drone School</p>
+          <p>📍 College Campus</p>
 
-          <p>📞 +91 9425168627</p>
+          <p>📞 <a href="tel:+919425168627">+91 9425168627</a></p>
 
         </div>
 

@@ -46,7 +46,9 @@ function TeamPreview({ member }) {
 
         <span>{member.position}</span>
 
-        {member.department && member.department.toLowerCase() !== "president" && (
+        {member.department && 
+         member.department.toLowerCase() !== "president" && 
+         member.department.toLowerCase() !== "secretary" && (
           <p>{member.department}</p>
         )}
 
