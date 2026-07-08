@@ -14,7 +14,7 @@ const newTeamMembers = [
     position: "Club President",
     department: "President",
     bio: "Visionary leader overseeing the club operations, industry partnerships, and overall growth of Dronex AeroTech.",
-    image: "",
+    image: "/parth_soni.jpg",
     linkedin: "https://linkedin.com",
     github: "https://github.com",
     isLeader: true

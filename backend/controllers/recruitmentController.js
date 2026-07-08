@@ -1,4 +1,5 @@
 import Recruitment from "../models/Recruitment.js";
+import Team from "../models/Team.js";
 import transporter from "../config/mailer.js";
 
 // Submit Application
@@ -157,6 +158,23 @@ export const updateApplicationStatus = async (req, res) => {
 
     // Send selection email to candidate if status is updated to "Selected" (await to keep event loop alive)
     if (req.body.status === "Selected" && application) {
+      // Automatically add selected candidate to Team if not already added
+      const domain = application.domain || application.skills || "Technical";
+      const existingMember = await Team.findOne({ name: application.name, department: domain });
+      
+      if (!existingMember) {
+        await Team.create({
+          name: application.name,
+          position: "Sub-Team Member",
+          department: domain,
+          bio: `Joined Dronex AeroTech through the recruitment drive.`,
+          image: "",
+          linkedin: "",
+          github: "",
+          isLeader: false
+        });
+      }
+
       await transporter.sendMail({
         from: process.env.EMAIL_USER,
         to: application.email,

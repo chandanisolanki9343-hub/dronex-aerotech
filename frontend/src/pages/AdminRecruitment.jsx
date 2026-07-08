@@ -295,7 +295,7 @@ function AdminRecruitment() {
 
               {/* Action Buttons */}
               <div style={{ display: "flex", justifyContent: "flex-end", gap: "12px", marginTop: "10px", flexWrap: "wrap" }}>
-                {app.status === "Pending" && (
+                {(app.status === "Pending" || app.status === "Interview Scheduled") && (
                   <button
                     onClick={() => updateStatus(app._id, "Selected")}
                     style={{
