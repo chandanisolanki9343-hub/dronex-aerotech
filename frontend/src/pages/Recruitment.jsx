@@ -137,13 +137,13 @@ function Recruitment() {
               required
             >
               <option value="">Preferred Domain</option>
+              <option>Web Development</option>
               <option>Event Management</option>
               <option>Photo & Video Editing</option>
               <option>Promotion & Social Media</option>
               <option>Photography & Videography</option>
               <option>Technical</option>
               <option>Content Writing</option>
-              <option>Web Development</option>
               <option>Graphic Designing & Auto CAD</option>
             </select>
           </div>

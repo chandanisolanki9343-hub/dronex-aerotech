@@ -34,13 +34,13 @@ function Team() {
     "All",
     "President",
     "Secretary",
+    "Web Development",
     "Event Management",
     "Photo & Video Editing",
     "Promotion & Social Media",
     "Photography & Videography",
     "Technical",
     "Content Writing",
-    "Web Development",
     "Graphic Designing & Auto CAD"
   ];
 
