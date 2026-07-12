@@ -21,12 +21,12 @@ const newTeamMembers = [
   },
   // Technical
   {
-    name: "Kabir Mehta",
+    name: "Ankit Gurjar",
     position: "Technical Lead",
     department: "Technical",
     bio: "Leads drone aerodynamic designs, flight control systems integration, and hardware prototyping.",
-    image: "",
-    linkedin: "https://linkedin.com",
+    image: "https://res.cloudinary.com/dbkednkcg/image/upload/v1783525258/dronex-aerotech/x9fwvu9g3fcnkhne0bu8.jpg",
+    linkedin: "https://www.linkedin.com/in/ankit-gurjar-16501a34a?utm_source=share_via&utm_content=profile&utm_medium=member_android",
     github: "https://github.com",
     isLeader: true
   },
@@ -42,27 +42,28 @@ const newTeamMembers = [
     isLeader: true
   },
   {
-    name: "Arjun Patel",
+    name: "Prajwal Pandey",
     position: "Aerodynamics Specialist",
     department: "Technical",
     bio: "Focuses on wing optimization, CFD simulations, and lightweight fuselage designs.",
-    image: "",
-    linkedin: "https://linkedin.com",
+    image: "https://res.cloudinary.com/dbkednkcg/image/upload/v1783524972/dronex-aerotech/xqkxtoz7qmgfrfl5olmu.jpg",
+    linkedin: "https://www.linkedin.com/in/prajwal-pandey-5252b7329?utm_source=share_via&utm_content=profile&utm_medium=member_android",
     github: "https://github.com",
     isLeader: false
   },
   {
-    name: "Dev Shah",
+    name: "Shiva Gupta",
     position: "Avionics Specialist",
     department: "Technical",
     bio: "Handles ESC calibration, power distribution networks, and flight controller setups.",
-    image: "",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
+    image: "https://res.cloudinary.com/dbkednkcg/image/upload/v1783506006/dronex-aerotech/uavbr2iosc77d7tskp6g.jpg",
+    linkedin: "https://www.linkedin.com/in/shiva-gupta-7bab633a6",
+    github: "https://github.com/Shiva981",
+    portfolio: "https://shiva-gupta-portfolio.vercel.app/",
     isLeader: false
   },
   {
-    name: "Aarav Joshi",
+    name: "Aryan Bhadoriya",
     position: "Structural Analyst",
     department: "Technical",
     bio: "Analyzes structural integrity, stress points, and load capacities of custom-built multirotors.",
