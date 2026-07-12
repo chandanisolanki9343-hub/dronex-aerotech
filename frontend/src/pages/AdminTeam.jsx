@@ -13,6 +13,7 @@ function AdminTeam() {
     image: "",
     linkedin: "",
     github: "",
+    portfolio: "",
     isLeader: false,
   });
 
@@ -85,6 +86,7 @@ function AdminTeam() {
         image: "",
         linkedin: "",
         github: "",
+        portfolio: "",
         isLeader: false,
       });
 
@@ -180,6 +182,16 @@ function AdminTeam() {
 
         <br /><br />
 
+        <input
+          type="text"
+          name="portfolio"
+          placeholder="Portfolio URL"
+          value={formData.portfolio}
+          onChange={handleChange}
+        />
+
+        <br /><br />
+
         <label style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer", fontFamily: "var(--font-body)", color: "var(--primary)" }}>
           <input
             type="checkbox"
@@ -237,6 +249,8 @@ function AdminTeam() {
 
           <p>{member.github}</p>
 
+          {member.portfolio && <p>{member.portfolio}</p>}
+
           <button
             onClick={() => {
               setEditingId(member._id);
@@ -247,8 +261,9 @@ function AdminTeam() {
                 department: member.department,
                 bio: member.bio,
                 image: member.image,
-                linkedin: member.linkedin,
-                github: member.github,
+                linkedin: member.linkedin || "",
+                github: member.github || "",
+                portfolio: member.portfolio || "",
                 isLeader: member.isLeader || false,
               });
             }}

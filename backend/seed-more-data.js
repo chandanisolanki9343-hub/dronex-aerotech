@@ -31,6 +31,17 @@ const newTeamMembers = [
     isLeader: true
   },
   {
+    name: "Aryan Narwariya",
+    position: "Technical Co-lead",
+    department: "Technical",
+    bio: "Specializes in drone design, autonomous navigation systems, flight hardware calibration, and embedded systems integration.",
+    image: "/aryan_narwariya.png",
+    linkedin: "https://linkedin.com",
+    github: "https://github.com",
+    portfolio: "https://my-portfolio-2cs.pages.dev/",
+    isLeader: true
+  },
+  {
     name: "Arjun Patel",
     position: "Aerodynamics Specialist",
     department: "Technical",

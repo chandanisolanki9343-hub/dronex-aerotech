@@ -74,6 +74,16 @@ function TeamPreview({ member }) {
             </a>
           )}
 
+          {member.portfolio && (
+            <a
+              href={member.portfolio}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Portfolio
+            </a>
+          )}
+
         </div>
 
       </div>

@@ -55,6 +55,8 @@ function Team() {
         "Vice president": 2,
         "Secretary": 3,
         "Secratary": 3,
+        "Technical Lead": 10,
+        "Technical Co-lead": 11,
       };
       const nameOrder = {
         "Arpita Makwana": 4,

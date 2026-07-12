@@ -37,6 +37,11 @@ const teamSchema = new mongoose.Schema(
       default: "",
     },
 
+    portfolio: {
+      type: String,
+      default: "",
+    },
+
     isLeader: {
       type: Boolean,
       default: false,
