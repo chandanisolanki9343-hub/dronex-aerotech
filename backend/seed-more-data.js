@@ -266,6 +266,16 @@ const newTeamMembers = [
     github: "https://github.com",
     isLeader: false
   },
+  {
+    name: "Prajjwal Rai",
+    position: "Management Executive",
+    department: "Event Management",
+    bio: "Contributes to club logistics, management operations, and event orchestration.",
+    image: "/prajjwal_rai.png",
+    linkedin: "https://www.linkedin.com/in/prajjwal-rai-036020343?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+    github: "https://github.com",
+    isLeader: false
+  },
   // Content Writing
   {
     name: "Aanya Gupta",
