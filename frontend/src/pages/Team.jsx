@@ -35,13 +35,9 @@ function Team() {
     "President",
     "Secretary",
     "Web Development",
-    "Event Management",
-    "Photo & Video Editing",
-    "Promotion & Social Media",
-    "Photography & Videography",
     "Technical",
-    "Content Writing",
-    "Graphic Designing & Auto CAD"
+    "Event Management",
+    "PR & Social Media"
   ];
 
   // Helper to render a group of members with the leader highlighted
@@ -137,9 +133,28 @@ function Team() {
 
   const studentTeam = team.filter((m) => m.position !== "Club Coordinator");
 
+  // Helper to normalize the department names to consolidated PR & Social Media section
+  const getDisplayDepartment = (dept) => {
+    const prAndSocialMediaDepts = [
+      "Promotion & Social Media",
+      "Content Writing",
+      "Photography & Videography",
+      "Photo & Video Editing",
+      "Graphic Designing & Auto CAD",
+      "PR & Social Media",
+      "PR and Social Media",
+      "Pr & social media",
+      "Pr and social media"
+    ];
+    if (prAndSocialMediaDepts.includes(dept)) {
+      return "PR & Social Media";
+    }
+    return dept;
+  };
+
   // Group members by department
   const groupedTeam = studentTeam.reduce((acc, member) => {
-    const dept = member.department || "Other";
+    const dept = getDisplayDepartment(member.department) || "Other";
     if (!acc[dept]) acc[dept] = [];
     acc[dept].push(member);
     return acc;
