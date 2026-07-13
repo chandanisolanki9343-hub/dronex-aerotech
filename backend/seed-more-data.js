@@ -90,7 +90,7 @@ const newTeamMembers = [
     bio: "Cuts and sequences raw footage from workshops, flight tests, and competition updates.",
     image: "/anushree_khatri.png",
     linkedin: "https://www.linkedin.com/in/anushree-khatri-72b78237b",
-    github: "https://github.com",
+    github: "https://github.com/anushreekhatri028-coder",
     isLeader: false
   },
   {
