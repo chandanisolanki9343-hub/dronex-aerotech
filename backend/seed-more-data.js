@@ -84,12 +84,12 @@ const newTeamMembers = [
     isLeader: true
   },
   {
-    name: "Rhea Sen",
+    name: "Anushree Khatri",
     position: "Video Editor",
     department: "Photo & Video Editing",
     bio: "Cuts and sequences raw footage from workshops, flight tests, and competition updates.",
-    image: "",
-    linkedin: "https://linkedin.com",
+    image: "/anushree_khatri.png",
+    linkedin: "https://www.linkedin.com/in/anushree-khatri-72b78237b",
     github: "https://github.com",
     isLeader: false
   },

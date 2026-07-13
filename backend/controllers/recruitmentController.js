@@ -355,19 +355,19 @@ export const bulkScheduleInterviews = async (req, res) => {
       });
     }
 
-    // 1. Fetch all candidates who are currently "Selected"
-    const candidates = await Recruitment.find({ status: "Selected" });
+    // 1. Fetch all candidates who are currently "Approved"
+    const candidates = await Recruitment.find({ status: "Approved" });
 
     if (candidates.length === 0) {
       return res.status(400).json({
         success: false,
-        message: "No selected candidates found to schedule interviews for",
+        message: "No approved candidates found to schedule interviews for",
       });
     }
 
     // 2. Update all of these candidates in the database
     await Recruitment.updateMany(
-      { status: "Selected" },
+      { status: "Approved" },
       {
         status: "Interview Scheduled",
         interviewDate,

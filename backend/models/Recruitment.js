@@ -62,7 +62,7 @@ const recruitmentSchema = new mongoose.Schema(
 
     status: {
       type: String,
-      enum: ["Pending", "Interview Scheduled", "Selected", "Rejected"],
+      enum: ["Pending", "Approved", "Interview Scheduled", "Selected", "Rejected"],
       default: "Pending",
     },
   },

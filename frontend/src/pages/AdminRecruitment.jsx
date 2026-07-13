@@ -10,6 +10,13 @@ function AdminRecruitment() {
   const [bulkLocation, setBulkLocation] = useState("");
   const [bulkSubmitting, setBulkSubmitting] = useState(false);
 
+  // Individual Scheduler states
+  const [schedulingId, setSchedulingId] = useState(null);
+  const [indivDate, setIndivDate] = useState("");
+  const [indivTime, setIndivTime] = useState("");
+  const [indivLocation, setIndivLocation] = useState("");
+  const [indivSubmitting, setIndivSubmitting] = useState(false);
+
   const fetchApplications = async () => {
     try {
       const res = await api.get("/recruitment");
@@ -23,8 +30,8 @@ function AdminRecruitment() {
     fetchApplications();
   }, []);
 
-  // Count candidates whose status is "Selected"
-  const selectedCount = applications.filter((app) => app.status === "Selected").length;
+  // Count candidates whose status is "Approved"
+  const approvedCount = applications.filter((app) => app.status === "Approved").length;
 
   const handleBulkSchedule = async (e) => {
     e.preventDefault();
@@ -33,12 +40,12 @@ function AdminRecruitment() {
       return;
     }
 
-    if (selectedCount === 0) {
-      alert("No selected candidates found to schedule");
+    if (approvedCount === 0) {
+      alert("No approved candidates found to schedule");
       return;
     }
 
-    if (!window.confirm(`Are you sure you want to schedule interviews and notify all ${selectedCount} selected candidate(s)?`)) return;
+    if (!window.confirm(`Are you sure you want to schedule interviews and notify all ${approvedCount} approved candidate(s)?`)) return;
 
     setBulkSubmitting(true);
     try {
@@ -47,7 +54,7 @@ function AdminRecruitment() {
         interviewTime: bulkTime,
         interviewLocation: bulkLocation
       });
-      alert(`Interview Scheduled and emails sent to all ${selectedCount} selected candidate(s) successfully!`);
+      alert(`Interview Scheduled and emails sent to all ${approvedCount} approved candidate(s) successfully!`);
       // Clear inputs
       setBulkDate("");
       setBulkTime("");
@@ -60,13 +67,48 @@ function AdminRecruitment() {
     setBulkSubmitting(false);
   };
 
+  const handleIndividualSchedule = async (id) => {
+    if (!indivDate || !indivTime || !indivLocation) {
+      alert("Please fill in Date, Time, and Venue/Location");
+      return;
+    }
+
+    setIndivSubmitting(true);
+    try {
+      await api.put(`/recruitment/${id}/schedule`, {
+        interviewDate: indivDate,
+        interviewTime: indivTime,
+        interviewLocation: indivLocation,
+      });
+      alert("Interview successfully scheduled and email sent to the candidate!");
+      // Reset state
+      setSchedulingId(null);
+      setIndivDate("");
+      setIndivTime("");
+      setIndivLocation("");
+      fetchApplications();
+    } catch (error) {
+      console.error(error);
+      alert(error.response?.data?.message || "Failed to schedule interview");
+    }
+    setIndivSubmitting(false);
+  };
+
   const updateStatus = async (id, status) => {
-    const actionText = status === "Selected" ? "approve and select" : "reject";
+    let actionText = `change status to ${status} for`;
+    if (status === "Approved") actionText = "approve (shortlist for interview)";
+    if (status === "Selected") actionText = "select and finalize";
+    if (status === "Rejected") actionText = "reject";
+
     if (!window.confirm(`Are you sure you want to ${actionText} this applicant?`)) return;
     
     try {
       await api.put(`/recruitment/${id}`, { status });
-      alert(`Application successfully ${status === "Selected" ? "Approved & Selected" : "Rejected"}`);
+      let alertMsg = `Application successfully updated to ${status}`;
+      if (status === "Approved") alertMsg = "Application Shortlisted/Approved for Interview";
+      if (status === "Selected") alertMsg = "Application Approved & Selected (Welcome email sent and added to Team!)";
+      if (status === "Rejected") alertMsg = "Application Rejected";
+      alert(alertMsg);
       fetchApplications();
     } catch (error) {
       console.log(error);
@@ -91,6 +133,8 @@ function AdminRecruitment() {
     switch (status) {
       case "Selected":
         return { backgroundColor: "rgba(40, 167, 69, 0.15)", color: "#28a745", border: "1px solid rgba(40, 167, 69, 0.3)" };
+      case "Approved":
+        return { backgroundColor: "rgba(23, 162, 184, 0.15)", color: "#17a2b8", border: "1px solid rgba(23, 162, 184, 0.3)" };
       case "Rejected":
         return { backgroundColor: "rgba(220, 53, 69, 0.15)", color: "#dc3545", border: "1px solid rgba(220, 53, 69, 0.3)" };
       case "Interview Scheduled":
@@ -119,7 +163,7 @@ function AdminRecruitment() {
         }}>
           <h2 style={{ fontSize: "20px", fontWeight: "600", margin: "0 0 10px 0", color: "#fff" }}>Batch Interview Scheduler</h2>
           <p style={{ color: "#aaa", fontSize: "14px", margin: "0 0 20px 0" }}>
-            Schedule interviews in bulk for all selected/approved candidates. They will automatically receive the interview details email.
+            Schedule interviews in bulk for all shortlisted/approved candidates. They will automatically receive the interview details email.
           </p>
           
           <form onSubmit={handleBulkSchedule} style={{ display: "flex", flexWrap: "wrap", gap: "15px", alignItems: "flex-end" }}>
@@ -179,19 +223,19 @@ function AdminRecruitment() {
             </div>
 
             <div style={{ display: "flex", flexDirection: "column", gap: "10px", minWidth: "200px" }}>
-              <span style={{ fontSize: "13px", color: selectedCount > 0 ? "#28a745" : "#ffc107", fontWeight: "500", paddingBottom: "5px" }}>
-                ● {selectedCount} Selected applicant(s) ready to schedule
+              <span style={{ fontSize: "13px", color: approvedCount > 0 ? "#17a2b8" : "#ffc107", fontWeight: "500", paddingBottom: "5px" }}>
+                ● {approvedCount} Approved applicant(s) ready to schedule
               </span>
               <button
                 type="submit"
-                disabled={bulkSubmitting || selectedCount === 0}
+                disabled={bulkSubmitting || approvedCount === 0}
                 style={{
-                  background: selectedCount > 0 ? "#007bff" : "rgba(255,255,255,0.05)",
-                  color: selectedCount > 0 ? "white" : "#666",
+                  background: approvedCount > 0 ? "#007bff" : "rgba(255,255,255,0.05)",
+                  color: approvedCount > 0 ? "white" : "#666",
                   border: "none",
                   padding: "11px 24px",
                   borderRadius: "8px",
-                  cursor: selectedCount > 0 ? "pointer" : "not-allowed",
+                  cursor: approvedCount > 0 ? "pointer" : "not-allowed",
                   fontSize: "14px",
                   fontWeight: "600",
                   transition: "all 0.2s"
@@ -293,9 +337,160 @@ function AdminRecruitment() {
                 </div>
               )}
 
+              {/* Individual Interview Scheduler Inline Form */}
+              {app.status === "Approved" && schedulingId === app._id && (
+                <div style={{
+                  background: "rgba(0, 123, 255, 0.05)",
+                  border: "1px solid rgba(0, 123, 255, 0.2)",
+                  borderRadius: "10px",
+                  padding: "16px",
+                  marginTop: "10px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px"
+                }}>
+                  <span style={{ fontSize: "14px", fontWeight: "600", color: "#007bff" }}>Schedule Individual Interview</span>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "4px", flex: 1, minWidth: "120px" }}>
+                      <label style={{ fontSize: "11px", color: "#888" }}>Date</label>
+                      <input
+                        type="date"
+                        required
+                        value={indivDate}
+                        onChange={(e) => setIndivDate(e.target.value)}
+                        style={{
+                          background: "#161616",
+                          border: "1px solid rgba(255,255,255,0.1)",
+                          color: "white",
+                          padding: "8px",
+                          borderRadius: "6px",
+                          fontSize: "13px"
+                        }}
+                      />
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "4px", flex: 1, minWidth: "100px" }}>
+                      <label style={{ fontSize: "11px", color: "#888" }}>Time</label>
+                      <input
+                        type="time"
+                        required
+                        value={indivTime}
+                        onChange={(e) => setIndivTime(e.target.value)}
+                        style={{
+                          background: "#161616",
+                          border: "1px solid rgba(255,255,255,0.1)",
+                          color: "white",
+                          padding: "8px",
+                          borderRadius: "6px",
+                          fontSize: "13px"
+                        }}
+                      />
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "4px", flex: 2, minWidth: "180px" }}>
+                      <label style={{ fontSize: "11px", color: "#888" }}>Venue / Classroom / Link</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Room 102, Aero Block"
+                        value={indivLocation}
+                        onChange={(e) => setIndivLocation(e.target.value)}
+                        style={{
+                          background: "#161616",
+                          border: "1px solid rgba(255,255,255,0.1)",
+                          color: "white",
+                          padding: "8px",
+                          borderRadius: "6px",
+                          fontSize: "13px"
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px", marginTop: "4px" }}>
+                    <button
+                      onClick={() => setSchedulingId(null)}
+                      style={{
+                        background: "rgba(255,255,255,0.05)",
+                        color: "#aaa",
+                        border: "1px solid rgba(255,255,255,0.1)",
+                        padding: "7px 14px",
+                        borderRadius: "6px",
+                        cursor: "pointer",
+                        fontSize: "13px",
+                        fontWeight: "600"
+                      }}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={() => handleIndividualSchedule(app._id)}
+                      disabled={indivSubmitting}
+                      style={{
+                        background: "#007bff",
+                        color: "white",
+                        border: "none",
+                        padding: "8px 16px",
+                        borderRadius: "6px",
+                        cursor: "pointer",
+                        fontSize: "13px",
+                        fontWeight: "600"
+                      }}
+                    >
+                      {indivSubmitting ? "Sending..." : "Confirm & Send Invite"}
+                    </button>
+                  </div>
+                </div>
+              )}
+
               {/* Action Buttons */}
               <div style={{ display: "flex", justifyContent: "flex-end", gap: "12px", marginTop: "10px", flexWrap: "wrap" }}>
-                {(app.status === "Pending" || app.status === "Interview Scheduled") && (
+                {/* 1. Pending candidate can be approved (shortlisted) for interview */}
+                {app.status === "Pending" && (
+                  <button
+                    onClick={() => updateStatus(app._id, "Approved")}
+                    style={{
+                      background: "#17a2b8",
+                      color: "white",
+                      border: "none",
+                      padding: "10px 20px",
+                      borderRadius: "8px",
+                      cursor: "pointer",
+                      fontWeight: "600",
+                      fontSize: "14px",
+                      transition: "all 0.2s"
+                    }}
+                    className="btn-shortlist"
+                  >
+                    Approve for Interview
+                  </button>
+                )}
+
+                {/* 2. Approved candidate can have interview scheduled */}
+                {app.status === "Approved" && schedulingId !== app._id && (
+                  <button
+                    onClick={() => {
+                      setSchedulingId(app._id);
+                      setIndivDate("");
+                      setIndivTime("");
+                      setIndivLocation("");
+                    }}
+                    style={{
+                      background: "#007bff",
+                      color: "white",
+                      border: "none",
+                      padding: "10px 20px",
+                      borderRadius: "8px",
+                      cursor: "pointer",
+                      fontWeight: "600",
+                      fontSize: "14px",
+                      transition: "all 0.2s"
+                    }}
+                    className="btn-schedule"
+                  >
+                    Schedule Interview
+                  </button>
+                )}
+
+                {/* 3. Candidate whose interview is scheduled can be selected/finalized */}
+                {app.status === "Interview Scheduled" && (
                   <button
                     onClick={() => updateStatus(app._id, "Selected")}
                     style={{
@@ -309,12 +504,14 @@ function AdminRecruitment() {
                       fontSize: "14px",
                       transition: "all 0.2s"
                     }}
-                    className="btn-approve"
+                    className="btn-select"
                   >
-                    Approve & Select
+                    Select & Finalize
                   </button>
                 )}
-                {app.status !== "Rejected" && (
+
+                {/* Reject action available for any candidate that is not already selected or rejected */}
+                {app.status !== "Selected" && app.status !== "Rejected" && (
                   <button
                     onClick={() => updateStatus(app._id, "Rejected")}
                     style={{
@@ -333,6 +530,7 @@ function AdminRecruitment() {
                     Reject
                   </button>
                 )}
+
                 <button
                   onClick={() => deleteApplication(app._id)}
                   style={{
