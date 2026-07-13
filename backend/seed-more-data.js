@@ -74,16 +74,6 @@ const newTeamMembers = [
   },
   // Photo & Video Editing
   {
-    name: "Ishan Malhotra",
-    position: "Editing Lead",
-    department: "Photo & Video Editing",
-    bio: "Manages visual narratives, color grading, sound design, and post-production for all club media.",
-    image: "",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
-    isLeader: true
-  },
-  {
     name: "Anushree Khatri",
     position: "Video Editor",
     department: "Photo & Video Editing",
