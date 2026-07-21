@@ -114,36 +114,7 @@ const newTeamMembers = [
     github: "https://github.com",
     isLeader: true
   },
-  {
-    name: "Neil D'Souza",
-    position: "Social Media Manager",
-    department: "Promotion & Social Media",
-    bio: "Schedules content across channels, tracks engagement metrics, and optimizes outreach strategies.",
-    image: "",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
-    isLeader: false
-  },
-  {
-    name: "Ananya Panday",
-    position: "Content Planner",
-    department: "Promotion & Social Media",
-    bio: "Develops editorial calendars, content pillars, and interactive social polls/quizzes.",
-    image: "",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
-    isLeader: false
-  },
-  {
-    name: "Armaan Malik",
-    position: "Community Representative",
-    department: "Promotion & Social Media",
-    bio: "Interacts with student clubs, replies to messages, and manages subscriber newsletters.",
-    image: "",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
-    isLeader: false
-  },
+
   // Photography & Videography
   {
     name: "Rohan Das",
@@ -155,36 +126,7 @@ const newTeamMembers = [
     github: "https://github.com",
     isLeader: true
   },
-  {
-    name: "Sneha Kapoor",
-    position: "Lead Photographer",
-    department: "Photography & Videography",
-    bio: "Captures high-resolution macro shots of hardware details, avionics setups, and student teams.",
-    image: "",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
-    isLeader: false
-  },
-  {
-    name: "Aryan Khan",
-    position: "Drone Operator & Videographer",
-    department: "Photography & Videography",
-    bio: "Flies tracking camera rigs to capture aerial footage of fixed-wing and multirotor test flights.",
-    image: "",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
-    isLeader: false
-  },
-  {
-    name: "Maya Ali",
-    position: "Event Photographer",
-    department: "Photography & Videography",
-    bio: "Focuses on capturing candid moments during workshops, presentations, and team meetings.",
-    image: "",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
-    isLeader: false
-  },
+
   // Event Management
   {
     name: "Vaishnavi Sharma",
@@ -211,7 +153,7 @@ const newTeamMembers = [
     position: "Sponsorship In-Charge",
     department: "Event Management",
     bio: "Develops pitch decks, reaches out to industry sponsors, and manages the event budgets.",
-    image: "https://res.cloudinary.com/dbkednkcg/image/upload/v1783507668/dronex-aerotech/ftaiwkyoe3wgosipqcek.jpg",
+    image: "/yash_baghel.png",
     linkedin: "https://www.linkedin.com/in/yash-baghel-042085305?utm_source=share_via&utm_content=profile&utm_medium=membeur_android",
     github: "https://github.com",
     isLeader: false
@@ -277,26 +219,7 @@ const newTeamMembers = [
     github: "https://github.com",
     isLeader: true
   },
-  {
-    name: "Ritvik Sood",
-    position: "Technical Writer",
-    department: "Content Writing",
-    bio: "Writes documentation, hardware specification sheets, and project reports.",
-    image: "",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
-    isLeader: false
-  },
-  {
-    name: "Natasha Gill",
-    position: "Social Media Copywriter",
-    department: "Content Writing",
-    bio: "Composes engaging, punchy post captions and announcements for Instagram and LinkedIn.",
-    image: "",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
-    isLeader: false
-  },
+
   {
     name: "Siddharth Malhotra",
     position: "Club Reporter",
@@ -359,26 +282,7 @@ const newTeamMembers = [
     github: "https://github.com",
     isLeader: true
   },
-  {
-    name: "Pooja Hegde",
-    position: "CAD Modeler",
-    department: "Graphic Designing & Auto CAD",
-    bio: "Drafts high-precision 3D CAD blueprints of motor brackets, arm connections, and custom landing gears.",
-    image: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&q=80&w=400",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
-    isLeader: false
-  },
-  {
-    name: "Varun Dhawan",
-    position: "UI/UX Designer",
-    department: "Graphic Designing & Auto CAD",
-    bio: "Researches user flows, wireframes website mockups, and establishes a premium visual guide.",
-    image: "",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
-    isLeader: false
-  },
+
   {
     name: "Shruti Haasan",
     position: "3D Rendering Artist",
