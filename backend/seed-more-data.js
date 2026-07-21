@@ -72,6 +72,16 @@ const newTeamMembers = [
     github: "https://github.com",
     isLeader: false
   },
+  {
+    name: "Divyansh Sharma",
+    position: "Technical Executive",
+    department: "Technical",
+    bio: "Focuses on drone software integration, flight testing, telemetry systems, and hardware-software synchronization.",
+    image: "/divyansh_sharma.png",
+    linkedin: "https://www.linkedin.com/in/workdivyanshsharma/",
+    github: "https://github.com/workdivyansh",
+    isLeader: false
+  },
   // Photo & Video Editing
   {
     name: "Anushree Khatri",
