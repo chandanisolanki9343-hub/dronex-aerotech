@@ -19,6 +19,17 @@ const newTeamMembers = [
     github: "https://github.com",
     isLeader: true
   },
+  // Secretary
+  {
+    name: "Harshvardhan Kaushal",
+    position: "Secretary",
+    department: "Secretary",
+    bio: "Manages administrative affairs, meeting records, inter-domain correspondence, and event schedules.",
+    image: "https://res.cloudinary.com/dbkednkcg/image/upload/v1783575415/dronex-aerotech/b089ymfvqcqjyqv77rwf.png",
+    linkedin: "https://www.linkedin.com/in/harsh-vardhan-kaushal-84212b317?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+    github: "https://github.com/coolharsh408",
+    isLeader: true
+  },
   // Technical
   {
     name: "Ankit Gurjar",
