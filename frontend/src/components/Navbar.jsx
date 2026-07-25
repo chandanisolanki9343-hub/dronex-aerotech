@@ -18,7 +18,7 @@ function Navbar() {
   return (
     <nav className={scrolled ? "navbar navbar-scroll" : "navbar"}>
       <div className="navbar-logo">
-        <Link to="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
+        <Link to="/" style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
           <div style={{
             padding: "3px 10px",
             borderRadius: "8px",
@@ -31,6 +31,14 @@ function Navbar() {
           }} className="logo-badge">
             <img src="/logo.png" alt="Dronex AeroTech" style={{ height: "24px", objectFit: "contain" }} />
           </div>
+          <span style={{
+            fontSize: "22px",
+            fontWeight: "700",
+            fontFamily: "var(--font-heading)",
+            color: "#ffffff"
+          }} className="logo-text">
+            Dronex <span style={{ color: "var(--accent)" }}>AeroTech</span>
+          </span>
         </Link>
       </div>
 

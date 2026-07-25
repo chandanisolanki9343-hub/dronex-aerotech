@@ -20,7 +20,7 @@ margin-bottom:60px;
 
 font-size:48px;
 
-color:#111;
+color: var(--primary);
 
 margin-bottom:15px;
 
@@ -28,7 +28,7 @@ margin-bottom:15px;
 
 .stats-heading p{
 
-color:#666;
+color: var(--secondary);
 
 font-size:18px;
 
@@ -53,12 +53,13 @@ gap:30px;
     border-radius: var(--radius-md);
     text-align:center;
     box-shadow: var(--shadow-sm);
-    transition:.35s ease;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .stat-card:hover{
-    transform:translateY(-10px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 25px 55px rgba(0, 0, 0, 0.6), 0 0 35px rgba(223, 165, 87, 0.12);
+    border-color: var(--accent);
 }
 
 .stat-card h1{

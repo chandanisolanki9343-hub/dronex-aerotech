@@ -9,7 +9,7 @@
 
     padding:18px 60px;
 
-    background: rgba(246, 241, 232, 0.45);
+    background: rgba(9, 9, 11, 0.45);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
 
@@ -20,7 +20,7 @@
 
 .navbar-scroll{
     box-shadow: var(--shadow-sm);
-    background: rgba(246, 241, 232, 0.75);
+    background: rgba(9, 9, 11, 0.85);
 }
 
 .navbar-logo a{
@@ -40,11 +40,13 @@
 }
 
 .navbar-links a{
+    position: relative;
     text-decoration:none;
     color: var(--secondary);
     font-weight:500;
     font-family: var(--font-body);
     transition:.25s;
+    padding-bottom: 6px;
 }
 
 .navbar-links a:hover{
@@ -56,22 +58,36 @@
     font-weight:700;
 }
 
+.navbar-links .active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 15%;
+    width: 70%;
+    height: 2.5px;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+    border-radius: 2px;
+}
+
 .navbar-search input{
     width:250px;
     padding:12px 18px;
     border: 1px solid var(--border);
     border-radius:30px;
-    background: rgba(255, 255, 255, 0.65);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--primary);
     outline:none;
     font-size:15px;
     font-family: var(--font-body);
-    box-shadow: 0 3px 10px rgba(0,0,0,.03);
+    box-shadow: none;
     transition: all 0.3s;
 }
 
 .navbar-search input:focus {
     border-color: var(--accent);
-    background: var(--card);
+    background: rgba(255, 255, 255, 0.09);
+    box-shadow: 0 0 15px rgba(223, 165, 87, 0.1);
 }
 
 @media(max-width:1000px){

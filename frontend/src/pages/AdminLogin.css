@@ -4,12 +4,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(
-    135deg,
-    #F6F1E8 0%,
-    #FBF8F3 50%,
-    #FFFFFF 100%
-  );
+  background-color: #0b0b0d;
+  background-image: 
+    radial-gradient(circle at 50% 20%, rgba(223, 165, 87, 0.08) 0%, rgba(11, 11, 13, 0) 50%),
+    radial-gradient(circle at 80% 70%, rgba(223, 165, 87, 0.03) 0%, rgba(11, 11, 13, 0) 40%);
+  background-attachment: fixed;
   overflow: hidden;
   margin: 0;
   padding: 0;
@@ -116,7 +115,7 @@
   padding: 11px 14px;
   border: 1px solid var(--border);
   font-size: 13px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.03);
   box-sizing: border-box;
   transition: all 0.3s ease;
   outline: none;
@@ -128,8 +127,8 @@
 .admin-form-group input[type="email"]:focus,
 .admin-form-group input[type="password"]:focus {
   border-color: var(--accent);
-  background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(184, 137, 60, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 15px rgba(223, 165, 87, 0.1);
 }
 
 .password-toggle {
@@ -189,8 +188,8 @@
 }
 
 .admin-signin-btn {
-  background: var(--primary);
-  color: #ffffff;
+  background: linear-gradient(135deg, #dfa557 0%, #b27b37 100%);
+  color: #0b0b0d;
   border: none;
   padding: 14px;
   font-size: 13px;
@@ -206,10 +205,10 @@
 }
 
 .admin-signin-btn:hover {
-  background: var(--accent);
-  color: #ffffff;
+  background: linear-gradient(135deg, #e5b36c 0%, #c48c48 100%);
+  color: #0b0b0d;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(184, 137, 60, 0.25);
+  box-shadow: 0 8px 25px rgba(223, 165, 87, 0.35);
 }
 
 .admin-login-footer {

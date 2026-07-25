@@ -110,8 +110,8 @@ const newTeamMembers = [
     department: "Photo & Video Editing",
     bio: "Edits and sequences raw footage from flight tests, workshops, and club activities.",
     image: "/love_singh_rajput.png",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
+    linkedin: "",
+    github: "",
     isLeader: false
   },
   {

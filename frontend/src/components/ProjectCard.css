@@ -5,14 +5,15 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     overflow:hidden;
-    transition:.35s ease;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     cursor:pointer;
     box-shadow: var(--shadow-sm);
 }
 
 .project-card:hover{
-    transform:translateY(-10px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 25px 55px rgba(0, 0, 0, 0.6), 0 0 35px rgba(223, 165, 87, 0.12);
+    border-color: var(--accent);
 }
 
 .project-card img{

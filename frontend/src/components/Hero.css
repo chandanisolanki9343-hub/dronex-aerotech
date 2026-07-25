@@ -11,24 +11,45 @@
     min-height:60vh;
 
     background: transparent;
+    position: relative;
 }
 
 .hero-left{
     flex:1;
+    position: relative;
+    z-index: 2;
 }
 
 .welcome-box{
-    display:inline-block;
-    background: var(--card);
+    display:inline-flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--border);
-    padding:12px 20px;
-    border-radius:30px;
-    margin-bottom:30px;
-    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 10px 18px;
+    border-radius: 30px;
+    margin-bottom: 30px;
     color: var(--primary);
     font-weight: 500;
+    font-size: 14px;
+}
+
+.welcome-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    margin-right: 10px;
+    box-shadow: 0 0 10px var(--accent);
+}
+
+.text-accent-gradient {
+    background: linear-gradient(135deg, #dfa557 0%, #b27b37 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
 }
 
 .hero h1{
@@ -58,6 +79,8 @@
     flex:1;
     display:flex;
     justify-content:center;
+    position: relative;
+    z-index: 2;
 }
 
 .inspiration-card{
@@ -68,13 +91,14 @@
     border: 1px solid var(--border);
     padding:35px;
     border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 35px rgba(223, 165, 87, 0.03);
     transition: all 0.35s ease;
 }
 
 .inspiration-card:hover {
     transform: translateY(-8px);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.65), 0 0 45px rgba(223, 165, 87, 0.08);
+    border-color: rgba(223, 165, 87, 0.3);
 }
 
 .inspiration-card h2{
@@ -87,16 +111,19 @@
     width:100%;
     padding:15px;
     border: 1px solid var(--border);
-    background: rgba(0, 0, 0, 0.03);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--primary);
     border-radius: var(--radius-sm);
     margin-bottom:25px;
     outline: none;
     font-family: var(--font-body);
-    transition: border-color 0.3s;
+    transition: all 0.3s;
 }
 
 .inspiration-card input:focus{
     border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0 15px rgba(223, 165, 87, 0.1);
 }
 
 .collection{
@@ -106,9 +133,12 @@
 }
 
 .collection-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 15px 20px;
-    background: rgba(255, 255, 255, 0.45);
-    border: 1px solid rgba(0, 0, 0, 0.03);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-sm);
     color: var(--primary);
     font-family: var(--font-body);
@@ -116,11 +146,41 @@
     font-weight: 500;
 }
 
+.collection-item-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.collection-icon {
+    color: var(--accent);
+    transition: transform 0.3s ease;
+}
+
+.chevron-right {
+    display: flex;
+    align-items: center;
+    color: var(--secondary);
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
 .collection-item:hover{
-    background: var(--primary);
-    color: white;
+    background: rgba(223, 165, 87, 0.06);
+    border-color: rgba(223, 165, 87, 0.4);
+    color: var(--primary);
     cursor:pointer;
     transform: translateX(6px);
+}
+
+.collection-item:hover .collection-icon {
+    transform: scale(1.1);
+}
+
+.collection-item:hover .chevron-right {
+    color: var(--accent);
+    opacity: 1;
+    transform: translateX(2px);
 }
 
 @media(max-width: 1100px) {
@@ -160,3 +220,96 @@
         width: 100%;
     }
 }
+
+/* ==========================================================================
+   HERO DECORATIONS (ORBITAL RING & HOVERING DRONE)
+   ========================================================================== */
+
+.hero-decorations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: visible;
+}
+
+.hero-orbital-ring {
+    position: absolute;
+    top: 48%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    width: 580px;
+    height: 580px;
+    border: 1px solid rgba(223, 165, 87, 0.12);
+    border-radius: 50%;
+    pointer-events: none;
+    box-shadow: inset 0 0 50px rgba(223, 165, 87, 0.01), 0 0 50px rgba(223, 165, 87, 0.01);
+}
+
+.hero-drone-container {
+    position: absolute;
+    top: 16%;
+    left: 50.5%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    height: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    mix-blend-mode: screen;
+    opacity: 0.75;
+    filter: drop-shadow(0 0 15px rgba(223, 165, 87, 0.1));
+    animation: float 6s ease-in-out infinite;
+}
+
+.hero-drone {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(-50%, -50%) translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translate(-50%, -50%) translateY(-15px) rotate(1deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) translateY(0px) rotate(0deg);
+    }
+}
+
+/* Responsive styles for decorations */
+@media(max-width: 1100px) {
+    .hero-orbital-ring {
+        width: 480px;
+        height: 480px;
+        left: 50%;
+    }
+    .hero-drone-container {
+        width: 230px;
+        height: 230px;
+        left: 50%;
+        top: 18%;
+    }
+}
+
+@media(max-width: 850px) {
+    .hero-orbital-ring {
+        width: 320px;
+        height: 320px;
+        left: 50%;
+        top: 50%;
+    }
+    .hero-drone-container {
+        width: 180px;
+        height: 180px;
+        left: 50%;
+        top: 50%;
+    }
+}
+

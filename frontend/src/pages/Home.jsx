@@ -71,25 +71,29 @@ function Home() {
           gap: "60px",
           alignItems: "center"
         }}>
-          {/* Left Column: Premium Drone Image */}
-          <div style={{
-            display: "flex",
-            justifyContent: "center",
-            position: "relative",
-            width: "100%"
-          }}>
+          {/* Left Column: Premium Drone Image with Gold Ornaments */}
+          <div className="about-image-container">
+            {/* L-shaped bottom-left gold border frame ornament */}
+            <div className="gold-frame" />
+            
+            {/* Dot grid decoration on the middle-left */}
+            <div style={{
+              position: "absolute",
+              left: "-10px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              width: "40px",
+              height: "80px",
+              backgroundImage: "radial-gradient(var(--accent) 2px, transparent 2px)",
+              backgroundSize: "10px 10px",
+              opacity: 0.35,
+              pointerEvents: "none",
+              zIndex: 1
+            }} />
+
             <img 
               src="/drone-about.png" 
               alt="Dronex AeroTech Drone" 
-              style={{ 
-                width: "100%", 
-                maxWidth: "480px",
-                height: "auto", 
-                objectFit: "cover",
-                borderRadius: "16px",
-                boxShadow: "0 10px 30px rgba(0, 0, 0, 0.12)",
-                display: "block"
-              }} 
             />
           </div>
 
