@@ -20,10 +20,11 @@
 .trinetra-page .pin-section__inner {
   justify-content: center;
   align-items: center;
-  padding: 60px 24px;
+  padding: 36px 24px;
   max-width: 1240px;
   margin: 0 auto;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .trinetra-container {
@@ -287,18 +288,20 @@
   background: linear-gradient(135deg, rgba(223, 165, 87, 0.08) 0%, rgba(18, 18, 22, 0.95) 100%);
   border: 1px solid rgba(223, 165, 87, 0.3);
   border-radius: var(--radius-lg);
-  padding: 48px;
+  padding: 32px 36px;
   backdrop-filter: blur(20px);
   box-shadow: var(--shadow-md);
   position: relative;
   overflow: hidden;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
 .suas-card__header h2 {
-  font-size: 42px;
+  font-size: 34px;
   font-family: var(--font-heading);
   color: var(--primary);
-  margin: 6px 0;
+  margin: 4px 0;
 }
 
 .eyebrow-accent {
@@ -310,18 +313,18 @@
 }
 
 .suas-location {
-  font-size: 16px;
+  font-size: 15px;
   color: var(--accent);
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 .suas-card__desc {
-  font-size: 17px;
+  font-size: 15.5px;
   color: var(--secondary);
-  line-height: 1.7;
+  line-height: 1.6;
   max-width: 850px;
-  margin-bottom: 30px;
+  margin-bottom: 18px;
 }
 
 .suas-flight-banner {
@@ -330,9 +333,9 @@
   gap: 4px;
   background: rgba(223, 165, 87, 0.15);
   border: 1.5px solid var(--accent);
-  padding: 16px 28px;
+  padding: 12px 22px;
   border-radius: var(--radius-sm);
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .suas-flight-banner .banner-title {
@@ -617,22 +620,22 @@
 /* ── 08. FACULTY MENTOR SECTION ─────────────────────────────────────────── */
 .mentor-card {
   display: flex;
-  gap: 40px;
+  gap: 32px;
   align-items: center;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 48px;
+  padding: 24px 32px;
   backdrop-filter: blur(20px);
   box-shadow: var(--shadow-sm);
 }
 
 .mentor-image-wrapper {
   position: relative;
-  width: 220px;
-  height: 220px;
+  width: 150px;
+  height: 150px;
   flex-shrink: 0;
-  border-radius: 24px;
+  border-radius: 20px;
   overflow: hidden;
   border: 2px solid var(--accent);
 }
@@ -656,7 +659,7 @@
 }
 
 .mentor-eyebrow {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 2px;
   color: var(--accent);
@@ -665,18 +668,18 @@
 }
 
 .mentor-name {
-  font-size: 32px;
+  font-size: 26px;
   font-family: var(--font-heading);
   color: var(--primary);
-  margin: 4px 0;
+  margin: 4px 0 2px;
 }
 
 .mentor-role {
   display: block;
-  font-size: 15px;
+  font-size: 13.5px;
   color: var(--secondary);
   font-weight: 500;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .mentor-quote {
