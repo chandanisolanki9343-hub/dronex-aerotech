@@ -293,7 +293,7 @@ function TeamTrinetra() {
         </div>
       </div>
 
-      {/* ── CARD 7: MEDIA RECOGNITION ────────────────────────────────── */}
+      {/* ── CARD 7: MEDIA RECOGNITION (SHOWCASE) ────────────────────────── */}
       <div className="pin-section pin-section--trinetra-media">
         <div className="pin-overlay" />
         <div className="pin-section__inner">
@@ -337,7 +337,17 @@ function TeamTrinetra() {
                 </div>
               </div>
             </div>
+          </section>
+        </div>
+      </div>
 
+      {/* ── CARD 8: MEDIA COVERAGE HIGHLIGHTS GRID ─────────────────────── */}
+      <div className="pin-section pin-section--trinetra-media-grid">
+        <div className="pin-overlay" />
+        <div className="pin-section__inner">
+          <section className="trinetra-section trinetra-media">
+            <div className="section-label">04.1 // BROADCAST &amp; PRESS</div>
+            <h2 className="trinetra-heading">Media Highlights</h2>
             <div className="media-grid">
               {mediaCoverage.map((item, idx) => (
                 <div className="media-card" key={idx}>
@@ -351,7 +361,7 @@ function TeamTrinetra() {
         </div>
       </div>
 
-      {/* ── CARD 8: FACULTY MENTOR ───────────────────────────────────── */}
+      {/* ── CARD 9: FACULTY MENTOR PROFILE ───────────────────────────── */}
       <div className="pin-section pin-section--trinetra-mentor">
         <div className="pin-overlay" />
         <div className="pin-section__inner">
@@ -372,8 +382,18 @@ function TeamTrinetra() {
                 </blockquote>
               </div>
             </div>
+          </section>
+        </div>
+      </div>
 
-            <div className="mentor-field-showcase">
+      {/* ── CARD 10: ON-FIELD MENTORSHIP PHOTO ───────────────────────── */}
+      <div className="pin-section pin-section--trinetra-mentor-field">
+        <div className="pin-overlay" />
+        <div className="pin-section__inner">
+          <section className="trinetra-section trinetra-mentor">
+            <div className="section-label">05.1 // FLIGHT TESTING &amp; GUIDANCE</div>
+            <h2 className="trinetra-heading">On-Field Flight Operations</h2>
+            <div className="mentor-field-showcase" style={{ marginTop: 0 }}>
               <div className="mentor-field-image-container">
                 <img
                   src="/yashwant_sawle_mentorship.png"
