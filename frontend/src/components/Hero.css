@@ -1,23 +1,125 @@
 .hero{
-    max-width:1400px;
-    margin:auto;
-    padding:40px 60px;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 60px;
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 
-    min-height:60vh;
+    min-height: 85vh;
+    flex: 1;
 
     background: transparent;
     position: relative;
+
+    /* Keep default cursor visible */
+    cursor: default;
 }
 
+/* ── Floating cursor "Join Club" button ──────────────────── */
+.hero-cursor-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+    /* GSAP sets transform:translate(x,y), starts hidden */
+    opacity: 0;
+    transform: scale(0.7);
+    transform-origin: center center;
+
+    /* Interactive button that follows cursor */
+    pointer-events: auto;
+    cursor: pointer;
+    text-decoration: none;
+    will-change: transform;
+
+    /* Layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 0 20px;
+    height: 52px;
+    border-radius: 999px;
+
+    /* Premium gold glassmorphic style */
+    background: rgba(223, 165, 87, 0.14);
+    border: 1.5px solid rgba(223, 165, 87, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow:
+        0 0 28px rgba(223, 165, 87, 0.18),
+        inset 0 0 20px rgba(223, 165, 87, 0.06);
+
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.hero-cursor-btn:hover {
+    background: linear-gradient(135deg, #dfa557 0%, #b27b37 100%) !important;
+    border-color: #ffe6aa !important;
+    box-shadow:
+        0 0 45px rgba(223, 165, 87, 0.85),
+        inset 0 0 15px rgba(255, 255, 255, 0.3) !important;
+}
+
+.hero-cursor-btn:hover .hero-cursor-btn__label {
+    color: #040406 !important;
+    font-weight: 800;
+}
+
+.hero-cursor-btn:hover .hero-cursor-btn__arrow {
+    color: #040406 !important;
+    transform: scale(1.3) rotate(20deg);
+}
+
+.hero-cursor-btn:active {
+    transform: scale(0.94);
+}
+
+.hero-cursor-btn__arrow {
+    font-size: 16px;
+    color: var(--accent);
+    line-height: 1;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.hero-cursor-btn__label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-family: var(--font-body);
+    line-height: 1;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+@keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+@keyframes float-badge {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-3px) scale(1.06); }
+}
+
+
+
 .hero-left{
-    flex:1;
+    flex: 1;
+    max-width: 650px;
     position: relative;
     z-index: 2;
+    text-align: left;
+    overflow: visible;
 }
 
 .welcome-box{
@@ -69,10 +171,19 @@
     font-family: var(--font-body);
 }
 
-.hero-buttons{
-    display:flex;
-    gap:20px;
-    flex-wrap:wrap;
+/* Override btn padding inside hero so all 3 buttons fit on one row */
+.hero .btn {
+    padding: 12px 24px;
+    font-size: 15px;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .hero-right{
@@ -190,14 +301,14 @@
         min-height: auto;
     }
     .inspiration-card {
-        width: 350px;
-        padding: 25px;
+        width: 320px;
+        padding: 22px;
     }
     .hero h1 {
-        font-size: 52px;
+        font-size: 48px;
     }
     .hero-buttons {
-        gap: 12px;
+        gap: 10px;
     }
 }
 
@@ -216,8 +327,10 @@
         max-width: 420px;
     }
     .hero-buttons {
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
         width: 100%;
+        gap: 10px;
     }
 }
 

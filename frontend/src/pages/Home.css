@@ -1,0 +1,268 @@
+/* ============================================================
+   HOME.CSS  —  Stacked Card Scroll + Section Layouts
+   Dronex AeroTech  ·  Premium Dark Theme
+============================================================ */
+
+/* ── Stacked Pin Wrapper ─────────────────────────────────── */
+
+.pin-stack-wrapper {
+  position: relative;
+}
+
+/* Every pin-section is a full-viewport "card" */
+.pin-section {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  /* GPU-composite the transform so GSAP scale is smooth */
+  will-change: transform;
+  transform-origin: top center;
+  /* Slight rounded corner appears when scale shrinks */
+  border-radius: 0px;
+  /* Each card sits on top of the previous (z-index stacking) */
+  z-index: 1;
+}
+
+/* Dark semi-transparent veil overlaid on each card as it gets covered */
+.pin-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 4, 6, 0.72);
+  opacity: 0;              /* GSAP animates this to 1 */
+  pointer-events: none;
+  z-index: 10;
+  border-radius: inherit;
+}
+
+/* Inner scroll container — sits above the overlay */
+.pin-section__inner {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Per-card background tints ──────────────────────────── */
+
+.pin-section--showcase {
+  background: #060608;
+}
+
+.pin-section--hero {
+  background: #07070a;
+  background-image: radial-gradient(
+    ellipse 80% 60% at 50% 100%,
+    rgba(223, 165, 87, 0.05) 0%,
+    transparent 70%
+  );
+}
+
+.pin-section--about {
+  background: #080809;
+  background-image: radial-gradient(
+    ellipse 80% 60% at 50% 0%,
+    rgba(223, 165, 87, 0.04) 0%,
+    transparent 70%
+  );
+}
+
+.pin-section--projects {
+  background: #070709;
+  background-image: radial-gradient(
+    ellipse 70% 50% at 30% 0%,
+    rgba(223, 165, 87, 0.03) 0%,
+    transparent 65%
+  );
+}
+
+.pin-section--events {
+  background: #060609;
+  background-image: radial-gradient(
+    ellipse 70% 50% at 70% 0%,
+    rgba(223, 165, 87, 0.04) 0%,
+    transparent 65%
+  );
+}
+
+.pin-section--gallery {
+  background: #08080b;
+  background-image: radial-gradient(
+    ellipse 80% 50% at 40% 0%,
+    rgba(223, 165, 87, 0.035) 0%,
+    transparent 68%
+  );
+}
+
+.pin-section--why {
+  background: #06060a;
+  background-image: radial-gradient(
+    ellipse 90% 50% at 60% 0%,
+    rgba(223, 165, 87, 0.05) 0%,
+    transparent 70%
+  );
+}
+
+/* ── About Section Layout ────────────────────────────────── */
+
+.home-about-section {
+  padding: 100px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  flex: 1;
+}
+
+.home-about-grid {
+  max-width: 1200px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 60px;
+  align-items: center;
+}
+
+.home-about-copy {
+  position: relative;
+  z-index: 1;
+  text-align: left;
+}
+
+.about-eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.about-heading {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 20px;
+  font-family: var(--font-heading);
+  color: var(--primary);
+}
+
+.about-body {
+  font-size: 17px;
+  color: var(--secondary);
+  line-height: 1.8;
+  margin: 0;
+}
+
+.about-stats {
+  display: flex;
+  gap: 30px;
+  margin-top: 30px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.about-stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0;
+  font-family: var(--font-heading);
+}
+
+.about-stat-label {
+  font-size: 14px;
+  color: var(--secondary);
+}
+
+.about-stat-divider {
+  width: 1px;
+  background: var(--border);
+  height: 40px;
+}
+
+.about-dot-grid {
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 80px;
+  background-image: radial-gradient(var(--accent) 2px, transparent 2px);
+  background-size: 10px 10px;
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Projects / Events / Gallery Sections ────────────────── */
+
+.home-projects,
+.home-events,
+.home-gallery {
+  padding: 60px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.single-project-stacked-wrapper {
+  width: 100%;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.section-header h2 {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--primary);
+  font-family: var(--font-heading);
+  margin-bottom: 12px;
+}
+
+.section-header p {
+  font-size: 17px;
+  color: var(--secondary);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 28px;
+}
+
+.no-content-msg {
+  text-align: center;
+  color: var(--secondary);
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .home-projects,
+  .home-events,
+  .home-gallery {
+    padding: 60px 24px;
+  }
+
+  .home-about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-about-section {
+    padding: 70px 24px;
+  }
+}

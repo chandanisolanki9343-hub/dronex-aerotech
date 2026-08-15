@@ -1,40 +1,91 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import api from "../services/api";
 import ProjectCard from "../components/ProjectCard";
+import { useLenis } from "../hooks/useLenis";
+import { useStackedScroll } from "../hooks/useStackedScroll";
+import "./Projects.css";
 
 function Projects() {
   const [projects, setProjects] = useState([]);
+  const stackRef = useRef(null);
+
+  useLenis();
+  useStackedScroll(stackRef, [projects]);
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const res = await api.get("/projects");
-        setProjects(res.data.projects || []);
-      } catch (err) {
-        console.error(err);
-      }
-    };
     fetchProjects();
   }, []);
 
+  const fetchProjects = async () => {
+    try {
+      const res = await api.get("/projects");
+      const fetched = res.data.projects || [];
+      
+      const hasTrinetra = fetched.some(p => p.title?.toLowerCase().includes("trinetra"));
+      if (!hasTrinetra) {
+        const trinetraCard = {
+          _id: "team-trinetra-featured",
+          isTrinetra: true,
+          title: "Team Trinetra",
+          description: "MITS Gwalior's First International UAV Competition Team",
+          image: "/drone-showcase-bg.jpg"
+        };
+        setProjects([trinetraCard, ...fetched]);
+      } else {
+        // Sort Trinetra to top
+        const sorted = [...fetched].sort((a, b) => {
+          const aIs = a.title?.toLowerCase().includes("trinetra");
+          const bIs = b.title?.toLowerCase().includes("trinetra");
+          if (aIs) return -1;
+          if (bIs) return 1;
+          return 0;
+        });
+        setProjects(sorted);
+      }
+    } catch (err) {
+      console.error(err);
+      // Fallback default
+      setProjects([{
+        _id: "team-trinetra-featured",
+        isTrinetra: true,
+        title: "Team Trinetra",
+        description: "MITS Gwalior's First International UAV Competition Team",
+        image: "/drone-showcase-bg.jpg"
+      }]);
+    }
+  };
+
   return (
-    <div className="container" style={{ padding: "100px 24px", minHeight: "80vh" }}>
-      <div className="section-header" style={{ marginBottom: "50px" }}>
-        <h2>All Projects</h2>
-        <p>Explore the full portfolio of drone systems, robotics, and aerospace innovations built by Dronex AeroTech.</p>
+    <div ref={stackRef} className="pin-stack-wrapper projects-stack-page">
+      
+      {/* ── CARD 0: Header Section ───────────────────────────────────── */}
+      <div className="pin-section pin-section--projects-header">
+        <div className="pin-overlay" />
+        <div className="pin-section__inner projects-header-inner">
+          <span className="projects-eyebrow">AEROSPACE &amp; ROBOTICS PORTFOLIO</span>
+          <h1>Explore Our Projects</h1>
+          <p>
+            Discover autonomous flight systems, AI-powered computer vision, custom UAV hardware, and competition robotics engineered by Dronex AeroTech.
+          </p>
+          <div className="scroll-down-hint">
+            <span>Scroll down to explore projects</span>
+            <div className="scroll-arrow">↓</div>
+          </div>
+        </div>
       </div>
 
-      {projects.length > 0 ? (
-        <div className="projects-grid">
-          {projects.map((project) => (
-            <ProjectCard key={project._id} project={project} />
-          ))}
+      {/* ── CARDS 1..N: Individual Stacked Project Cards ─────────────── */}
+      {projects.map((project, idx) => (
+        <div key={project._id || idx} className="pin-section pin-section--project-card">
+          <div className="pin-overlay" />
+          <div className="pin-section__inner project-card-inner">
+            <div className="project-card-container">
+              <ProjectCard project={project} />
+            </div>
+          </div>
         </div>
-      ) : (
-        <p style={{ textAlign: "center", color: "var(--secondary)", marginTop: "40px" }}>
-          No projects found. Check back soon!
-        </p>
-      )}
+      ))}
+
     </div>
   );
 }

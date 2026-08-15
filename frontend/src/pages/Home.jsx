@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import api from "../services/api";
 
 import Hero from "../components/Hero";
+import DroneShowcase from "../components/DroneShowcase";
 import ProjectCard from "../components/ProjectCard";
 import EventPreview from "../components/EventPreview";
 import GalleryPreview from "../components/GalleryPreview";
@@ -10,11 +11,20 @@ import StatsSection from "../components/StatsSection";
 import WhyChoose from "../components/WhyChoose";
 import JoinCTA from "../components/JoinCTA";
 
+import { useLenis } from "../hooks/useLenis";
+import { useStackedScroll } from "../hooks/useStackedScroll";
+
+import "./Home.css";
+
 function Home() {
-  const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [events, setEvents] = useState([]);
   const [gallery, setGallery] = useState([]);
+
+  const stackRef = useRef(null);
+
+  useLenis();
+  useStackedScroll(stackRef);
 
   useEffect(() => {
     fetchProjects();
@@ -25,9 +35,35 @@ function Home() {
   const fetchProjects = async () => {
     try {
       const res = await api.get("/projects");
-      setProjects(res.data.projects || []);
-    } catch (err) {
-      console.log(err);
+      const fetched = res.data.projects || [];
+      const hasTrinetra = fetched.some(p => p.title?.toLowerCase().includes("trinetra"));
+      if (!hasTrinetra) {
+        setProjects([{
+          _id: "team-trinetra-featured",
+          isTrinetra: true,
+          title: "Team Trinetra",
+          description: "MITS Gwalior's First International UAV Competition Team",
+          image: "/drone-showcase-bg.jpg"
+        }, ...fetched]);
+      } else {
+        const sorted = [...fetched].sort((a, b) => {
+          const aIs = a.title?.toLowerCase().includes("trinetra");
+          const bIs = b.title?.toLowerCase().includes("trinetra");
+          if (aIs) return -1;
+          if (bIs) return 1;
+          return 0;
+        });
+        setProjects(sorted);
+      }
+    } catch (err) { 
+      console.log(err); 
+      setProjects([{
+        _id: "team-trinetra-featured",
+        isTrinetra: true,
+        title: "Team Trinetra",
+        description: "MITS Gwalior's First International UAV Competition Team",
+        image: "/drone-showcase-bg.jpg"
+      }]);
     }
   };
 
@@ -35,164 +71,147 @@ function Home() {
     try {
       const res = await api.get("/events");
       setEvents(res.data.events || []);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) { console.log(err); }
   };
-
-
 
   const fetchGallery = async () => {
     try {
       const res = await api.get("/gallery");
       setGallery(res.data.items || []);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) { console.log(err); }
   };
 
   return (
-    <>
-      <Hero />
+    <div ref={stackRef} className="pin-stack-wrapper">
 
-      {/* Premium About Section */}
-      <section className="home-about-section" style={{
-        padding: "100px 24px",
-        background: "transparent",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center"
-      }}>
-        <div style={{
-          maxWidth: "1200px",
-          width: "100%",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-          gap: "60px",
-          alignItems: "center"
-        }}>
-          {/* Left Column: Premium Drone Image with Gold Ornaments */}
-          <div className="about-image-container">
-            {/* L-shaped bottom-left gold border frame ornament */}
-            <div className="gold-frame" />
-            
-            {/* Dot grid decoration on the middle-left */}
-            <div style={{
-              position: "absolute",
-              left: "-10px",
-              top: "50%",
-              transform: "translateY(-50%)",
-              width: "40px",
-              height: "80px",
-              backgroundImage: "radial-gradient(var(--accent) 2px, transparent 2px)",
-              backgroundSize: "10px 10px",
-              opacity: 0.35,
-              pointerEvents: "none",
-              zIndex: 1
-            }} />
+      {/* ── CARD 1 · Drone Showcase ─────────────────── */}
+      <div className="pin-section pin-section--showcase">
+        <div className="pin-overlay" />
+        <div className="pin-section__inner">
+          <DroneShowcase />
+        </div>
+      </div>
 
-            <img 
-              src="/drone-about.png" 
-              alt="Dronex AeroTech Drone" 
-            />
-          </div>
+      {/* ── CARD 2 · Hero "Save & Explore" ──────────── */}
+      <div className="pin-section pin-section--hero">
+        <div className="pin-overlay" />
+        <div className="pin-section__inner">
+          <Hero />
+        </div>
+      </div>
 
-          {/* Right Column: Content */}
-          <div style={{ zIndex: 1, textAlign: "left" }}>
-            <span style={{
-              fontSize: "13px",
-              fontWeight: "700",
-              textTransform: "uppercase",
-              letterSpacing: "3px",
-              color: "var(--accent)",
-              display: "block",
-              marginBottom: "12px"
-            }}>
-              Who We Are
-            </span>
-            <h2 style={{
-              fontSize: "38px",
-              fontWeight: "700",
-              lineHeight: "1.2",
-              margin: "0 0 20px 0",
-              fontFamily: "var(--font-heading)",
-              color: "var(--primary)"
-            }}>
-              About Our Mission
-            </h2>
-            <p style={{
-              fontSize: "17px",
-              color: "var(--secondary)",
-              lineHeight: "1.8",
-              margin: 0
-            }}>
-              Dronex AeroTech is a premium research and development club dedicated to advancing the frontiers of autonomous flight, robotics, embedded systems, and aerospace engineering. Our mission is to inspire student engineers to design, build, and fly next-generation drone technologies.
-            </p>
+      {/* ── CARD 3 · About Our Mission ───────────────── */}
+      <div className="pin-section pin-section--about">
+        <div className="pin-overlay" />
+        <div className="pin-section__inner">
+          <section className="home-about-section">
+            <div className="home-about-grid">
 
-            <div style={{ display: "flex", gap: "30px", marginTop: "30px" }}>
-              <div>
-                <h4 style={{ fontSize: "28px", fontWeight: "700", color: "var(--accent)", margin: 0, fontFamily: "var(--font-heading)" }}>R&D</h4>
-                <span style={{ fontSize: "14px", color: "var(--secondary)" }}>Focused Research</span>
+              {/* Left: drone image */}
+              <div className="about-image-container">
+                <div className="gold-frame" />
+                <div className="about-dot-grid" aria-hidden="true" />
+                <img src="/drone-about.png" alt="Dronex AeroTech Drone" />
               </div>
-              <div style={{ width: "1px", background: "var(--border)", height: "40px" }}></div>
-              <div>
-                <h4 style={{ fontSize: "28px", fontWeight: "700", color: "var(--accent)", margin: 0, fontFamily: "var(--font-heading)" }}>100%</h4>
-                <span style={{ fontSize: "14px", color: "var(--secondary)" }}>Hands-on Learning</span>
+
+              {/* Right: copy */}
+              <div className="home-about-copy">
+                <span className="about-eyebrow">Who We Are</span>
+                <h2 className="about-heading">About Our Mission</h2>
+                <p className="about-body">
+                  Dronex AeroTech is a premium research and development club
+                  dedicated to advancing the frontiers of autonomous flight,
+                  robotics, embedded systems, and aerospace engineering. Our
+                  mission is to inspire student engineers to design, build, and
+                  fly next-generation drone technologies.
+                </p>
+                <div className="about-stats">
+                  <div>
+                    <h4 className="about-stat-value">R&amp;D</h4>
+                    <span className="about-stat-label">Focused Research</span>
+                  </div>
+                  <div className="about-stat-divider" />
+                  <div>
+                    <h4 className="about-stat-value">100%</h4>
+                    <span className="about-stat-label">Hands-on Learning</span>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          </section>
         </div>
-      </section>
+      </div>
 
-      <section className="home-projects">
-        <div className="section-header">
-          <h2>Continue Exploring</h2>
-          <p>Latest innovations from Dronex AeroTech</p>
+      {/* ── CARD 4 · Projects ────────────────────────── */}
+      <div className="pin-section pin-section--projects">
+        <div className="pin-overlay" />
+        <div className="pin-section__inner">
+          <section className="home-projects">
+            <div className="section-header">
+              <h2>Continue Exploring</h2>
+              <p>Latest innovations from Dronex AeroTech</p>
+            </div>
+            <div className="projects-grid">
+              {projects.map((project) => (
+                <ProjectCard key={project._id} project={project} />
+              ))}
+            </div>
+          </section>
         </div>
+      </div>
 
-        <div className="projects-grid">
-          {projects.map((project) => (
-            <ProjectCard key={project._id} project={project} />
-          ))}
+      {/* ── CARD 5 · Upcoming Events ─────────────────── */}
+      <div className="pin-section pin-section--events">
+        <div className="pin-overlay" />
+        <div className="pin-section__inner">
+          <section className="home-events">
+            <div className="section-header">
+              <h2>Upcoming Events</h2>
+              <p>Workshops, Competitions and Drone Activities</p>
+            </div>
+            {events.filter((e) => !e.isCompleted).length > 0 ? (
+              <div className="projects-grid">
+                {events.filter((e) => !e.isCompleted).slice(0, 3).map((event) => (
+                  <EventPreview key={event._id} event={event} />
+                ))}
+              </div>
+            ) : (
+              <p className="no-content-msg">
+                No upcoming events scheduled. Keep an eye out for updates!
+              </p>
+            )}
+          </section>
         </div>
-      </section>
+      </div>
 
-      <section className="home-events">
-        <div className="section-header">
-          <h2>Upcoming Events</h2>
-          <p>Workshops, Competitions and Drone Activities</p>
+      {/* ── CARD 6 · Gallery ─────────────────────────── */}
+      <div className="pin-section pin-section--gallery">
+        <div className="pin-overlay" />
+        <div className="pin-section__inner">
+          <section className="home-gallery">
+            <div className="section-header">
+              <h2>Gallery</h2>
+              <p>Moments captured from workshops, competitions and projects.</p>
+            </div>
+            <div className="projects-grid">
+              {gallery.slice(0, 9).map((item) => (
+                <GalleryPreview key={item._id} item={item} />
+              ))}
+            </div>
+          </section>
         </div>
+      </div>
 
-        {events.filter(event => !event.isCompleted).length > 0 ? (
-          <div className="projects-grid">
-            {events.filter(event => !event.isCompleted).slice(0, 3).map((event) => (
-              <EventPreview key={event._id} event={event} />
-            ))}
-          </div>
-        ) : (
-          <p style={{ textAlign: "center", color: "var(--secondary)", width: "100%", marginTop: "20px" }}>
-            No upcoming events scheduled. Keep an eye out for updates!
-          </p>
-        )}
-      </section>
-
-      <section className="home-gallery">
-        <div className="section-header">
-          <h2>Gallery</h2>
-          <p>Moments captured from workshops, competitions and projects.</p>
+      {/* ── CARD 7 · Why Choose + Stats + CTA (last) ── */}
+      <div className="pin-section pin-section--why">
+        <div className="pin-section__inner">
+          <StatsSection />
+          <WhyChoose />
+          <JoinCTA />
         </div>
+      </div>
 
-        <div className="projects-grid">
-          {gallery.slice(0, 10).map((item) => (
-            <GalleryPreview key={item._id} item={item} />
-          ))}
-        </div>
-      </section>
-
-      <StatsSection />
-      <WhyChoose />
-      <JoinCTA />
-    </>
+    </div>
   );
 }
 

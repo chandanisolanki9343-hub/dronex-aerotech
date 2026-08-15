@@ -8,26 +8,37 @@
     transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     cursor:pointer;
     box-shadow: var(--shadow-sm);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-card:hover{
-    transform: translateY(-12px) scale(1.03);
-    box-shadow: 0 25px 55px rgba(0, 0, 0, 0.6), 0 0 35px rgba(223, 165, 87, 0.12);
+    transform: translateY(-8px) scale(1.015);
+    box-shadow: 0 25px 55px rgba(0, 0, 0, 0.6), 0 0 35px rgba(223, 165, 87, 0.15);
     border-color: var(--accent);
+}
+
+.project-card:hover img{
+    filter: grayscale(100%);
 }
 
 .project-card img{
     width:100%;
-    height:230px;
+    height:220px;
     object-fit:cover;
+    transition: filter 0.4s ease, transform 0.4s ease;
 }
 
 .project-content{
     padding:22px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .project-content h3{
-    margin-bottom:12px;
+    margin-bottom:10px;
     color: var(--primary);
     font-family: var(--font-heading);
 }
@@ -36,4 +47,149 @@
     color: var(--secondary);
     font-family: var(--font-body);
     line-height:1.6;
+}
+
+.btn-explore-project-simple {
+    margin-top: 14px;
+    display: inline-block;
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* ── Featured Team Trinetra Card ────────────────────────────── */
+.trinetra-featured-card {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  border: 1.5px solid rgba(223, 165, 87, 0.4);
+  background: linear-gradient(135deg, rgba(223, 165, 87, 0.08) 0%, rgba(18, 18, 22, 0.95) 100%);
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  align-items: stretch;
+}
+
+.trinetra-featured-card .project-card__image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  overflow: hidden;
+}
+
+.trinetra-featured-card .project-card__image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.trinetra-badge-overlay {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(223, 165, 87, 0.95);
+  color: #060608;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-family: var(--font-heading);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.trinetra-featured-card .project-content {
+  padding: 24px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.trinetra-card-header h3 {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 2px;
+  font-family: var(--font-heading);
+}
+
+.trinetra-subhead {
+  display: block;
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.trinetra-quote {
+  font-style: italic;
+  color: #ffe0b3 !important;
+  font-size: 15px;
+  margin-bottom: 14px !important;
+  font-weight: 500;
+}
+
+.trinetra-stats-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.stat-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--primary);
+  backdrop-filter: blur(5px);
+}
+
+.btn-explore-project {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  align-self: flex-start;
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #dfa557 0%, #b27b37 100%);
+  color: #060608;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 1px;
+  border-radius: 30px;
+  font-family: var(--font-heading);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(223, 165, 87, 0.25);
+  margin-top: 6px;
+}
+
+.trinetra-featured-card:hover .btn-explore-project {
+  background: linear-gradient(135deg, #ffe0b3 0%, #dfa557 100%);
+  box-shadow: 0 6px 22px rgba(223, 165, 87, 0.5);
+  transform: translateX(4px);
+}
+
+/* ── Responsive for Featured Card ────────────────────────────── */
+@media (max-width: 900px) {
+  .trinetra-featured-card {
+    grid-template-columns: 1fr;
+  }
+  
+  .trinetra-featured-card .project-card__image-wrapper {
+    height: 180px;
+    min-height: auto;
+  }
+  
+  .trinetra-featured-card .project-content {
+    padding: 20px;
+  }
+
+  .btn-explore-project {
+    width: 100%;
+    margin-top: 10px;
+  }
 }

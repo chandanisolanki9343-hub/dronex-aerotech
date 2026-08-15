@@ -12,6 +12,7 @@ import Gallery from "./pages/Gallery";
 import Recruitment from "./pages/Recruitment";
 import Contact from "./pages/Contact";
 import Portfolio from "./pages/Portfolio";
+import TeamTrinetra from "./pages/TeamTrinetra";
 import AdminLogin from "./pages/AdminLogin";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -51,6 +52,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/projects" element={<Projects />} />
+      <Route path="/projects/team-trinetra" element={<TeamTrinetra />} />
       <Route path="/members" element={<Team />} />
       <Route path="/events" element={<Events />} />
       <Route path="/gallery" element={<Gallery />} />

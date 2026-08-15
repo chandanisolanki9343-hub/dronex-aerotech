@@ -51,7 +51,8 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth removed — Lenis handles this */
+  height: 100%;
 }
 
 body {
@@ -149,6 +150,7 @@ section {
   transition: all 0.3s ease;
   font-family: var(--font-body);
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .btn-primary {
@@ -258,6 +260,7 @@ section {
 .about-image-container:hover img {
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(223, 165, 87, 0.18);
   transform: translate(6px, -6px);
+  filter: grayscale(100%);
 }
 
 .about-image-container:hover .gold-frame {
