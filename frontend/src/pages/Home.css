@@ -14,13 +14,10 @@
   position: relative;
   min-height: 100vh;
   width: 100%;
-  overflow: hidden;
-  /* GPU-composite the transform so GSAP scale is smooth */
+  box-sizing: border-box;
   will-change: transform;
   transform-origin: top center;
-  /* Slight rounded corner appears when scale shrinks */
   border-radius: 0px;
-  /* Each card sits on top of the previous (z-index stacking) */
   z-index: 1;
 }
 
@@ -42,6 +39,9 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+  padding-top: 90px;
+  padding-bottom: 60px;
 }
 
 /* ── Per-card background tints ──────────────────────────── */
