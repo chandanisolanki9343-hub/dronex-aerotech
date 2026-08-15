@@ -12,6 +12,20 @@
   overflow-x: hidden;
 }
 
+.trinetra-page .pin-section {
+  background: #060608;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.trinetra-page .pin-section__inner {
+  justify-content: center;
+  align-items: center;
+  padding: 60px 24px;
+  max-width: 1240px;
+  margin: 0 auto;
+  width: 100%;
+}
+
 .trinetra-container {
   max-width: 1240px;
   margin: 0 auto;
