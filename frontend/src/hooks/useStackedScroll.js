@@ -28,11 +28,11 @@ export function useStackedScroll(containerRef, deps = []) {
         const overlay = section.querySelector(".pin-overlay");
 
         /* ── Pin current section ── */
-        /* If section content is taller than viewport, pin when bottom reaches viewport bottom */
+        /* If section content + navbar padding is taller than viewport, pin when bottom reaches viewport bottom */
         ScrollTrigger.create({
           trigger: section,
           start: () =>
-            section.offsetHeight > window.innerHeight ? "bottom bottom" : "top top",
+            section.offsetHeight + 80 > window.innerHeight ? "bottom bottom" : "top top",
           endTrigger: nextSection,
           end: "top top",
           pin: true,

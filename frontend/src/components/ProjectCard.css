@@ -61,7 +61,7 @@
 .trinetra-featured-card {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: 380px 1fr;
+  grid-template-columns: 320px 1fr;
   border: 1.5px solid rgba(223, 165, 87, 0.4);
   background: linear-gradient(135deg, rgba(223, 165, 87, 0.08) 0%, rgba(18, 18, 22, 0.95) 100%);
   position: relative;
@@ -74,7 +74,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 220px;
+  min-height: 200px;
   overflow: hidden;
 }
 
@@ -86,13 +86,13 @@
 
 .trinetra-badge-overlay {
   position: absolute;
-  top: 14px;
-  left: 14px;
+  top: 12px;
+  left: 12px;
   background: rgba(223, 165, 87, 0.95);
   color: #060608;
-  padding: 4px 12px;
+  padding: 4px 10px;
   border-radius: 20px;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 800;
   letter-spacing: 1px;
   font-family: var(--font-heading);
@@ -100,14 +100,14 @@
 }
 
 .trinetra-featured-card .project-content {
-  padding: 24px 30px;
+  padding: 18px 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .trinetra-card-header h3 {
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 800;
   color: var(--primary);
   margin-bottom: 2px;
@@ -116,33 +116,33 @@
 
 .trinetra-subhead {
   display: block;
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--accent);
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .trinetra-quote {
   font-style: italic;
   color: #ffe0b3 !important;
-  font-size: 15px;
-  margin-bottom: 14px !important;
+  font-size: 14px;
+  margin-bottom: 10px !important;
   font-weight: 500;
 }
 
 .trinetra-stats-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 6px;
+  margin-bottom: 12px;
 }
 
 .stat-pill {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 4px 12px;
+  padding: 3px 10px;
   border-radius: 20px;
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--primary);
   backdrop-filter: blur(5px);
@@ -154,17 +154,17 @@
   justify-content: center;
   width: auto;
   align-self: flex-start;
-  padding: 10px 24px;
+  padding: 8px 20px;
   background: linear-gradient(135deg, #dfa557 0%, #b27b37 100%);
   color: #060608;
   font-weight: 800;
-  font-size: 13px;
+  font-size: 12px;
   letter-spacing: 1px;
   border-radius: 30px;
   font-family: var(--font-heading);
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(223, 165, 87, 0.25);
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
 .trinetra-featured-card:hover .btn-explore-project {
