@@ -244,7 +244,7 @@ const newTeamMembers = [
     position: "Photographer",
     department: "Photography & Videography",
     bio: "Captures photography, event moments, and photo coverage for club events.",
-    image: "",
+    image: "/shivam_sanodiya.png",
     linkedin: "https://linkedin.com",
     github: "https://github.com",
     isLeader: false
