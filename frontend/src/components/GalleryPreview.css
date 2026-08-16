@@ -21,7 +21,7 @@ transform:translateY(-8px);
 }
 
 .gallery-card:hover img{
-filter: grayscale(100%);
+filter: brightness(1.08) scale(1.04);
 }
 
 .gallery-card img,

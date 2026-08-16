@@ -15,7 +15,7 @@
 }
 
 .team-card:hover .team-image img {
-    filter: grayscale(100%);
+    filter: brightness(1.05);
 }
 
 .team-image img{

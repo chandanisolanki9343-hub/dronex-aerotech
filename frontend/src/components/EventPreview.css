@@ -15,7 +15,7 @@
 }
 
 .event-preview:hover img{
-    filter: grayscale(100%);
+    filter: brightness(1.05);
 }
 
 .event-preview img{

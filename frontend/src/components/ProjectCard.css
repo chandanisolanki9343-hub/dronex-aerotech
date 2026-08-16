@@ -20,7 +20,7 @@
 }
 
 .project-card:hover img{
-    filter: grayscale(100%);
+    filter: brightness(1.05);
 }
 
 .project-card img{
@@ -191,5 +191,28 @@
   .btn-explore-project {
     width: 100%;
     margin-top: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .trinetra-featured-card .project-content {
+    padding: 16px;
+  }
+  .trinetra-card-header h3 {
+    font-size: 18px;
+  }
+  .trinetra-subhead {
+    font-size: 11.5px;
+  }
+  .trinetra-quote {
+    font-size: 13px;
+  }
+  .stat-pill {
+    font-size: 10.5px;
+    padding: 3px 8px;
+  }
+  .trinetra-stats-grid {
+    gap: 5px;
+    margin-bottom: 8px;
   }
 }

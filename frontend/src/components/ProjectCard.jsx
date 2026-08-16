@@ -40,8 +40,26 @@ function ProjectCard({ project }) {
     );
   }
 
+  const projectUrl = project?.link || project?.url;
+  const isExternal = projectUrl && (projectUrl.startsWith("http://") || projectUrl.startsWith("https://"));
+
+  if (isExternal) {
+    return (
+      <a href={projectUrl} target="_blank" rel="noopener noreferrer" className="project-card">
+        {project.image && <img src={project.image} alt={project.title} />}
+        <div className="project-content">
+          <h3>{project.title}</h3>
+          <p>{project.description}</p>
+          <div className="btn-explore-project-simple">
+            Learn More &rarr;
+          </div>
+        </div>
+      </a>
+    );
+  }
+
   return (
-    <Link to="/projects/team-trinetra" className="project-card">
+    <Link to={projectUrl || "/projects"} className="project-card">
       {project.image && <img src={project.image} alt={project.title} />}
       <div className="project-content">
         <h3>{project.title}</h3>

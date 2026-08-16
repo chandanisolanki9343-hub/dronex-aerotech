@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLenis } from "../hooks/useLenis";
 import { useStackedScroll } from "../hooks/useStackedScroll";
@@ -6,6 +6,7 @@ import "./TeamTrinetra.css";
 
 function TeamTrinetra() {
   const stackRef = useRef(null);
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
   useLenis();
   useStackedScroll(stackRef);
@@ -13,6 +14,24 @@ function TeamTrinetra() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setIsImageModalOpen(false);
+      }
+    };
+    if (isImageModalOpen) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isImageModalOpen]);
 
   const stats = [
     { value: "17", label: "Global Flight Order" },
@@ -305,14 +324,30 @@ function TeamTrinetra() {
             </p>
 
             <div className="press-showcase-card">
-              <div className="press-showcase-image-container">
+              <div 
+                className="press-showcase-image-container clickable"
+                onClick={() => setIsImageModalOpen(true)}
+                title="Click to view full size high quality image"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setIsImageModalOpen(true); }}
+              >
                 <img
                   src="/trinetra_media_coverage.jpg"
                   alt="Team Trinetra National Media Coverage &amp; Felicitations"
                   className="press-clipping-img"
                 />
+                <div className="press-zoom-badge">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                  <span>Click to Enlarge HD</span>
+                </div>
                 <div className="press-image-overlay">
-                  <span>📰 National Daily Coverage (25-06-2026)</span>
+                  <span>📰 National Daily Coverage (25-06-2026) — 🔍 Click for HD</span>
                 </div>
               </div>
 
@@ -523,6 +558,39 @@ function TeamTrinetra() {
           </section>
         </div>
       </div>
+
+      {/* ── HIGH RESOLUTION PRESS IMAGE MODAL ──────────────────────────── */}
+      {isImageModalOpen && (
+        <div 
+          className="press-image-modal-overlay" 
+          onClick={() => setIsImageModalOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="High Quality Press Coverage"
+        >
+          <div className="press-image-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button 
+              className="press-image-modal-close" 
+              onClick={() => setIsImageModalOpen(false)}
+              aria-label="Close modal"
+              title="Close (ESC)"
+            >
+              ✕
+            </button>
+            <div className="press-image-modal-body">
+              <img 
+                src="/trinetra_media_coverage_hd.jpg" 
+                alt="Team Trinetra National Media Coverage &amp; Felicitations - Full Newspaper Clippings" 
+                className="press-modal-hd-img"
+              />
+            </div>
+            <div className="press-image-modal-caption">
+              <span className="press-modal-title">📰 National Daily Coverage (25-06-2026) — Team Trinetra Felicitated by CAT</span>
+              <span className="press-modal-hint">Click outside or press ESC to close</span>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );
