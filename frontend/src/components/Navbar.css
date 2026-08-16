@@ -145,7 +145,8 @@
   }
 
   .desktop-links,
-  .desktop-search {
+  .desktop-search,
+  .desktop-admin {
     display: none !important;
   }
 
@@ -265,5 +266,28 @@
     border-left-color: var(--accent);
     color: var(--accent);
     padding-left: 14px;
+  }
+
+  .mobile-nav-links .mobile-admin-btn {
+    margin-top: 16px;
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: var(--font-body);
+    color: var(--accent);
+    background: rgba(223, 165, 87, 0.12);
+    border: 1px solid var(--accent);
+    border-radius: 30px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .mobile-nav-links .mobile-admin-btn:hover {
+    background: var(--accent);
+    color: #000000;
+    padding-left: 24px;
   }
 }
