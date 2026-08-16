@@ -34,6 +34,7 @@ function Team() {
     "All",
     "President",
     "Secretary",
+    "Treasurer",
     "Web Development",
     "Technical",
     "Event Management",
@@ -42,7 +43,7 @@ function Team() {
 
   // Helper to render a group of members with the leader highlighted
   const renderDepartmentGroup = (deptName, members) => {
-    // Sort members so that Club President is first, Vice President is second, Secretary is third
+    // Sort members so that Club President is first, Vice President is second, Secretary / Treasurer is third
     // and Arpita Makwana is sorted first among remaining sub-team members.
     const sortedMembers = [...members].sort((a, b) => {
       const order = {
@@ -51,6 +52,7 @@ function Team() {
         "Vice president": 2,
         "Secretary": 3,
         "Secratary": 3,
+        "Treasurer": 3,
         "Technical Lead": 10,
         "Technical Co-lead": 11,
       };
@@ -141,6 +143,7 @@ function Team() {
       "Photography & Videography",
       "Photo & Video Editing",
       "Graphic Designing & Auto CAD",
+      "Graphic Designing",
       "PR & Social Media",
       "PR and Social Media",
       "Pr & social media",

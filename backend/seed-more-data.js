@@ -19,12 +19,12 @@ const newTeamMembers = [
     github: "https://github.com",
     isLeader: true
   },
-  // Secretary
+  // Treasurer / Executive
   {
     name: "Harshvardhan Kaushal",
-    position: "Secretary",
-    department: "Secretary",
-    bio: "Manages administrative affairs, meeting records, inter-domain correspondence, and event schedules.",
+    position: "Treasurer",
+    department: "Treasurer",
+    bio: "Manages club finances, budgets, administrative affairs, and event schedules.",
     image: "https://res.cloudinary.com/dbkednkcg/image/upload/v1783575415/dronex-aerotech/b089ymfvqcqjyqv77rwf.png",
     linkedin: "https://www.linkedin.com/in/harsh-vardhan-kaushal-84212b317?utm_source=share_via&utm_content=profile&utm_medium=member_android",
     github: "https://github.com/coolharsh408",
@@ -54,9 +54,9 @@ const newTeamMembers = [
   },
   {
     name: "Prajwal Pandey",
-    position: "Aerodynamics Specialist",
+    position: "Technical Executive",
     department: "Technical",
-    bio: "Focuses on wing optimization, CFD simulations, and lightweight fuselage designs.",
+    bio: "Focuses on drone hardware optimization, CFD simulations, and fuselage testing.",
     image: "https://res.cloudinary.com/dbkednkcg/image/upload/v1783524972/dronex-aerotech/xqkxtoz7qmgfrfl5olmu.jpg",
     linkedin: "https://www.linkedin.com/in/prajwal-pandey-5252b7329?utm_source=share_via&utm_content=profile&utm_medium=member_android",
     github: "https://github.com",
@@ -64,23 +64,13 @@ const newTeamMembers = [
   },
   {
     name: "Shiva Gupta",
-    position: "Avionics Specialist",
+    position: "Technical Executive",
     department: "Technical",
     bio: "Handles ESC calibration, power distribution networks, and flight controller setups.",
     image: "https://res.cloudinary.com/dbkednkcg/image/upload/v1783506006/dronex-aerotech/uavbr2iosc77d7tskp6g.jpg",
     linkedin: "https://www.linkedin.com/in/shiva-gupta-7bab633a6",
     github: "https://github.com/Shiva981",
     portfolio: "https://shiva-gupta-portfolio.vercel.app/",
-    isLeader: false
-  },
-  {
-    name: "Aryan Bhadoriya",
-    position: "Structural Analyst",
-    department: "Technical",
-    bio: "Analyzes structural integrity, stress points, and load capacities of custom-built multirotors.",
-    image: "",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
     isLeader: false
   },
   {
@@ -93,7 +83,7 @@ const newTeamMembers = [
     github: "https://github.com/workdivyansh",
     isLeader: false
   },
-  // Photo & Video Editing
+  // Photo & Video Editing / Photography
   {
     name: "Anushree Khatri",
     position: "Video Editor",
@@ -126,9 +116,9 @@ const newTeamMembers = [
   },
   {
     name: "Tanvi Bose",
-    position: "Motion Graphics Designer",
-    department: "Photo & Video Editing",
-    bio: "Designs intros, title transitions, kinetic typography, and animated overlays.",
+    position: "Photographer",
+    department: "Photography & Videography",
+    bio: "Captures high-quality photography and event moments for club highlights.",
     image: "",
     linkedin: "https://linkedin.com",
     github: "https://github.com",
@@ -144,6 +134,16 @@ const newTeamMembers = [
     linkedin: "https://linkedin.com",
     github: "https://github.com",
     isLeader: true
+  },
+  {
+    name: "Puneet Choudhary",
+    position: "PR & Social Executive",
+    department: "Promotion & Social Media",
+    bio: "Drives physical flyer distribution, social announcements, and promotion.",
+    image: "https://res.cloudinary.com/dbkednkcg/image/upload/v1783506963/dronex-aerotech/iwlmfryv0kroqbfqueqj.jpg",
+    linkedin: "https://www.linkedin.com/in/puneet-choudhary-b9b07a37b?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+    github: "https://github.com",
+    isLeader: false
   },
 
   // Photography & Videography
@@ -171,9 +171,9 @@ const newTeamMembers = [
   },
   {
     name: "Gaurav Pal",
-    position: "Logistics Manager",
+    position: "Management Executive",
     department: "Event Management",
-    bio: "Organizes transportation, hardware supply logistics, and setup arrangements on event locations.",
+    bio: "Contributes to transportation, hardware supply logistics, and setup arrangements.",
     image: "https://res.cloudinary.com/dbkednkcg/image/upload/v1783508165/dronex-aerotech/qduodqo3xthgj4l4c3zs.jpg",
     linkedin: "https://www.linkedin.com/in/gaurav-pal-4b59b1420?utm_source=share_via&utm_content=profile&utm_medium=member_android",
     github: "https://github.com",
@@ -181,21 +181,11 @@ const newTeamMembers = [
   },
   {
     name: "Yash Baghel",
-    position: "Sponsorship In-Charge",
+    position: "Management Executive",
     department: "Event Management",
-    bio: "Develops pitch decks, reaches out to industry sponsors, and manages the event budgets.",
+    bio: "Manages sponsor outreach, pitch presentations, and event coordination.",
     image: "/yash_baghel.png",
     linkedin: "https://www.linkedin.com/in/yash-baghel-042085305?utm_source=share_via&utm_content=profile&utm_medium=membeur_android",
-    github: "https://github.com",
-    isLeader: false
-  },
-  {
-    name: "Puneet Choudhary",
-    position: "Publicity Manager",
-    department: "Event Management",
-    bio: "Drives physical flyer distribution, class-to-class announcements, and registers participants.",
-    image: "https://res.cloudinary.com/dbkednkcg/image/upload/v1783506963/dronex-aerotech/iwlmfryv0kroqbfqueqj.jpg",
-    linkedin: "https://www.linkedin.com/in/puneet-choudhary-b9b07a37b?utm_source=share_via&utm_content=profile&utm_medium=member_android",
     github: "https://github.com",
     isLeader: false
   },
@@ -250,10 +240,9 @@ const newTeamMembers = [
     github: "https://github.com",
     isLeader: true
   },
-
   {
     name: "Siddharth Malhotra",
-    position: "Club Reporter",
+    position: "Content Writer",
     department: "Content Writing",
     bio: "Interviews members, reports on event highlights, and drafts monthly activity summaries.",
     image: "",
@@ -283,16 +272,6 @@ const newTeamMembers = [
     isLeader: false
   },
   {
-    name: "Lisa Geller",
-    position: "DevOps Engineer",
-    department: "Web Development",
-    bio: "Configures and optimizes automated build test and deploy actions on cloud hostings.",
-    image: "",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
-    isLeader: false
-  },
-  {
     name: "Arpita Makwana",
     position: "Front-End Developer",
     department: "Web Development",
@@ -302,27 +281,26 @@ const newTeamMembers = [
     github: "https://github.com",
     isLeader: false
   },
-  // Graphic Designing & Auto CAD
+  {
+    name: "Aryan Bhadoriya",
+    position: "Web Development Executive",
+    department: "Web Development",
+    bio: "Develops front-end features, web portal layout components, and user interfaces.",
+    image: "",
+    linkedin: "https://linkedin.com",
+    github: "https://github.com",
+    isLeader: false
+  },
+  // Graphic Designing
   {
     name: "Vikram Rathore",
     position: "Design Head",
-    department: "Graphic Designing & Auto CAD",
+    department: "Graphic Designing",
     bio: "Supervises all visual assets, promotional poster graphic models, and CAD designs for the drone frames.",
     image: "",
     linkedin: "https://linkedin.com",
     github: "https://github.com",
     isLeader: true
-  },
-
-  {
-    name: "Shruti Haasan",
-    position: "3D Rendering Artist",
-    department: "Graphic Designing & Auto CAD",
-    bio: "Renders ultra-realistic visual models of completed drone builds for sponsorship proposals.",
-    image: "",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
-    isLeader: false
   }
 ];
 
