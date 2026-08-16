@@ -2,11 +2,13 @@
  * Lenis smooth scroll — fast and clean.
  * Also resets body overflow on mount so a previous page's modal
  * lock doesn't bleed through on navigation.
+ * Uses ResizeObserver to dynamically recalculate scroll limits
+ * when async API data or images load.
  */
 import { useEffect, useRef } from "react";
 import Lenis from "lenis";
 
-export function useLenis() {
+export function useLenis(deps = []) {
   const lenisRef = useRef(null);
 
   useEffect(() => {
@@ -30,11 +32,33 @@ export function useLenis() {
     }
     rafId = requestAnimationFrame(raf);
 
+    // Auto-resize Lenis whenever page height changes (API data, images, DOM updates)
+    const resizeObserver = new ResizeObserver(() => {
+      lenis.resize();
+    });
+
+    if (document.body) {
+      resizeObserver.observe(document.body);
+    }
+
+    const handleResize = () => {
+      lenis.resize();
+    };
+    window.addEventListener("resize", handleResize);
+
     return () => {
       cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", handleResize);
+      resizeObserver.disconnect();
       lenis.destroy();
     };
   }, []);
+
+  useEffect(() => {
+    if (lenisRef.current) {
+      lenisRef.current.resize();
+    }
+  }, deps);
 
   return lenisRef;
 }

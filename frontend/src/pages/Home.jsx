@@ -20,7 +20,7 @@ function Home() {
   const [events, setEvents] = useState([]);
   const [gallery, setGallery] = useState([]);
 
-  useLenis();
+  useLenis([projects, events, gallery]);
 
   useEffect(() => {
     fetchProjects();
