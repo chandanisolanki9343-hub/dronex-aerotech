@@ -5,25 +5,21 @@ import "./DroneShowcase.css";
 
 const COMPONENT_CALLOUTS = [
   {
-    icon: "🧭",
     label: "Flight Controller",
     name: "Pixhawk Cube Orange",
     desc: "Triple-redundant IMU, CAN bus, ArduCopter firmware",
   },
   {
-    icon: "⚡",
     label: "Propulsion",
     name: "Hexsoon EDU-450 Motors",
     desc: "980 KV brushless, 40A ESCs, 10-inch props",
   },
   {
-    icon: "📡",
     label: "Navigation",
     name: "Here3+ GPS / GNSS",
     desc: "RTK-ready, CAN bus, 10 Hz position update",
   },
   {
-    icon: "📶",
     label: "Telemetry",
     name: "SkyDroid T12 / SiK Radio",
     desc: "915 MHz link, MAVLink, 1–3 km range",
@@ -129,7 +125,6 @@ function DroneShowcase() {
           <div className="callouts-grid">
             {COMPONENT_CALLOUTS.map((c, i) => (
               <div className="callout-card" key={i}>
-                <div className="callout-icon">{c.icon}</div>
                 <div className="callout-info">
                   <span className="callout-label">{c.label}</span>
                   <span className="callout-name">{c.name}</span>
