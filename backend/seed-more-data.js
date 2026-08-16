@@ -271,11 +271,12 @@ const newTeamMembers = [
     github: "https://github.com",
     isLeader: false
   },
+  // Graphic Designing
   {
     name: "Arpita Makwana",
-    position: "Front-End Developer",
-    department: "Web Development",
-    bio: "Develops smooth interactive dashboards and web page components with CSS and React.",
+    position: "Graphic Designer",
+    department: "Graphic Designing",
+    bio: "Develops promotional poster graphic models, visual design components, and UI graphics.",
     image: "https://res.cloudinary.com/dbkednkcg/image/upload/v1782485715/dronex-aerotech/dcbnt5oetlnil3kfd0d1.jpg",
     linkedin: "https://linkedin.com",
     github: "https://github.com",
