@@ -280,7 +280,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (pointer: coarse), (max-width: 768px) {
   .pin-section {
     min-height: auto !important;
     height: auto !important;
@@ -294,7 +294,7 @@
   }
 
   .pin-section--showcase .pin-section__inner {
-    min-height: 100vh !important;
+    min-height: auto !important;
     padding-top: 0 !important;
   }
 

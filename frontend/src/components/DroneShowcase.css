@@ -451,9 +451,9 @@
   .scan-tick   { transform-origin: 190px center; }
 }
 
-@media (max-width: 768px) {
+@media (pointer: coarse), (max-width: 768px) {
   .showcase-stage {
-    min-height: auto;
+    min-height: auto !important;
   }
 
   .showcase-photo-layer img {
