@@ -32,8 +32,20 @@ function ProjectCard({ project }) {
             <span className="stat-pill">📰 8+ National Media Features</span>
           </div>
 
-          <div className="btn-explore-project">
-            EXPLORE PROJECT &rarr;
+          <div style={{ display: "flex", gap: "12px", marginTop: "16px", flexWrap: "wrap", alignItems: "center" }}>
+            <div className="btn-explore-project">
+              EXPLORE PROJECT &rarr;
+            </div>
+            <a 
+              href="https://Team-trinetra.vercel.app" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="btn-explore-project"
+              style={{ background: "rgba(223, 165, 87, 0.15)", border: "1px solid var(--accent)", color: "var(--accent)", textDecoration: "none" }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              VISIT WEBSITE ↗
+            </a>
           </div>
         </div>
       </Link>

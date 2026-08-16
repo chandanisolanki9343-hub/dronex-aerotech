@@ -55,6 +55,7 @@ function Footer() {
           <Link to="/events">Events</Link>
           <Link to="/gallery">Gallery</Link>
           <Link to="/recruitment">Recruitment</Link>
+          <a href="https://Team-trinetra.vercel.app" target="_blank" rel="noopener noreferrer">Team Trinetra ↗</a>
           <Link to="/contact">Contact</Link>
 
         </div>

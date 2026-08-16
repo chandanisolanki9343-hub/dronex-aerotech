@@ -191,6 +191,25 @@ function TeamTrinetra() {
                 <span className="divider">•</span>
                 <span>🇮🇳 1 of only 2 Indian Teams</span>
               </div>
+
+              <div style={{ marginTop: "24px" }}>
+                <a
+                  href="https://Team-trinetra.vercel.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    textDecoration: "none",
+                    boxShadow: "0 0 20px rgba(223, 165, 87, 0.35)",
+                    fontWeight: "600"
+                  }}
+                >
+                  Visit Official Trinetra Website ↗
+                </a>
+              </div>
             </div>
           </header>
         </div>
@@ -551,9 +570,21 @@ function TeamTrinetra() {
               <h2>TEAM TRINETRA</h2>
               <p className="cta-tagline">FROM GWALIOR TO THE GLOBAL SKIES.</p>
 
-              <Link to="/projects" className="btn-back">
-                ← BACK TO PROJECTS
-              </Link>
+              <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap", marginTop: "24px" }}>
+                <a
+                  href="https://Team-trinetra.vercel.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary"
+                  style={{ textDecoration: "none" }}
+                >
+                  VISIT OFFICIAL WEBSITE ↗
+                </a>
+
+                <Link to="/projects" className="btn-back">
+                  ← BACK TO PROJECTS
+                </Link>
+              </div>
             </div>
           </section>
         </div>
