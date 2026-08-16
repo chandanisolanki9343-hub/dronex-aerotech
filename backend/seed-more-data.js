@@ -275,7 +275,7 @@ const newTeamMembers = [
     position: "Content Writer",
     department: "Content Writing",
     bio: "Drafts event summaries, articles, newsletter copy, and activity reports.",
-    image: "",
+    image: "/ayush_mishra.png",
     linkedin: "https://linkedin.com",
     github: "https://github.com",
     isLeader: false
