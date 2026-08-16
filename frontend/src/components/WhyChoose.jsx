@@ -4,25 +4,21 @@ function WhyChoose() {
 
   const features = [
     {
-      icon: "🚁",
       title: "Drone Innovation",
       description:
         "Design, build and test next-generation drones with hands-on engineering experience.",
     },
     {
-      icon: "🤖",
       title: "AI & Robotics",
       description:
         "Work on autonomous navigation, computer vision and intelligent robotic systems.",
     },
     {
-      icon: "🛰",
       title: "Research & Competitions",
       description:
         "Represent the college in hackathons, drone competitions and aerospace challenges.",
     },
     {
-      icon: "💼",
       title: "Career Growth",
       description:
         "Gain practical skills, leadership experience and industry exposure for your future career.",
@@ -50,10 +46,6 @@ function WhyChoose() {
             className="why-card"
             key={index}
           >
-
-            <div className="why-icon">
-              {item.icon}
-            </div>
 
             <h3>{item.title}</h3>
 
