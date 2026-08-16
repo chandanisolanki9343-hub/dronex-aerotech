@@ -3,19 +3,19 @@ import "./StatsSection.css";
 function StatsSection() {
   const stats = [
     {
-      number: "50+",
+      number: "25+",
       title: "Active Members",
     },
     {
-      number: "25+",
+      number: "10+",
       title: "Drone Projects",
     },
     {
-      number: "12+",
+      number: "8+",
       title: "Competitions",
     },
     {
-      number: "8+",
+      number: "10+",
       title: "Workshops",
     },
   ];
