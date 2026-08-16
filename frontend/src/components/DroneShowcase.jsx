@@ -104,9 +104,6 @@ function DroneShowcase() {
             <span className="live-text">Student Built · Field Ready</span>
           </div>
 
-          {/* Eyebrow */}
-          <span className="showcase-eyebrow">Our Own Build</span>
-
           {/* Heading */}
           <h2 className="showcase-heading">
             Engineered by <em>Students.</em>
