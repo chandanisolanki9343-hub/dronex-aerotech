@@ -234,7 +234,7 @@ const newTeamMembers = [
     position: "Video Editor",
     department: "Photo & Video Editing",
     bio: "Cuts and sequences raw footage, video edits, and club activity media.",
-    image: "",
+    image: "/raheesh_khan.jpg",
     linkedin: "https://linkedin.com",
     github: "https://github.com",
     isLeader: false
