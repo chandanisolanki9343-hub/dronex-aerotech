@@ -261,16 +261,7 @@ const newTeamMembers = [
     github: "https://github.com",
     isLeader: true
   },
-  {
-    name: "Rohan Mehta",
-    position: "Systems Administrator",
-    department: "Web Development",
-    bio: "Maintains club servers, manages credentials, and guarantees portal database backups.",
-    image: "",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
-    isLeader: false
-  },
+
   // Graphic Designing
   {
     name: "Arpita Makwana",
