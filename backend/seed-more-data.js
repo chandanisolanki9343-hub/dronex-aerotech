@@ -229,6 +229,26 @@ const newTeamMembers = [
     github: "https://github.com",
     isLeader: false
   },
+  {
+    name: "Raheesh Khan",
+    position: "Video Editor",
+    department: "Photo & Video Editing",
+    bio: "Cuts and sequences raw footage, video edits, and club activity media.",
+    image: "",
+    linkedin: "https://linkedin.com",
+    github: "https://github.com",
+    isLeader: false
+  },
+  {
+    name: "Shivam Sanodiya",
+    position: "Photographer",
+    department: "Photography & Videography",
+    bio: "Captures photography, event moments, and photo coverage for club events.",
+    image: "",
+    linkedin: "https://linkedin.com",
+    github: "https://github.com",
+    isLeader: false
+  },
   // Content Writing
   {
     name: "Aanya Gupta",
@@ -245,6 +265,16 @@ const newTeamMembers = [
     position: "Content Writer",
     department: "Content Writing",
     bio: "Interviews members, reports on event highlights, and drafts monthly activity summaries.",
+    image: "",
+    linkedin: "https://linkedin.com",
+    github: "https://github.com",
+    isLeader: false
+  },
+  {
+    name: "Ayush Mishra",
+    position: "Content Writer",
+    department: "Content Writing",
+    bio: "Drafts event summaries, articles, newsletter copy, and activity reports.",
     image: "",
     linkedin: "https://linkedin.com",
     github: "https://github.com",
