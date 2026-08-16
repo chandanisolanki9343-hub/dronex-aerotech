@@ -71,12 +71,11 @@ function Navbar() {
         <NavLink to="/contact">Contact</NavLink>
       </div>
 
-      {/* Desktop Search */}
-      <div className="navbar-search desktop-search">
-        <input
-          type="text"
-          placeholder="Search projects..."
-        />
+      {/* Desktop Admin Login Button */}
+      <div className="navbar-admin desktop-admin">
+        <Link to="/admin-login" className="navbar-admin-btn">
+          Admin Login
+        </Link>
       </div>
 
       {/* Mobile Hamburger Button */}
@@ -93,12 +92,6 @@ function Navbar() {
 
       {/* Mobile Menu Drawer */}
       <div className={`mobile-menu-drawer ${mobileMenuOpen ? "is-open" : ""}`}>
-        <div className="mobile-search-box">
-          <input
-            type="text"
-            placeholder="Search projects..."
-          />
-        </div>
         <div className="mobile-nav-links">
           <NavLink to="/" onClick={() => setMobileMenuOpen(false)}>Home</NavLink>
           <NavLink to="/projects" onClick={() => setMobileMenuOpen(false)}>Projects</NavLink>
@@ -107,6 +100,9 @@ function Navbar() {
           <NavLink to="/gallery" onClick={() => setMobileMenuOpen(false)}>Gallery</NavLink>
           <NavLink to="/recruitment" onClick={() => setMobileMenuOpen(false)}>Recruitment</NavLink>
           <NavLink to="/contact" onClick={() => setMobileMenuOpen(false)}>Contact</NavLink>
+          <Link to="/admin-login" className="navbar-admin-btn mobile-admin-btn" onClick={() => setMobileMenuOpen(false)}>
+            Admin Login
+          </Link>
         </div>
       </div>
     </nav>

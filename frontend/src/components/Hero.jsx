@@ -176,10 +176,6 @@ function Hero() {
           <Link to="/recruitment" className="btn btn-secondary">
             Register Now
           </Link>
-
-          <Link to="/admin-login" className="btn btn-secondary">
-            Admin Login
-          </Link>
         </div>
 
       </div>
