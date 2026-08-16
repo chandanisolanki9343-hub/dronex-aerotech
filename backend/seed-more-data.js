@@ -304,6 +304,16 @@ const newTeamMembers = [
     isLeader: false
   },
   {
+    name: "Kirti Shukla",
+    position: "Graphic Designer",
+    department: "Graphic Designing",
+    bio: "Creates posters, banners, and visual design assets for club events.",
+    image: "/kirti_shukla.png",
+    linkedin: "https://linkedin.com",
+    github: "https://github.com",
+    isLeader: false
+  },
+  {
     name: "Aryan Bhadoriya",
     position: "Web Development Executive",
     department: "Web Development",
