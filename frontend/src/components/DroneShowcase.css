@@ -200,10 +200,11 @@
   max-width: 1300px;
   width: 100%;
   margin: 0 auto;
-  padding: 110px 60px 60px 50%;
+  padding: 110px clamp(20px, 4vw, 60px) 60px clamp(20px, 42%, 50%);
   display: flex;
   flex-direction: column;
   gap: 0;
+  box-sizing: border-box;
 }
 
 .showcase-eyebrow {
@@ -220,7 +221,7 @@
 
 .showcase-heading {
   font-family: var(--font-heading);
-  font-size: clamp(36px, 5vw, 60px);
+  font-size: clamp(32px, 5vw, 60px);
   font-weight: 700;
   line-height: 1.05;
   color: var(--primary);
@@ -252,9 +253,10 @@
 /* ── Component callouts ──────────────────────────────────── */
 .callouts-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 14px;
   max-width: 520px;
+  width: 100%;
   opacity: 0;
   transform: translateY(22px);
   transition: opacity 0.7s ease 0.35s, transform 0.7s ease 0.35s;

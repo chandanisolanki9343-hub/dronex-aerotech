@@ -4,13 +4,14 @@
     left:0;
     right:0;
     width:100%;
+    max-width:100%;
     z-index:1000;
 
     display:flex;
-    justify-content:space-between;
+    justify-space:between;
     align-items:center;
 
-    padding:18px 60px;
+    padding:14px clamp(16px, 4vw, 60px);
 
     background: rgba(9, 9, 11, 0.45);
     backdrop-filter: blur(12px);
@@ -19,6 +20,7 @@
     transition:.3s ease;
 
     border-bottom:1px solid var(--border);
+    box-sizing: border-box;
 }
 
 .navbar-scroll{
@@ -39,7 +41,7 @@
 
 .navbar-links{
     display:flex;
-    gap:28px;
+    gap:clamp(12px, 2vw, 28px);
 }
 
 .navbar-links a{
@@ -50,6 +52,7 @@
     font-family: var(--font-body);
     transition:.25s;
     padding-bottom: 6px;
+    white-space: nowrap;
 }
 
 .navbar-links a:hover{
@@ -74,14 +77,14 @@
 }
 
 .navbar-search input{
-    width:250px;
-    padding:12px 18px;
+    width:clamp(140px, 18vw, 250px);
+    padding:10px 16px;
     border: 1px solid var(--border);
     border-radius:30px;
     background: rgba(255, 255, 255, 0.05);
     color: var(--primary);
     outline:none;
-    font-size:15px;
+    font-size:14px;
     font-family: var(--font-body);
     box-shadow: none;
     transition: all 0.3s;
@@ -113,7 +116,7 @@
 
 @media(max-width: 1000px) {
   .navbar {
-    padding: 14px 30px;
+    padding: 14px clamp(16px, 3vw, 30px);
   }
 }
 
@@ -179,7 +182,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    width: 100vw;
+    width: 100%;
+    max-width: 100dvw;
     height: calc(100vh - 64px);
     background: rgba(8, 8, 12, 0.98);
     backdrop-filter: blur(24px);

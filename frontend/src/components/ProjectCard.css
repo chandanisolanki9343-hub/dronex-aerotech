@@ -61,13 +61,14 @@
 .trinetra-featured-card {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: 320px 1fr;
+  grid-template-columns: minmax(min(280px, 100%), 320px) minmax(0, 1fr);
   border: 1.5px solid rgba(223, 165, 87, 0.4);
   background: linear-gradient(135deg, rgba(223, 165, 87, 0.08) 0%, rgba(18, 18, 22, 0.95) 100%);
   position: relative;
   border-radius: var(--radius-md);
   overflow: hidden;
   align-items: stretch;
+  min-width: 0;
 }
 
 .trinetra-featured-card .project-card__image-wrapper {

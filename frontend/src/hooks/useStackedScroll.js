@@ -16,8 +16,9 @@ gsap.registerPlugin(ScrollTrigger);
  */
 export function useStackedScroll(containerRef, deps = []) {
   useEffect(() => {
-    // On mobile devices (<=768px), disable card pinning so sections flow naturally
-    if (window.innerWidth <= 768) return;
+    // On touch devices or narrow viewports, disable card pinning so sections flow naturally
+    const isTouchDevice = typeof window !== "undefined" && ("ontouchstart" in window || (navigator && navigator.maxTouchPoints > 0));
+    if (isTouchDevice || window.innerWidth <= 768) return;
 
     const ctx = gsap.context(() => {
       const sections = gsap.utils.toArray(".pin-section");
