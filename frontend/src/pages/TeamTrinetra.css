@@ -494,9 +494,9 @@
 
 .press-clipping-img {
   width: 100%;
-  max-height: 220px;
+  height: auto;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
   transition: filter 0.4s ease;
 }
 
@@ -699,7 +699,7 @@
 
 .mentor-field-image-container {
   position: relative;
-  border-radius: var(--radius-lg);
+  border-radius: 2px;
   overflow: hidden;
   border: 1px solid rgba(223, 165, 87, 0.35);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(223, 165, 87, 0.1);
@@ -709,11 +709,8 @@
 .mentor-field-image-container img {
   width: 100%;
   height: auto;
-  max-height: 600px;
   display: block;
-  object-fit: cover;
-  object-position: center center;
-  image-rendering: -webkit-optimize-contrast;
+  object-fit: contain;
   transition: transform 0.5s ease, filter 0.5s ease;
 }
 
@@ -1099,6 +1096,46 @@
 
   .pipeline-line {
     display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .trinetra-hero {
+    padding: 80px 16px 50px;
+    min-height: 70vh;
+  }
+
+  .trinetra-hero__title {
+    font-size: clamp(36px, 9vw, 52px);
+    letter-spacing: -1px;
+  }
+
+  .trinetra-hero__quote {
+    font-size: clamp(16px, 4.5vw, 20px);
+  }
+
+  .trinetra-hero__subtitle {
+    font-size: 14px;
+  }
+
+  .trinetra-page .pin-section__inner {
+    padding: 80px 16px 40px;
+  }
+
+  .trinetra-container {
+    padding: 0 16px;
+  }
+
+  .trinetra-section {
+    margin-top: 60px;
+  }
+
+  .suas-card, .status-card, .vision-card, .cta-box {
+    padding: 22px 16px;
+  }
+
+  .mentor-card {
+    padding: 24px 16px;
   }
 }
 

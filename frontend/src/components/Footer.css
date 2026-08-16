@@ -167,3 +167,34 @@
     gap:35px;
   }
 }
+
+@media(max-width:768px){
+
+.footer {
+  padding: 50px 20px 24px;
+  margin-top: 60px;
+}
+
+.footer-section h2 {
+  font-size: 22px;
+  margin-bottom: 14px;
+}
+
+.footer-section h3 {
+  font-size: 15px;
+  margin-bottom: 14px;
+}
+
+.footer-container {
+  gap: 24px;
+}
+
+}
+
+@media(max-width:480px){
+
+.footer {
+  padding: 40px 16px 20px;
+}
+
+}

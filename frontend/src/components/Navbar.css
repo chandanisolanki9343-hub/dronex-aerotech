@@ -234,27 +234,28 @@
   .mobile-nav-links {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 4px;
   }
 
   .mobile-nav-links a {
-    padding: 14px 20px;
-    border-radius: 14px;
-    color: var(--primary);
+    padding: 14px 8px;
+    border-radius: 0;
+    color: var(--secondary);
     font-size: 17px;
     font-weight: 600;
     font-family: var(--font-heading);
     text-decoration: none;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: transparent;
+    border: none;
+    border-left: 3px solid transparent;
     transition: all 0.25s ease;
   }
 
   .mobile-nav-links a:hover,
   .mobile-nav-links a.active {
-    background: rgba(223, 165, 87, 0.12);
-    border-color: rgba(223, 165, 87, 0.4);
+    background: transparent;
+    border-left-color: var(--accent);
     color: var(--accent);
-    transform: translateX(4px);
+    padding-left: 14px;
   }
 }

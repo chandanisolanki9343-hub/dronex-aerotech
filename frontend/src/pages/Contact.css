@@ -138,3 +138,27 @@
     padding: 30px 20px;
   }
 }
+
+@media (max-width: 480px) {
+  .contact-form-card {
+    padding: 20px 16px;
+    border-radius: var(--radius-sm);
+  }
+
+  .contact-form-card h2 {
+    font-size: 20px;
+    margin-bottom: 18px;
+  }
+
+  .contact-method-card {
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .contact-icon-wrapper {
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+}
