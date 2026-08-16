@@ -87,3 +87,23 @@
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+@media (max-width: 768px) {
+  .team-image img {
+    height: 220px;
+  }
+
+  .team-content h3 {
+    font-size: 20px;
+  }
+
+  .team-content {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-image img {
+    height: 180px;
+  }
+}

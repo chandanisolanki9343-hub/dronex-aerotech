@@ -268,3 +268,36 @@
     justify-content: center;
   }
 }
+
+@media (max-width: 480px) {
+  .portfolio-page {
+    padding: 90px 16px 40px;
+  }
+
+  .portfolio-hero {
+    padding: 24px 16px;
+    gap: 20px;
+    border-radius: var(--radius-md);
+  }
+
+  .portfolio-intro h1 {
+    font-size: clamp(24px, 7vw, 30px);
+  }
+
+  .portfolio-intro h2 {
+    font-size: 16px;
+  }
+
+  .portfolio-avatar-container {
+    width: 130px;
+    height: 130px;
+  }
+
+  .portfolio-card {
+    padding: 24px 18px;
+  }
+
+  .portfolio-card h3 {
+    font-size: 18px;
+  }
+}

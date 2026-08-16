@@ -1,63 +1,15 @@
 /* ============================================================
-   HOME.CSS  —  Stacked Card Scroll + Section Layouts
+   HOME.CSS  —  Section Layouts
    Dronex AeroTech  ·  Premium Dark Theme
 ============================================================ */
 
-/* ── Stacked Pin Wrapper ─────────────────────────────────── */
-
-.pin-stack-wrapper {
-  position: relative;
-}
-
-/* Every pin-section is a full-viewport "card" */
-.pin-section {
-  position: relative;
-  min-height: 100vh;
-  width: 100%;
-  box-sizing: border-box;
-  will-change: transform;
-  transform-origin: top center;
-  border-radius: 0px;
-  z-index: 1;
-}
-
-/* Dark semi-transparent veil overlaid on each card as it gets covered */
-.pin-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(4, 4, 6, 0.72);
-  opacity: 0;              /* GSAP animates this to 1 */
-  pointer-events: none;
-  z-index: 10;
-  border-radius: inherit;
-}
-
-/* Inner scroll container — sits above the overlay */
-.pin-section__inner {
-  position: relative;
-  z-index: 2;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  justify-content: center;
-}
-
-/* ── Per-card background tints ──────────────────────────── */
-
-.pin-section--showcase {
+.home-page {
   background: #060608;
+  color: var(--primary);
+  overflow-x: hidden;
 }
 
-.pin-section--showcase .pin-section__inner {
-  padding-top: 0;
-  padding-bottom: 0;
-  min-height: 100vh;
-}
-
-.pin-section--hero {
+.home-hero-section {
   background: #07070a;
   background-image: radial-gradient(
     ellipse 80% 60% at 50% 100%,
@@ -66,74 +18,19 @@
   );
 }
 
-.pin-section--hero .pin-section__inner {
-  padding-top: 30px;
-  padding-bottom: 30px;
-  justify-content: center;
-}
+/* ── About Section Layout ────────────────────────────────── */
 
-.pin-section--about {
+.home-about-section {
+  padding: 80px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #080809;
   background-image: radial-gradient(
     ellipse 80% 60% at 50% 0%,
     rgba(223, 165, 87, 0.04) 0%,
     transparent 70%
   );
-}
-
-.pin-section--projects {
-  background: #070709;
-  background-image: radial-gradient(
-    ellipse 70% 50% at 30% 0%,
-    rgba(223, 165, 87, 0.03) 0%,
-    transparent 65%
-  );
-}
-
-.pin-section--events {
-  background: #060609;
-  background-image: radial-gradient(
-    ellipse 70% 50% at 70% 0%,
-    rgba(223, 165, 87, 0.04) 0%,
-    transparent 65%
-  );
-}
-
-.pin-section--gallery {
-  background: #08080b;
-  background-image: radial-gradient(
-    ellipse 80% 50% at 40% 0%,
-    rgba(223, 165, 87, 0.035) 0%,
-    transparent 68%
-  );
-}
-
-.pin-section--projects .pin-section__inner,
-.pin-section--events .pin-section__inner,
-.pin-section--gallery .pin-section__inner {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  justify-content: flex-start;
-}
-
-.pin-section--why {
-  background: #06060a;
-  background-image: radial-gradient(
-    ellipse 90% 50% at 60% 0%,
-    rgba(223, 165, 87, 0.05) 0%,
-    transparent 70%
-  );
-}
-
-/* ── About Section Layout ────────────────────────────────── */
-
-.home-about-section {
-  padding: 20px 24px 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: transparent;
-  flex: 1;
 }
 
 .home-about-grid {
@@ -281,25 +178,8 @@
 }
 
 @media (max-width: 768px) {
-  .pin-section {
-    min-height: auto !important;
-    height: auto !important;
-  }
-
-  .pin-section__inner {
-    min-height: auto !important;
-    padding-top: 20px !important;
-    padding-bottom: 24px !important;
-    justify-content: flex-start !important;
-  }
-
-  .pin-section--showcase .pin-section__inner {
-    min-height: 100vh !important;
-    padding-top: 0 !important;
-  }
-
   .home-about-section {
-    padding: 20px 16px 36px;
+    padding: 48px 16px;
   }
 
   .home-about-grid {
@@ -337,7 +217,7 @@
   .home-projects,
   .home-events,
   .home-gallery {
-    padding: 16px 16px 28px;
+    padding: 40px 16px;
   }
 
   .section-header {
@@ -358,3 +238,4 @@
     gap: 20px;
   }
 }
+

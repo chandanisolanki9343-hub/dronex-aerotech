@@ -1,37 +1,37 @@
+/**
+ * Lenis smooth scroll — fast and clean.
+ * Also resets body overflow on mount so a previous page's modal
+ * lock doesn't bleed through on navigation.
+ */
 import { useEffect, useRef } from "react";
 import Lenis from "lenis";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
-
-/**
- * Initialises Lenis smooth scrolling and wires it into GSAP's RAF loop.
- * Call once at the root level (App.jsx or Home.jsx).
- */
 export function useLenis() {
   const lenisRef = useRef(null);
 
   useEffect(() => {
+    // Reset any overflow lock left by a previous page (e.g. modal on TeamTrinetra)
+    document.body.style.overflow = "";
+    document.documentElement.style.overflow = "";
+
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: 0.7,
+      easing: (t) => 1 - Math.pow(1 - t, 3),
       smoothWheel: true,
       syncTouch: false,
     });
 
     lenisRef.current = lenis;
 
-    // Tell ScrollTrigger to use Lenis's scroll position
-    lenis.on("scroll", ScrollTrigger.update);
-
-    // Drive Lenis with GSAP's ticker so they stay in perfect sync
-    const rafCallback = (time) => lenis.raf(time * 1000);
-    gsap.ticker.add(rafCallback);
-    gsap.ticker.lagSmoothing(0);
+    let rafId;
+    function raf(time) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+    rafId = requestAnimationFrame(raf);
 
     return () => {
-      gsap.ticker.remove(rafCallback);
+      cancelAnimationFrame(rafId);
       lenis.destroy();
     };
   }, []);
