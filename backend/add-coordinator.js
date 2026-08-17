@@ -27,6 +27,8 @@ const addCoordinator = async () => {
       member.bio = bio;
       member.image = image;
       member.isLeader = isLeader;
+      member.linkedin = "https://www.linkedin.com/in/dr-yashwant-sawle-b3139921/";
+      member.github = "";
       await member.save();
       console.log("Updated Dr. Yashwant Sawle.");
     } else {
@@ -38,8 +40,8 @@ const addCoordinator = async () => {
         bio,
         image,
         isLeader,
-        linkedin: "https://linkedin.com",
-        github: "https://github.com"
+        linkedin: "https://www.linkedin.com/in/dr-yashwant-sawle-b3139921/",
+        github: ""
       });
       console.log("Created Dr. Yashwant Sawle.");
     }

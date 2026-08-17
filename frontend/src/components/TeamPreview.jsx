@@ -54,25 +54,21 @@ function TeamPreview({ member }) {
 
         <div className="social-links" onClick={(e) => e.stopPropagation()}>
 
-          {member.linkedin && (
-            <a
-              href={member.linkedin}
-              target="_blank"
-              rel="noreferrer"
-            >
-              LinkedIn
-            </a>
-          )}
+          <a
+            href={member.linkedin || "about:blank"}
+            target="_blank"
+            rel="noreferrer"
+          >
+            LinkedIn
+          </a>
 
-          {member.github && (
-            <a
-              href={member.github}
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub
-            </a>
-          )}
+          <a
+            href={member.github || "about:blank"}
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
 
           {member.portfolio && (
             <a

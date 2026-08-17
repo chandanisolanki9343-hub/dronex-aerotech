@@ -15,8 +15,8 @@ const newTeamMembers = [
     department: "President",
     bio: "Visionary leader overseeing the club operations, industry partnerships, and overall growth of Dronex AeroTech.",
     image: "/parth_soni.jpg",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
+    linkedin: "",
+    github: "",
     isLeader: true
   },
   // Treasurer / Executive
@@ -47,8 +47,8 @@ const newTeamMembers = [
     department: "Technical",
     bio: "Specializes in drone design, autonomous navigation systems, flight hardware calibration, and embedded systems integration.",
     image: "/aryan_narwariya.png",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
+    linkedin: "",
+    github: "",
     portfolio: "https://my-portfolio-2cs.pages.dev/",
     isLeader: true
   },
@@ -165,8 +165,8 @@ const newTeamMembers = [
     department: "Event Management",
     bio: "Coordinates event logistics, management, university approvals, and workshops booking.",
     image: "https://res.cloudinary.com/dbkednkcg/image/upload/v1783505019/dronex-aerotech/txtq8xra4xal0z6dmca9.jpg",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
+    linkedin: "",
+    github: "",
     isLeader: true
   },
   {
@@ -309,8 +309,8 @@ const newTeamMembers = [
     department: "Graphic Designing",
     bio: "Creates posters, banners, and visual design assets for club events.",
     image: "/kirti_shukla.png",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
+    linkedin: "https://www.linkedin.com/in/kirti-shukla-33492a349",
+    github: "",
     isLeader: false
   },
   {
@@ -319,8 +319,8 @@ const newTeamMembers = [
     department: "Web Development",
     bio: "Develops front-end features, web portal layout components, and user interfaces.",
     image: "",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
+    linkedin: "",
+    github: "",
     isLeader: false
   },
   // Graphic Designing

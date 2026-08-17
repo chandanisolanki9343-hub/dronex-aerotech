@@ -91,37 +91,51 @@ function TeamTrinetra() {
     {
       name: "Parth Soni",
       role: "Team Lead & Aerospace Specialist",
-      image: "/parth_soni.jpg"
+      image: "/parth_soni.jpg",
+      linkedin: "",
+      github: ""
     },
     {
       name: "Rishabh Dohare",
       role: "Avionics & Flight Operations Lead",
-      image: null
+      image: null,
+      linkedin: "",
+      github: ""
     },
     {
       name: "Harshvardhan Kaushal",
       role: "Mechanical & Airframe Fabrication Lead",
-      image: null
+      image: null,
+      linkedin: "https://www.linkedin.com/in/harsh-vardhan-kaushal-84212b317?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+      github: "https://github.com/coolharsh408"
     },
     {
       name: "Ankit Gurjar",
       role: "AI & Computer Vision Specialist",
-      image: null
+      image: null,
+      linkedin: "https://www.linkedin.com/in/ankit-gurjar-16501a34a?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+      github: ""
     },
     {
       name: "Aryan Bhadoriya",
       role: "Embedded Systems & Controls Specialist",
-      image: null
+      image: null,
+      linkedin: "",
+      github: ""
     },
     {
       name: "Kuldeep Shikarwar",
       role: "Ground Control Station Engineer",
-      image: null
+      image: null,
+      linkedin: "",
+      github: ""
     },
     {
       name: "Moksh Dandotiya",
       role: "Autonomous Navigation & Software Engineer",
-      image: null
+      image: null,
+      linkedin: "",
+      github: ""
     }
   ];
 
@@ -434,6 +448,29 @@ function TeamTrinetra() {
                 <blockquote className="mentor-quote">
                   “His constant mentorship, technical expertise, and invaluable guidance have been instrumental in transforming our ideas into practical solutions. His support in project development and team coordination has greatly contributed to the growth and achievements of Team Trinetra.”
                 </blockquote>
+                <div style={{ marginTop: "14px" }}>
+                  <a
+                    href="https://www.linkedin.com/in/dr-yashwant-sawle-b3139921/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "6px",
+                      padding: "6px 14px",
+                      borderRadius: "20px",
+                      background: "rgba(223, 165, 87, 0.12)",
+                      border: "1px solid rgba(223, 165, 87, 0.4)",
+                      color: "var(--accent)",
+                      fontSize: "13px",
+                      fontWeight: "600",
+                      textDecoration: "none",
+                      transition: "all 0.3s ease"
+                    }}
+                  >
+                    Dr. Yashwant Sawle on LinkedIn ↗
+                  </a>
+                </div>
               </div>
             </div>
           </section>
@@ -505,6 +542,24 @@ function TeamTrinetra() {
                   <div className="member-info">
                     <h3>{m.name}</h3>
                     <span>{m.role}</span>
+                    <div className="trinetra-social-links" style={{ display: "flex", gap: "12px", marginTop: "6px" }}>
+                      <a 
+                        href={m.linkedin || "about:blank"} 
+                        target="_blank" 
+                        rel="noreferrer"
+                        style={{ fontSize: "12px", color: "var(--accent)", textDecoration: "none", fontWeight: "600" }}
+                      >
+                        LinkedIn ↗
+                      </a>
+                      <a 
+                        href={m.github || "about:blank"} 
+                        target="_blank" 
+                        rel="noreferrer"
+                        style={{ fontSize: "12px", color: "var(--secondary)", textDecoration: "none", fontWeight: "600" }}
+                      >
+                        GitHub ↗
+                      </a>
+                    </div>
                   </div>
                 </div>
               ))}
