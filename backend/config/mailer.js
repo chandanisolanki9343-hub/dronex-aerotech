@@ -37,7 +37,8 @@ export const sendEmail = async ({ to, subject, html, text }) => {
 
   if (brevoApiKey) {
     console.log("[Mailer] Using Brevo HTTP API → sending to:", to);
-    const senderEmail = process.env.EMAIL_USER || "chandanisolanki9343@gmail.com";
+    // Use the dedicated club email as Brevo verified sender
+    const BREVO_VERIFIED_SENDER = "dronexaerotech.mitsduclub08@gmail.com";
     const response = await fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       headers: {
@@ -46,7 +47,7 @@ export const sendEmail = async ({ to, subject, html, text }) => {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        sender: { name: "Dronex AeroTech", email: senderEmail },
+        sender: { name: "Dronex AeroTech", email: BREVO_VERIFIED_SENDER },
         to: [{ email: to }],
         subject,
         htmlContent: html || `<p>${text}</p>`,
