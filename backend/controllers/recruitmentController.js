@@ -62,7 +62,7 @@ export const createApplication = async (req, res) => {
         }),
         transporter.sendMail({
           from: process.env.EMAIL_USER,
-          to: "chandanisolanki9343@gmail.com", // Developer Personal Email
+          to: "dronexaerotech.mitsduclub08@gmail.com", // Official Club Email
           subject: `New Recruitment Application: ${application.name} - ${application.domain || application.skills}`,
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
