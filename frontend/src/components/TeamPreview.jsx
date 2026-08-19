@@ -21,19 +21,7 @@ function TeamPreview({ member }) {
             alt={member.name}
           />
         ) : (
-          <div className="avatar-placeholder" style={{
-            width: "100%",
-            height: "320px",
-            background: "linear-gradient(135deg, var(--card) 0%, var(--border) 100%)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: "48px",
-            fontWeight: "700",
-            color: "var(--accent)",
-            letterSpacing: "2px",
-            fontFamily: "var(--font-heading)"
-          }}>
+          <div className="avatar-placeholder">
             {getInitials(member.name)}
           </div>
         )}
@@ -54,21 +42,25 @@ function TeamPreview({ member }) {
 
         <div className="social-links" onClick={(e) => e.stopPropagation()}>
 
-          <a
-            href={member.linkedin || "about:blank"}
-            target="_blank"
-            rel="noreferrer"
-          >
-            LinkedIn
-          </a>
+          {member.linkedin && (
+            <a
+              href={member.linkedin}
+              target="_blank"
+              rel="noreferrer"
+            >
+              LinkedIn
+            </a>
+          )}
 
-          <a
-            href={member.github || "about:blank"}
-            target="_blank"
-            rel="noreferrer"
-          >
-            GitHub
-          </a>
+          {member.github && (
+            <a
+              href={member.github}
+              target="_blank"
+              rel="noreferrer"
+            >
+              GitHub
+            </a>
+          )}
 
           {member.portfolio && (
             <a

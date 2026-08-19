@@ -53,6 +53,11 @@ function Team() {
         "Secretary": 3,
         "Secratary": 3,
         "Treasurer": 3,
+        "Promotion Head": 8,
+        "Promotion head": 8,
+        "PR & Social Lead": 8,
+        "Social Media Lead": 9,
+        "Social media lead": 9,
         "Technical Lead": 10,
         "Technical Co-lead": 11,
       };

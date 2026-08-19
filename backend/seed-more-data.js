@@ -126,13 +126,23 @@ const newTeamMembers = [
   },
   // Promotion & Social Media
   {
-    name: "Kiara Advani",
-    position: "PR & Social Lead",
+    name: "Deepti Kushwah",
+    position: "Promotion Head",
     department: "Promotion & Social Media",
     bio: "Directs online marketing campaigns, public relations, community engagement, and brand aesthetics.",
-    image: "",
-    linkedin: "https://linkedin.com",
+    image: "https://res.cloudinary.com/dbkednkcg/image/upload/v1783526281/dronex-aerotech/jm5tuhvhq9slkj0a9fbn.jpg",
+    linkedin: "https://www.linkedin.com/in/deepti-kushwah-446b62348?utm_source=share_via&utm_content=profile&utm_medium=member_android",
     github: "https://github.com",
+    isLeader: true
+  },
+  {
+    name: "Nishant Kaushal",
+    position: "Social Media Lead",
+    department: "PR & Social Media",
+    bio: "Leads social media operations, digital presence, public relations, and promotional strategy.",
+    image: "/nishant_kaushal.jpg",
+    linkedin: "",
+    github: "",
     isLeader: true
   },
   {
@@ -318,7 +328,7 @@ const newTeamMembers = [
     position: "Web Development Executive",
     department: "Web Development",
     bio: "Develops front-end features, web portal layout components, and user interfaces.",
-    image: "",
+    image: "/aryan_bhadoriya.png",
     linkedin: "",
     github: "",
     isLeader: false
