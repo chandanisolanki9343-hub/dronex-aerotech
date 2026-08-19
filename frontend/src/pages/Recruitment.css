@@ -118,8 +118,166 @@
   font-size: 16px;
 }
 
+/* Recruitment QR Code Banner */
+.qr-recruitment-card {
+  background: var(--card);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px 30px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  box-shadow: var(--shadow-md);
+}
+
+.qr-image-wrapper {
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  flex-shrink: 0;
+}
+
+.qr-img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  display: block;
+}
+
+.qr-info h3 {
+  font-size: 20px;
+  color: var(--primary);
+  margin-bottom: 6px;
+  font-family: var(--font-heading);
+}
+
+.qr-info p {
+  font-size: 14px;
+  color: var(--secondary);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.btn-download-qr {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(184, 137, 60, 0.12);
+  color: var(--accent, #b8893c);
+  border: 1px solid rgba(184, 137, 60, 0.3);
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-download-qr:hover {
+  background: var(--accent, #b8893c);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Payment Proof Input & Preview Styles */
+.payment-proof-group {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px dashed var(--border);
+  padding: 20px;
+  border-radius: var(--radius-md);
+}
+
+.payment-proof-hint {
+  font-size: 12px;
+  color: var(--secondary);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.file-input-wrapper input[type="file"] {
+  padding: 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.uploading-text {
+  font-size: 13px;
+  color: var(--accent);
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+.payment-proof-preview {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 10px;
+  background: rgba(40, 167, 69, 0.05);
+  border: 1px solid rgba(40, 167, 69, 0.2);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+}
+
+.preview-image-container {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+  flex-shrink: 0;
+}
+
+.proof-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.preview-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.upload-success-badge {
+  color: #28a745;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.btn-remove-proof {
+  background: transparent;
+  border: 1px solid rgba(220, 53, 69, 0.3);
+  color: #dc3545;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  width: fit-content;
+  transition: all 0.2s ease;
+}
+
+.btn-remove-proof:hover {
+  background: rgba(220, 53, 69, 0.1);
+}
+
 /* Device Responsiveness */
 @media (max-width: 768px) {
+  .qr-recruitment-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+
   .recruitment-container {
     margin: 40px auto;
   }
@@ -150,3 +308,4 @@
     width: 100%;
   }
 }
+

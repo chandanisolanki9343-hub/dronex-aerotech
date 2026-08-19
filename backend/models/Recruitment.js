@@ -50,6 +50,11 @@ const recruitmentSchema = new mongoose.Schema(
       type: String,
     },
 
+    paymentProof: {
+      type: String,
+      default: "",
+    },
+
     interviewDate: {
       type: String,
     },

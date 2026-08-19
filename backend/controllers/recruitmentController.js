@@ -98,6 +98,14 @@ export const createApplication = async (req, res) => {
                   <td style="padding: 6px 0; font-weight: bold; vertical-align: top;">Why Join / Msg:</td>
                   <td style="white-space: pre-wrap;">${application.whyJoin || application.message || "N/A"}</td>
                 </tr>
+                ${
+                  application.paymentProof
+                    ? `<tr>
+                        <td style="padding: 6px 0; font-weight: bold;">Payment Proof:</td>
+                        <td><a href="${application.paymentProof}" target="_blank" style="color: #007bff;">View Screenshot PNG</a></td>
+                      </tr>`
+                    : ""
+                }
               </table>
               <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
               <p style="text-align: center; margin: 0;">

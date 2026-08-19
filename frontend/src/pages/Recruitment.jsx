@@ -11,15 +11,59 @@ function Recruitment() {
     year: "",
     domain: "",
     message: "",
+    paymentProof: "",
   });
 
   const [loading, setLoading] = useState(false);
+  const [uploadingProof, setUploadingProof] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleProofUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Check file type (must be png, jpg, jpeg screenshot)
+    if (!file.type.startsWith("image/")) {
+      alert("Please upload a valid image file (PNG/JPG screenshot)");
+      return;
+    }
+
+    setUploadingProof(true);
+    const uploadData = new FormData();
+    uploadData.append("image", file);
+
+    try {
+      const res = await api.post("/upload/image", uploadData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      setFormData((prev) => ({
+        ...prev,
+        paymentProof: res.data.imageUrl,
+      }));
+
+      alert("Payment proof screenshot uploaded successfully!");
+    } catch (error) {
+      console.error(error);
+      alert("Failed to upload screenshot. Please try again.");
+    } finally {
+      setUploadingProof(false);
+    }
+  };
+
+  const removePaymentProof = () => {
+    setFormData((prev) => ({
+      ...prev,
+      paymentProof: "",
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -40,6 +84,7 @@ function Recruitment() {
         year: "",
         domain: "",
         message: "",
+        paymentProof: "",
       });
     } catch (err) {
       console.log(err);
@@ -160,10 +205,55 @@ function Recruitment() {
               required
             />
           </div>
+
+          {/* Payment Proof Attachment Field */}
+          <div className="form-group form-group-full payment-proof-group">
+            <label htmlFor="paymentProof">
+              Payment Proof (Attach Screenshot PNG/JPG)
+            </label>
+            <span className="payment-proof-hint">
+              Attach screenshot of your registration payment history.
+            </span>
+
+            {!formData.paymentProof ? (
+              <div className="file-input-wrapper">
+                <input
+                  id="paymentProof"
+                  type="file"
+                  accept="image/png, image/jpeg, image/jpg"
+                  onChange={handleProofUpload}
+                  disabled={uploadingProof}
+                />
+                {uploadingProof && (
+                  <p className="uploading-text">Uploading screenshot...</p>
+                )}
+              </div>
+            ) : (
+              <div className="payment-proof-preview">
+                <div className="preview-image-container">
+                  <img
+                    src={formData.paymentProof}
+                    alt="Payment Proof Screenshot"
+                    className="proof-thumb"
+                  />
+                </div>
+                <div className="preview-actions">
+                  <span className="upload-success-badge">✓ Proof Screenshot Attached</span>
+                  <button
+                    type="button"
+                    className="btn-remove-proof"
+                    onClick={removePaymentProof}
+                  >
+                    Change / Remove Screenshot
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="recruitment-btn-container">
-          <button className="btn btn-primary" type="submit" disabled={loading}>
+          <button className="btn btn-primary" type="submit" disabled={loading || uploadingProof}>
             {loading ? "Submitting..." : "Apply Now"}
           </button>
         </div>

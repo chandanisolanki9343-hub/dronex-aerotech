@@ -146,9 +146,20 @@ function AdminRecruitment() {
 
   return (
     <div style={{ padding: "40px", maxWidth: "1200px", margin: "0 auto", minHeight: "80vh", color: "var(--primary, #333)" }}>
-      <div style={{ marginBottom: "30px", borderBottom: "1px solid rgba(255,255,255,0.1)", paddingBottom: "15px" }}>
-        <h1 style={{ fontSize: "32px", fontWeight: "700", letterSpacing: "-0.5px" }}>Recruitment Applications</h1>
-        <p style={{ color: "#777", marginTop: "5px" }}>Manage, review, approve, or reject applicants for Dronex AeroTech.</p>
+      <div style={{ marginBottom: "30px", borderBottom: "1px solid rgba(255,255,255,0.1)", paddingBottom: "15px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "20px" }}>
+        <div>
+          <h1 style={{ fontSize: "32px", fontWeight: "700", letterSpacing: "-0.5px" }}>Recruitment Applications</h1>
+          <p style={{ color: "#777", marginTop: "5px" }}>Manage, review, approve, or reject applicants for Dronex AeroTech.</p>
+        </div>
+
+        {/* QR Code Quick Download Card for Admin */}
+        <div style={{ display: "flex", alignItems: "center", gap: "15px", background: "rgba(255,255,255,0.03)", padding: "12px 20px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.08)" }}>
+          <img src="/recruitment-qr.png" alt="Recruitment QR Code" style={{ width: "50px", height: "50px", background: "white", padding: "4px", borderRadius: "6px" }} />
+          <div>
+            <span style={{ fontSize: "12px", fontWeight: "600", color: "#aaa", display: "block" }}>Recruitment QR Code</span>
+            <a href="/recruitment-qr.png" download="Dronex-Recruitment-QR.png" style={{ color: "#007bff", fontSize: "13px", fontWeight: "600", textDecoration: "none" }}>📥 Download PNG</a>
+          </div>
+        </div>
       </div>
 
       {/* Batch Interview Scheduler Panel */}
@@ -320,6 +331,49 @@ function AdminRecruitment() {
                 <p style={{ margin: 0, fontSize: "15px", color: "#ccc", lineHeight: "1.6", whiteSpace: "pre-wrap" }}>
                   {app.whyJoin || app.message || app.reason || "No details provided."}
                 </p>
+              </div>
+
+              {/* Payment Proof Display Section */}
+              <div style={{ background: app.paymentProof ? "rgba(40, 167, 69, 0.04)" : "rgba(255, 255, 255, 0.01)", borderRadius: "8px", padding: "16px", borderLeft: app.paymentProof ? "3px solid #28a745" : "3px solid #666" }}>
+                <span style={{ fontSize: "12px", textTransform: "uppercase", color: app.paymentProof ? "#28a745" : "#888", fontWeight: "600", display: "block", marginBottom: "8px" }}>
+                  {app.paymentProof ? "✓ Attached Payment Proof Screenshot" : "Payment Proof"}
+                </span>
+                {app.paymentProof ? (
+                  <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                    <a href={app.paymentProof} target="_blank" rel="noreferrer">
+                      <img
+                        src={app.paymentProof}
+                        alt="Payment Proof Screenshot"
+                        style={{ width: "100px", height: "100px", objectFit: "cover", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.2)", cursor: "pointer" }}
+                      />
+                    </a>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                      <span style={{ fontSize: "13px", color: "#aaa" }}>Screenshot PNG/JPG uploaded by applicant</span>
+                      <a
+                        href={app.paymentProof}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{
+                          display: "inline-block",
+                          background: "#28a745",
+                          color: "white",
+                          padding: "6px 14px",
+                          borderRadius: "6px",
+                          fontSize: "12px",
+                          fontWeight: "600",
+                          textDecoration: "none",
+                          width: "fit-content"
+                        }}
+                      >
+                        🔍 View Full Image
+                      </a>
+                    </div>
+                  </div>
+                ) : (
+                  <p style={{ margin: 0, fontSize: "14px", color: "#777", italic: "true" }}>
+                    No payment proof screenshot attached.
+                  </p>
+                )}
               </div>
 
               {/* Display interview details if scheduled */}
