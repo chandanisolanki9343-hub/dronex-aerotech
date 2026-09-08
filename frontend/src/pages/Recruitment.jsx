@@ -206,50 +206,6 @@ function Recruitment() {
             />
           </div>
 
-          {/* Payment Proof Attachment Field */}
-          <div className="form-group form-group-full payment-proof-group">
-            <label htmlFor="paymentProof">
-              Payment Proof (Attach Screenshot PNG/JPG)
-            </label>
-            <span className="payment-proof-hint">
-              Attach screenshot of your registration payment history.
-            </span>
-
-            {!formData.paymentProof ? (
-              <div className="file-input-wrapper">
-                <input
-                  id="paymentProof"
-                  type="file"
-                  accept="image/png, image/jpeg, image/jpg"
-                  onChange={handleProofUpload}
-                  disabled={uploadingProof}
-                />
-                {uploadingProof && (
-                  <p className="uploading-text">Uploading screenshot...</p>
-                )}
-              </div>
-            ) : (
-              <div className="payment-proof-preview">
-                <div className="preview-image-container">
-                  <img
-                    src={formData.paymentProof}
-                    alt="Payment Proof Screenshot"
-                    className="proof-thumb"
-                  />
-                </div>
-                <div className="preview-actions">
-                  <span className="upload-success-badge">✓ Proof Screenshot Attached</span>
-                  <button
-                    type="button"
-                    className="btn-remove-proof"
-                    onClick={removePaymentProof}
-                  >
-                    Change / Remove Screenshot
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
         </div>
 
         <div className="recruitment-btn-container">
