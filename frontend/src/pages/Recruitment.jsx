@@ -100,11 +100,10 @@ function Recruitment() {
     return (
       <div className="recruitment-container" style={{ maxWidth: "680px", margin: "80px auto" }}>
         <div className="recruitment-closed-card">
-          {/* Status Badge */}
-          <div className="closed-badge">
-            <span className="closed-badge-dot"></span>
-            <span>APPLICATIONS CLOSED</span>
-          </div>
+          {/* Status Label */}
+          <span className="closed-simple-label">
+            Applications Closed
+          </span>
 
           {/* Lock Icon */}
           <div className="closed-icon-container">

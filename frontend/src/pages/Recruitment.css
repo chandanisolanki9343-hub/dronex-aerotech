@@ -490,33 +490,12 @@
   background: linear-gradient(90deg, transparent, #dfa557, transparent);
 }
 
-.closed-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(220, 53, 69, 0.12);
-  border: 1px solid rgba(220, 53, 69, 0.35);
-  color: #ff5c6c;
-  padding: 6px 18px;
-  border-radius: 50px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
+.closed-simple-label {
+  color: #88889a;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-}
-
-.closed-badge-dot {
-  width: 8px;
-  height: 8px;
-  background: #ff5c6c;
-  border-radius: 50%;
-  box-shadow: 0 0 10px #ff5c6c;
-  animation: pulse-dot 1.8s infinite;
-}
-
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.8); }
 }
 
 .closed-icon-container {
