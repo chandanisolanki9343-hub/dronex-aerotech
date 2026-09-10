@@ -58,8 +58,6 @@ function AdminRecruitment() {
     window.open(`https://wa.me/${cleaned}?text=${encoded}`, "_blank");
   };
 
-  };
-
   const handleBulkSchedule = async (e) => {
     e.preventDefault();
     if (!bulkDate || !bulkTime || !bulkLocation) {
