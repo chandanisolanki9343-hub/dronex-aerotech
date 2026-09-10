@@ -2,9 +2,18 @@ import Recruitment from "../models/Recruitment.js";
 import Team from "../models/Team.js";
 import transporter from "../config/mailer.js";
 
+const IS_RECRUITMENT_OPEN = false;
+
 // Submit Application
 export const createApplication = async (req, res) => {
   try {
+    if (!IS_RECRUITMENT_OPEN) {
+      return res.status(400).json({
+        success: false,
+        message: "Recruitment applications for Dronex AeroTech are currently closed.",
+      });
+    }
+
     const application = await Recruitment.create(req.body);
 
     // Send professional confirmation email to applicant & notification to admin in parallel (await to keep event loop alive)
