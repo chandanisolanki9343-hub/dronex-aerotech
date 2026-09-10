@@ -68,15 +68,15 @@ function AdminMessages() {
   };
 
   return (
-    <div style={{ padding: "40px", maxWidth: "1200px", margin: "0 auto", minHeight: "80vh", color: "var(--primary, #333)" }}>
+    <div style={{ padding: "40px", maxWidth: "1200px", margin: "0 auto", minHeight: "80vh", color: "#f4f4f7" }}>
       <div style={{ marginBottom: "30px", borderBottom: "1px solid rgba(255,255,255,0.1)", paddingBottom: "15px" }}>
         <h1 style={{ fontSize: "32px", fontWeight: "700", letterSpacing: "-0.5px" }}>Contact Messages</h1>
-        <p style={{ color: "#777", marginTop: "5px" }}>Review, reply, and manage incoming user inquiries from the website.</p>
+        <p style={{ color: "#aaa", marginTop: "5px" }}>Review, reply, and manage incoming user inquiries from the website.</p>
       </div>
 
       {messages.length === 0 ? (
         <div style={{ textAlign: "center", padding: "80px 20px", background: "rgba(255,255,255,0.03)", borderRadius: "12px", border: "1px dashed rgba(255,255,255,0.1)" }}>
-          <p style={{ color: "#777", fontSize: "18px" }}>No messages found in the database.</p>
+          <p style={{ color: "#aaa", fontSize: "18px" }}>No messages found in the database.</p>
         </div>
       ) : (
         <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "25px" }}>

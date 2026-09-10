@@ -145,18 +145,18 @@ function AdminRecruitment() {
   };
 
   return (
-    <div style={{ padding: "40px", maxWidth: "1200px", margin: "0 auto", minHeight: "80vh", color: "var(--primary, #333)" }}>
+    <div style={{ padding: "40px", maxWidth: "1200px", margin: "0 auto", minHeight: "80vh", color: "#f4f4f7" }}>
       <div style={{ marginBottom: "30px", borderBottom: "1px solid rgba(255,255,255,0.1)", paddingBottom: "15px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "20px" }}>
         <div>
           <h1 style={{ fontSize: "32px", fontWeight: "700", letterSpacing: "-0.5px" }}>Recruitment Applications</h1>
-          <p style={{ color: "#777", marginTop: "5px" }}>Manage, review, approve, or reject applicants for Dronex AeroTech.</p>
+          <p style={{ color: "#aaa", marginTop: "5px" }}>Manage, review, approve, or reject applicants for Dronex AeroTech.</p>
         </div>
 
         {/* QR Code Quick Download Card for Admin */}
         <div style={{ display: "flex", alignItems: "center", gap: "15px", background: "rgba(255,255,255,0.03)", padding: "12px 20px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.08)" }}>
           <img src="/recruitment-qr.png" alt="Recruitment QR Code" style={{ width: "50px", height: "50px", background: "white", padding: "4px", borderRadius: "6px" }} />
           <div>
-            <span style={{ fontSize: "12px", fontWeight: "600", color: "#aaa", display: "block" }}>Recruitment QR Code</span>
+            <span style={{ fontSize: "12px", fontWeight: "600", color: "#ccc", display: "block" }}>Recruitment QR Code</span>
             <a href="/recruitment-qr.png" download="Dronex-Recruitment-QR.png" style={{ color: "#007bff", fontSize: "13px", fontWeight: "600", textDecoration: "none" }}>📥 Download PNG</a>
           </div>
         </div>
@@ -261,7 +261,7 @@ function AdminRecruitment() {
 
       {applications.length === 0 ? (
         <div style={{ textAlign: "center", padding: "80px 20px", background: "rgba(255,255,255,0.03)", borderRadius: "12px", border: "1px dashed rgba(255,255,255,0.1)" }}>
-          <p style={{ color: "#777", fontSize: "18px" }}>No applications found in the database.</p>
+          <p style={{ color: "#aaa", fontSize: "18px" }}>No applications found in the database.</p>
         </div>
       ) : (
         <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "25px" }}>
@@ -370,7 +370,7 @@ function AdminRecruitment() {
                     </div>
                   </div>
                 ) : (
-                  <p style={{ margin: 0, fontSize: "14px", color: "#777", italic: "true" }}>
+                  <p style={{ margin: 0, fontSize: "14px", color: "#aaa" }}>
                     No payment proof screenshot attached.
                   </p>
                 )}
