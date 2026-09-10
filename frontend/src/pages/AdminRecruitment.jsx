@@ -283,8 +283,8 @@ function AdminRecruitment() {
               {/* Header with name and status */}
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "10px" }}>
                 <div>
-                  <h3 style={{ fontSize: "22px", margin: 0, fontWeight: "600", color: "#f4f4f7" }}>{app.name}</h3>
-                  <span style={{ fontSize: "13px", color: "#999" }}>Applied on: {new Date(app.createdAt).toLocaleDateString()}</span>
+                  <h3 style={{ fontSize: "22px", margin: 0, fontWeight: "600", color: "#ffffff" }}>{app.name}</h3>
+                  <span style={{ fontSize: "13px", color: "#c0c0c0" }}>Applied on: {new Date(app.createdAt).toLocaleDateString()}</span>
                 </div>
                 <span
                   style={{
@@ -304,31 +304,31 @@ function AdminRecruitment() {
               {/* Grid detail summary */}
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "15px", margin: "10px 0" }}>
                 <div>
-                  <span style={{ fontSize: "12px", textTransform: "uppercase", color: "#999", fontWeight: "600", display: "block" }}>Email</span>
-                  <a href={`mailto:${app.email}`} style={{ color: "#dfa557", textDecoration: "none", wordBreak: "break-all", fontWeight: "500" }}>{app.email}</a>
+                  <span style={{ fontSize: "11px", textTransform: "uppercase", color: "#c0c0c0", fontWeight: "700", display: "block", letterSpacing: "0.8px", marginBottom: "4px" }}>EMAIL</span>
+                  <a href={`mailto:${app.email}`} style={{ color: "#dfa557", textDecoration: "none", wordBreak: "break-all", fontWeight: "600", fontSize: "14px" }}>{app.email}</a>
                 </div>
                 <div>
-                  <span style={{ fontSize: "12px", textTransform: "uppercase", color: "#999", fontWeight: "600", display: "block" }}>Phone</span>
-                  <span style={{ color: "#f4f4f7", fontWeight: "500" }}>{app.phone}</span>
+                  <span style={{ fontSize: "11px", textTransform: "uppercase", color: "#c0c0c0", fontWeight: "700", display: "block", letterSpacing: "0.8px", marginBottom: "4px" }}>PHONE</span>
+                  <span style={{ color: "#ffffff", fontWeight: "600", fontSize: "14px" }}>{app.phone}</span>
                 </div>
                 <div>
-                  <span style={{ fontSize: "12px", textTransform: "uppercase", color: "#999", fontWeight: "600", display: "block" }}>Department / Branch</span>
-                  <span style={{ color: "#f4f4f7", fontWeight: "500" }}>{app.department || app.branch}</span>
+                  <span style={{ fontSize: "11px", textTransform: "uppercase", color: "#c0c0c0", fontWeight: "700", display: "block", letterSpacing: "0.8px", marginBottom: "4px" }}>BRANCH</span>
+                  <span style={{ color: "#ffffff", fontWeight: "600", fontSize: "14px" }}>{app.department || app.branch}</span>
                 </div>
                 <div>
-                  <span style={{ fontSize: "12px", textTransform: "uppercase", color: "#999", fontWeight: "600", display: "block" }}>Academic Year</span>
-                  <span style={{ color: "#f4f4f7", fontWeight: "500" }}>{app.year}</span>
+                  <span style={{ fontSize: "11px", textTransform: "uppercase", color: "#c0c0c0", fontWeight: "700", display: "block", letterSpacing: "0.8px", marginBottom: "4px" }}>YEAR</span>
+                  <span style={{ color: "#ffffff", fontWeight: "600", fontSize: "14px" }}>{app.year}</span>
                 </div>
                 <div>
-                  <span style={{ fontSize: "12px", textTransform: "uppercase", color: "#999", fontWeight: "600", display: "block" }}>Target Domain</span>
-                  <span style={{ color: "#f4f4f7", fontWeight: "500" }}>{app.domain || app.skills || "N/A"}</span>
+                  <span style={{ fontSize: "11px", textTransform: "uppercase", color: "#c0c0c0", fontWeight: "700", display: "block", letterSpacing: "0.8px", marginBottom: "4px" }}>DOMAIN</span>
+                  <span style={{ color: "#ffffff", fontWeight: "600", fontSize: "14px" }}>{app.domain || app.skills || "N/A"}</span>
                 </div>
               </div>
 
               {/* Message / Why Join */}
               <div style={{ background: "rgba(255, 255, 255, 0.01)", borderRadius: "8px", padding: "16px", borderLeft: "3px solid var(--accent, #0056b3)" }}>
-                <span style={{ fontSize: "12px", textTransform: "uppercase", color: "#999", fontWeight: "600", display: "block", marginBottom: "8px" }}>Why Join / Application Statement</span>
-                <p style={{ margin: 0, fontSize: "15px", color: "#ccc", lineHeight: "1.6", whiteSpace: "pre-wrap" }}>
+                <span style={{ fontSize: "11px", textTransform: "uppercase", color: "#c0c0c0", fontWeight: "700", display: "block", marginBottom: "8px", letterSpacing: "0.8px" }}>WHY JOIN / APPLICATION STATEMENT</span>
+                <p style={{ margin: 0, fontSize: "15px", color: "#ffffff", lineHeight: "1.6", whiteSpace: "pre-wrap" }}>
                   {app.whyJoin || app.message || app.reason || "No details provided."}
                 </p>
               </div>
