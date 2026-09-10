@@ -283,8 +283,8 @@ function AdminRecruitment() {
               {/* Header with name and status */}
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "10px" }}>
                 <div>
-                  <h3 style={{ fontSize: "22px", margin: 0, fontWeight: "600" }}>{app.name}</h3>
-                  <span style={{ fontSize: "13px", color: "#666" }}>Applied on: {new Date(app.createdAt).toLocaleDateString()}</span>
+                  <h3 style={{ fontSize: "22px", margin: 0, fontWeight: "600", color: "#f4f4f7" }}>{app.name}</h3>
+                  <span style={{ fontSize: "13px", color: "#999" }}>Applied on: {new Date(app.createdAt).toLocaleDateString()}</span>
                 </div>
                 <span
                   style={{
@@ -304,30 +304,30 @@ function AdminRecruitment() {
               {/* Grid detail summary */}
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "15px", margin: "10px 0" }}>
                 <div>
-                  <span style={{ fontSize: "12px", textTransform: "uppercase", color: "#666", fontWeight: "600", display: "block" }}>Email</span>
-                  <a href={`mailto:${app.email}`} style={{ color: "var(--accent, #0056b3)", textDecoration: "none", wordBreak: "break-all" }}>{app.email}</a>
+                  <span style={{ fontSize: "12px", textTransform: "uppercase", color: "#999", fontWeight: "600", display: "block" }}>Email</span>
+                  <a href={`mailto:${app.email}`} style={{ color: "#dfa557", textDecoration: "none", wordBreak: "break-all", fontWeight: "500" }}>{app.email}</a>
                 </div>
                 <div>
-                  <span style={{ fontSize: "12px", textTransform: "uppercase", color: "#666", fontWeight: "600", display: "block" }}>Phone</span>
-                  <span>{app.phone}</span>
+                  <span style={{ fontSize: "12px", textTransform: "uppercase", color: "#999", fontWeight: "600", display: "block" }}>Phone</span>
+                  <span style={{ color: "#f4f4f7", fontWeight: "500" }}>{app.phone}</span>
                 </div>
                 <div>
-                  <span style={{ fontSize: "12px", textTransform: "uppercase", color: "#666", fontWeight: "600", display: "block" }}>Department / Branch</span>
-                  <span>{app.department || app.branch}</span>
+                  <span style={{ fontSize: "12px", textTransform: "uppercase", color: "#999", fontWeight: "600", display: "block" }}>Department / Branch</span>
+                  <span style={{ color: "#f4f4f7", fontWeight: "500" }}>{app.department || app.branch}</span>
                 </div>
                 <div>
-                  <span style={{ fontSize: "12px", textTransform: "uppercase", color: "#666", fontWeight: "600", display: "block" }}>Academic Year</span>
-                  <span>{app.year}</span>
+                  <span style={{ fontSize: "12px", textTransform: "uppercase", color: "#999", fontWeight: "600", display: "block" }}>Academic Year</span>
+                  <span style={{ color: "#f4f4f7", fontWeight: "500" }}>{app.year}</span>
                 </div>
                 <div>
-                  <span style={{ fontSize: "12px", textTransform: "uppercase", color: "#666", fontWeight: "600", display: "block" }}>Target Domain</span>
-                  <span>{app.domain || app.skills || "N/A"}</span>
+                  <span style={{ fontSize: "12px", textTransform: "uppercase", color: "#999", fontWeight: "600", display: "block" }}>Target Domain</span>
+                  <span style={{ color: "#f4f4f7", fontWeight: "500" }}>{app.domain || app.skills || "N/A"}</span>
                 </div>
               </div>
 
               {/* Message / Why Join */}
               <div style={{ background: "rgba(255, 255, 255, 0.01)", borderRadius: "8px", padding: "16px", borderLeft: "3px solid var(--accent, #0056b3)" }}>
-                <span style={{ fontSize: "12px", textTransform: "uppercase", color: "#666", fontWeight: "600", display: "block", marginBottom: "8px" }}>Why Join / Application Statement</span>
+                <span style={{ fontSize: "12px", textTransform: "uppercase", color: "#999", fontWeight: "600", display: "block", marginBottom: "8px" }}>Why Join / Application Statement</span>
                 <p style={{ margin: 0, fontSize: "15px", color: "#ccc", lineHeight: "1.6", whiteSpace: "pre-wrap" }}>
                   {app.whyJoin || app.message || app.reason || "No details provided."}
                 </p>
@@ -335,7 +335,7 @@ function AdminRecruitment() {
 
               {/* Payment Proof Display Section */}
               <div style={{ background: app.paymentProof ? "rgba(40, 167, 69, 0.04)" : "rgba(255, 255, 255, 0.01)", borderRadius: "8px", padding: "16px", borderLeft: app.paymentProof ? "3px solid #28a745" : "3px solid #666" }}>
-                <span style={{ fontSize: "12px", textTransform: "uppercase", color: app.paymentProof ? "#28a745" : "#888", fontWeight: "600", display: "block", marginBottom: "8px" }}>
+                <span style={{ fontSize: "12px", textTransform: "uppercase", color: app.paymentProof ? "#28a745" : "#999", fontWeight: "600", display: "block", marginBottom: "8px" }}>
                   {app.paymentProof ? "✓ Attached Payment Proof Screenshot" : "Payment Proof"}
                 </span>
                 {app.paymentProof ? (
@@ -406,7 +406,7 @@ function AdminRecruitment() {
                   <span style={{ fontSize: "14px", fontWeight: "600", color: "#007bff" }}>Schedule Individual Interview</span>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
                     <div style={{ display: "flex", flexDirection: "column", gap: "4px", flex: 1, minWidth: "120px" }}>
-                      <label style={{ fontSize: "11px", color: "#888" }}>Date</label>
+                      <label style={{ fontSize: "11px", color: "#bbb", fontWeight: "600" }}>Date</label>
                       <input
                         type="date"
                         required
@@ -423,7 +423,7 @@ function AdminRecruitment() {
                       />
                     </div>
                     <div style={{ display: "flex", flexDirection: "column", gap: "4px", flex: 1, minWidth: "100px" }}>
-                      <label style={{ fontSize: "11px", color: "#888" }}>Time</label>
+                      <label style={{ fontSize: "11px", color: "#bbb", fontWeight: "600" }}>Time</label>
                       <input
                         type="time"
                         required
@@ -440,7 +440,7 @@ function AdminRecruitment() {
                       />
                     </div>
                     <div style={{ display: "flex", flexDirection: "column", gap: "4px", flex: 2, minWidth: "180px" }}>
-                      <label style={{ fontSize: "11px", color: "#888" }}>Venue / Classroom / Link</label>
+                      <label style={{ fontSize: "11px", color: "#bbb", fontWeight: "600" }}>Venue / Classroom / Link</label>
                       <input
                         type="text"
                         required
