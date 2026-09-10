@@ -98,8 +98,8 @@ function AdminMessages() {
               {/* Header with sender and status */}
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "10px" }}>
                 <div>
-                  <h3 style={{ fontSize: "20px", margin: 0, fontWeight: "600" }}>{msg.name}</h3>
-                  <span style={{ fontSize: "13px", color: "#666" }}>Received on: {new Date(msg.createdAt).toLocaleString()}</span>
+                  <h3 style={{ fontSize: "20px", margin: 0, fontWeight: "600", color: "#ffffff" }}>{msg.name}</h3>
+                  <span style={{ fontSize: "13px", color: "#c0c0c0" }}>Received on: {new Date(msg.createdAt).toLocaleString()}</span>
                 </div>
                 <span
                   style={{
@@ -121,19 +121,19 @@ function AdminMessages() {
               {/* Grid metadata */}
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "12px", margin: "5px 0" }}>
                 <div>
-                  <span style={{ fontSize: "11px", textTransform: "uppercase", color: "#666", fontWeight: "600", display: "block" }}>Email</span>
-                  <a href={`mailto:${msg.email}`} style={{ color: "var(--accent, #0056b3)", textDecoration: "none", wordBreak: "break-all", fontSize: "15px" }}>{msg.email}</a>
+                  <span style={{ fontSize: "11px", textTransform: "uppercase", color: "#c0c0c0", fontWeight: "700", display: "block", letterSpacing: "0.8px", marginBottom: "4px" }}>EMAIL</span>
+                  <a href={`mailto:${msg.email}`} style={{ color: "#dfa557", textDecoration: "none", wordBreak: "break-all", fontSize: "15px", fontWeight: "600" }}>{msg.email}</a>
                 </div>
                 <div>
-                  <span style={{ fontSize: "11px", textTransform: "uppercase", color: "#666", fontWeight: "600", display: "block" }}>Subject</span>
-                  <span style={{ fontSize: "15px", fontWeight: "500" }}>{msg.subject}</span>
+                  <span style={{ fontSize: "11px", textTransform: "uppercase", color: "#c0c0c0", fontWeight: "700", display: "block", letterSpacing: "0.8px", marginBottom: "4px" }}>SUBJECT</span>
+                  <span style={{ fontSize: "15px", fontWeight: "600", color: "#ffffff" }}>{msg.subject}</span>
                 </div>
               </div>
 
               {/* Message text */}
               <div style={{ background: "rgba(255, 255, 255, 0.01)", borderRadius: "8px", padding: "16px", borderLeft: "3px solid rgba(255,255,255,0.2)" }}>
-                <span style={{ fontSize: "11px", textTransform: "uppercase", color: "#666", fontWeight: "600", display: "block", marginBottom: "8px" }}>Message</span>
-                <p style={{ margin: 0, fontSize: "15px", color: "#ccc", lineHeight: "1.6", whiteSpace: "pre-wrap" }}>
+                <span style={{ fontSize: "11px", textTransform: "uppercase", color: "#c0c0c0", fontWeight: "700", display: "block", marginBottom: "8px", letterSpacing: "0.8px" }}>MESSAGE</span>
+                <p style={{ margin: 0, fontSize: "15px", color: "#ffffff", lineHeight: "1.6", whiteSpace: "pre-wrap" }}>
                   {msg.message}
                 </p>
               </div>
@@ -143,9 +143,9 @@ function AdminMessages() {
                 <div style={{ background: "rgba(40, 167, 69, 0.03)", borderRadius: "8px", padding: "16px", borderLeft: "3px solid #28a745" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
                     <span style={{ fontSize: "11px", textTransform: "uppercase", color: "#28a745", fontWeight: "600" }}>Your Reply</span>
-                    {msg.repliedAt && <span style={{ fontSize: "11px", color: "#666" }}>Replied on: {new Date(msg.repliedAt).toLocaleString()}</span>}
+                    {msg.repliedAt && <span style={{ fontSize: "11px", color: "#c0c0c0" }}>Replied on: {new Date(msg.repliedAt).toLocaleString()}</span>}
                   </div>
-                  <p style={{ margin: 0, fontSize: "15px", color: "#ccc", lineHeight: "1.6", whiteSpace: "pre-wrap" }}>
+                  <p style={{ margin: 0, fontSize: "15px", color: "#ffffff", lineHeight: "1.6", whiteSpace: "pre-wrap" }}>
                     {msg.replyText}
                   </p>
                 </div>
@@ -154,7 +154,7 @@ function AdminMessages() {
               {/* Inline Reply Form */}
               {activeReplyId === msg._id && (
                 <div style={{ marginTop: "10px", display: "flex", flexDirection: "column", gap: "10px" }}>
-                  <label style={{ fontSize: "12px", textTransform: "uppercase", color: "#888", fontWeight: "600" }}>Compose Email Reply</label>
+                  <label style={{ fontSize: "12px", textTransform: "uppercase", color: "#c0c0c0", fontWeight: "700", letterSpacing: "0.8px" }}>Compose Email Reply</label>
                   <textarea
                     rows="5"
                     value={replyInputs[msg._id] || ""}

@@ -179,7 +179,7 @@ function AdminRecruitment() {
           
           <form onSubmit={handleBulkSchedule} style={{ display: "flex", flexWrap: "wrap", gap: "15px", alignItems: "flex-end" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: "6px", minWidth: "150px", flex: 1 }}>
-              <label style={{ fontSize: "12px", color: "#888", fontWeight: "600" }}>DATE</label>
+              <label style={{ fontSize: "12px", color: "#c0c0c0", fontWeight: "700", letterSpacing: "0.8px" }}>DATE</label>
               <input
                 type="date"
                 required
@@ -197,7 +197,7 @@ function AdminRecruitment() {
             </div>
 
             <div style={{ display: "flex", flexDirection: "column", gap: "6px", minWidth: "120px", flex: 1 }}>
-              <label style={{ fontSize: "12px", color: "#888", fontWeight: "600" }}>TIME</label>
+              <label style={{ fontSize: "12px", color: "#c0c0c0", fontWeight: "700", letterSpacing: "0.8px" }}>TIME</label>
               <input
                 type="time"
                 required
@@ -215,7 +215,7 @@ function AdminRecruitment() {
             </div>
 
             <div style={{ display: "flex", flexDirection: "column", gap: "6px", minWidth: "220px", flex: 2 }}>
-              <label style={{ fontSize: "12px", color: "#888", fontWeight: "600" }}>VENUE / CLASSROOM / BUILDING</label>
+              <label style={{ fontSize: "12px", color: "#c0c0c0", fontWeight: "700", letterSpacing: "0.8px" }}>VENUE / CLASSROOM / BUILDING</label>
               <input
                 type="text"
                 required
