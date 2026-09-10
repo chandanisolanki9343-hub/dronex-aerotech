@@ -333,48 +333,6 @@ function AdminRecruitment() {
                 </p>
               </div>
 
-              {/* Payment Proof Display Section */}
-              <div style={{ background: app.paymentProof ? "rgba(40, 167, 69, 0.04)" : "rgba(255, 255, 255, 0.01)", borderRadius: "8px", padding: "16px", borderLeft: app.paymentProof ? "3px solid #28a745" : "3px solid #666" }}>
-                <span style={{ fontSize: "12px", textTransform: "uppercase", color: app.paymentProof ? "#28a745" : "#999", fontWeight: "600", display: "block", marginBottom: "8px" }}>
-                  {app.paymentProof ? "✓ Attached Payment Proof Screenshot" : "Payment Proof"}
-                </span>
-                {app.paymentProof ? (
-                  <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-                    <a href={app.paymentProof} target="_blank" rel="noreferrer">
-                      <img
-                        src={app.paymentProof}
-                        alt="Payment Proof Screenshot"
-                        style={{ width: "100px", height: "100px", objectFit: "cover", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.2)", cursor: "pointer" }}
-                      />
-                    </a>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                      <span style={{ fontSize: "13px", color: "#aaa" }}>Screenshot PNG/JPG uploaded by applicant</span>
-                      <a
-                        href={app.paymentProof}
-                        target="_blank"
-                        rel="noreferrer"
-                        style={{
-                          display: "inline-block",
-                          background: "#28a745",
-                          color: "white",
-                          padding: "6px 14px",
-                          borderRadius: "6px",
-                          fontSize: "12px",
-                          fontWeight: "600",
-                          textDecoration: "none",
-                          width: "fit-content"
-                        }}
-                      >
-                        🔍 View Full Image
-                      </a>
-                    </div>
-                  </div>
-                ) : (
-                  <p style={{ margin: 0, fontSize: "14px", color: "#aaa" }}>
-                    No payment proof screenshot attached.
-                  </p>
-                )}
-              </div>
 
               {/* Display interview details if scheduled */}
               {(app.status === "Interview Scheduled" || (app.interviewDate && app.interviewTime)) && (
