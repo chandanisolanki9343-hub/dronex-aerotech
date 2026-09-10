@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
 
 function AdminRecruitment() {
   const [applications, setApplications] = useState([]);
@@ -60,71 +58,6 @@ function AdminRecruitment() {
     window.open(`https://wa.me/${cleaned}?text=${encoded}`, "_blank");
   };
 
-  const generatePDF = () => {
-    const doc = new jsPDF();
-    const today = new Date().toLocaleDateString("en-IN", { day: "2-digit", month: "long", year: "numeric" });
-
-    // Header
-    doc.setFillColor(9, 9, 11);
-    doc.rect(0, 0, 210, 40, "F");
-    doc.setTextColor(223, 165, 87);
-    doc.setFontSize(20);
-    doc.setFont("helvetica", "bold");
-    doc.text("DRONEX AEROTECH", 105, 16, { align: "center" });
-    doc.setFontSize(11);
-    doc.setTextColor(180, 180, 180);
-    doc.text("Pending Recruitment Applications Report", 105, 25, { align: "center" });
-    doc.setFontSize(9);
-    doc.text(`Generated on: ${today}`, 105, 33, { align: "center" });
-
-    // Summary
-    doc.setTextColor(50, 50, 50);
-    doc.setFontSize(11);
-    doc.setFont("helvetica", "normal");
-    doc.text(`Total Pending Applicants: ${pendingApps.length}`, 14, 52);
-
-    // Table
-    autoTable(doc, {
-      startY: 58,
-      head: [["#", "Name", "Phone", "Branch", "Year", "Domain", "Applied On"]],
-      body: pendingApps.map((app, i) => [
-        i + 1,
-        app.name || "-",
-        app.phone || "-",
-        app.branch || app.department || "-",
-        app.year || "-",
-        app.domain || "-",
-        app.createdAt ? new Date(app.createdAt).toLocaleDateString("en-IN") : "-"
-      ]),
-      headStyles: {
-        fillColor: [9, 9, 11],
-        textColor: [223, 165, 87],
-        fontStyle: "bold",
-        fontSize: 10
-      },
-      alternateRowStyles: { fillColor: [245, 245, 245] },
-      styles: { fontSize: 9, cellPadding: 4 },
-      columnStyles: {
-        0: { cellWidth: 8 },
-        1: { cellWidth: 35 },
-        2: { cellWidth: 30 },
-        3: { cellWidth: 25 },
-        4: { cellWidth: 18 },
-        5: { cellWidth: 40 },
-        6: { cellWidth: 28 }
-      }
-    });
-
-    // Footer
-    const pageCount = doc.internal.getNumberOfPages();
-    for (let i = 1; i <= pageCount; i++) {
-      doc.setPage(i);
-      doc.setFontSize(8);
-      doc.setTextColor(150, 150, 150);
-      doc.text(`Page ${i} of ${pageCount} — Dronex AeroTech Confidential`, 105, 290, { align: "center" });
-    }
-
-    doc.save(`Dronex-Pending-Applicants-${today.replace(/ /g, "-")}.pdf`);
   };
 
   const handleBulkSchedule = async (e) => {
@@ -248,27 +181,6 @@ function AdminRecruitment() {
 
         {/* Actions Bar */}
         <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
-          {/* Download PDF Button */}
-          <button
-            onClick={generatePDF}
-            style={{
-              display: "flex", alignItems: "center", gap: "8px",
-              background: "linear-gradient(135deg, #dfa557, #b87b28)",
-              color: "#09090b", border: "none", padding: "10px 20px",
-              borderRadius: "10px", cursor: "pointer", fontWeight: "700",
-              fontSize: "14px", boxShadow: "0 4px 15px rgba(223,165,87,0.35)"
-            }}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-              <line x1="12" y1="18" x2="12" y2="12"></line>
-              <line x1="9" y1="15" x2="12" y2="18"></line>
-              <line x1="15" y1="15" x2="12" y2="18"></line>
-            </svg>
-            Download PDF ({pendingApps.length})
-          </button>
-
           {/* WhatsApp Bulk Send Button */}
           <button
             onClick={() => setShowWAModal(true)}
@@ -338,34 +250,20 @@ function AdminRecruitment() {
               />
             </div>
 
-            {/* Action Bar in Modal */}
+            {/* Copy All Numbers */}
             {pendingApps.length > 0 && (
-              <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-                <button
-                  onClick={copyAllNumbers}
-                  style={{
-                    background: copied ? "rgba(40,167,69,0.2)" : "rgba(255,255,255,0.05)",
-                    border: `1px solid ${copied ? "#28a745" : "rgba(255,255,255,0.1)"}`,
-                    color: copied ? "#28a745" : "#ccc", padding: "10px 18px",
-                    borderRadius: "8px", cursor: "pointer", fontWeight: "600", fontSize: "13px",
-                    transition: "all 0.3s"
-                  }}
-                >
-                  {copied ? "✅ Copied!" : "📋 Copy All Phone Numbers"}
-                </button>
-                <button
-                  onClick={generatePDF}
-                  style={{
-                    background: "rgba(223,165,87,0.15)",
-                    border: "1px solid rgba(223,165,87,0.4)",
-                    color: "#dfa557", padding: "10px 18px",
-                    borderRadius: "8px", cursor: "pointer", fontWeight: "600", fontSize: "13px",
-                    display: "flex", alignItems: "center", gap: "6px"
-                  }}
-                >
-                  📄 Download Pending List PDF
-                </button>
-              </div>
+              <button
+                onClick={copyAllNumbers}
+                style={{
+                  background: copied ? "rgba(40,167,69,0.2)" : "rgba(255,255,255,0.05)",
+                  border: `1px solid ${copied ? "#28a745" : "rgba(255,255,255,0.1)"}`,
+                  color: copied ? "#28a745" : "#ccc", padding: "10px 18px",
+                  borderRadius: "8px", cursor: "pointer", fontWeight: "600", fontSize: "13px",
+                  transition: "all 0.3s", alignSelf: "flex-start"
+                }}
+              >
+                {copied ? "✅ Copied!" : "📋 Copy All Phone Numbers"}
+              </button>
             )}
 
             {/* Student List */}
