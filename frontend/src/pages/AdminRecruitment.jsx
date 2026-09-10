@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 function AdminRecruitment() {
   const [applications, setApplications] = useState([]);
@@ -9,6 +11,13 @@ function AdminRecruitment() {
   const [bulkTime, setBulkTime] = useState("");
   const [bulkLocation, setBulkLocation] = useState("");
   const [bulkSubmitting, setBulkSubmitting] = useState(false);
+
+  // WhatsApp Bulk Send states
+  const [showWAModal, setShowWAModal] = useState(false);
+  const [waMessage, setWaMessage] = useState(
+    `Namaste! 🙏\n\nAapne Dronex AeroTech ke liye apply kiya tha. Hum aapko apne official WhatsApp group mein invite karna chahte hain jahan aapko club ki saari updates, events aur announcements milenge.\n\nGroup join karne ke liye neeche diye link par click karein:\n👉 https://chat.whatsapp.com/HAcHOIKY8Yu9U2BSGf3Yrv\n\nDronex AeroTech Team 🚁`
+  );
+  const [copied, setCopied] = useState(false);
 
   // Individual Scheduler states
   const [schedulingId, setSchedulingId] = useState(null);
@@ -32,6 +41,91 @@ function AdminRecruitment() {
 
   // Count candidates whose status is "Approved"
   const approvedCount = applications.filter((app) => app.status === "Approved").length;
+
+  // Pending students with phone numbers
+  const pendingApps = applications.filter((app) => app.status === "Pending" || !app.status);
+
+  const copyAllNumbers = () => {
+    const numbers = pendingApps.map((a) => a.phone).filter(Boolean).join("\n");
+    navigator.clipboard.writeText(numbers);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
+
+  const openWhatsApp = (phone, message) => {
+    // Clean phone number — remove spaces, dashes, +
+    let cleaned = phone.replace(/[\s\-().]/g, "");
+    if (!cleaned.startsWith("+")) cleaned = "+91" + cleaned.replace(/^0/, "");
+    const encoded = encodeURIComponent(message);
+    window.open(`https://wa.me/${cleaned}?text=${encoded}`, "_blank");
+  };
+
+  const generatePDF = () => {
+    const doc = new jsPDF();
+    const today = new Date().toLocaleDateString("en-IN", { day: "2-digit", month: "long", year: "numeric" });
+
+    // Header
+    doc.setFillColor(9, 9, 11);
+    doc.rect(0, 0, 210, 40, "F");
+    doc.setTextColor(223, 165, 87);
+    doc.setFontSize(20);
+    doc.setFont("helvetica", "bold");
+    doc.text("DRONEX AEROTECH", 105, 16, { align: "center" });
+    doc.setFontSize(11);
+    doc.setTextColor(180, 180, 180);
+    doc.text("Pending Recruitment Applications Report", 105, 25, { align: "center" });
+    doc.setFontSize(9);
+    doc.text(`Generated on: ${today}`, 105, 33, { align: "center" });
+
+    // Summary
+    doc.setTextColor(50, 50, 50);
+    doc.setFontSize(11);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Total Pending Applicants: ${pendingApps.length}`, 14, 52);
+
+    // Table
+    autoTable(doc, {
+      startY: 58,
+      head: [["#", "Name", "Phone", "Branch", "Year", "Domain", "Applied On"]],
+      body: pendingApps.map((app, i) => [
+        i + 1,
+        app.name || "-",
+        app.phone || "-",
+        app.branch || app.department || "-",
+        app.year || "-",
+        app.domain || "-",
+        app.createdAt ? new Date(app.createdAt).toLocaleDateString("en-IN") : "-"
+      ]),
+      headStyles: {
+        fillColor: [9, 9, 11],
+        textColor: [223, 165, 87],
+        fontStyle: "bold",
+        fontSize: 10
+      },
+      alternateRowStyles: { fillColor: [245, 245, 245] },
+      styles: { fontSize: 9, cellPadding: 4 },
+      columnStyles: {
+        0: { cellWidth: 8 },
+        1: { cellWidth: 35 },
+        2: { cellWidth: 30 },
+        3: { cellWidth: 25 },
+        4: { cellWidth: 18 },
+        5: { cellWidth: 40 },
+        6: { cellWidth: 28 }
+      }
+    });
+
+    // Footer
+    const pageCount = doc.internal.getNumberOfPages();
+    for (let i = 1; i <= pageCount; i++) {
+      doc.setPage(i);
+      doc.setFontSize(8);
+      doc.setTextColor(150, 150, 150);
+      doc.text(`Page ${i} of ${pageCount} — Dronex AeroTech Confidential`, 105, 290, { align: "center" });
+    }
+
+    doc.save(`Dronex-Pending-Applicants-${today.replace(/ /g, "-")}.pdf`);
+  };
 
   const handleBulkSchedule = async (e) => {
     e.preventDefault();
@@ -152,15 +246,164 @@ function AdminRecruitment() {
           <p style={{ color: "#aaa", marginTop: "5px" }}>Manage, review, approve, or reject applicants for Dronex AeroTech.</p>
         </div>
 
-        {/* QR Code Quick Download Card for Admin */}
-        <div style={{ display: "flex", alignItems: "center", gap: "15px", background: "rgba(255,255,255,0.03)", padding: "12px 20px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.08)" }}>
-          <img src="/recruitment-qr.png" alt="Recruitment QR Code" style={{ width: "50px", height: "50px", background: "white", padding: "4px", borderRadius: "6px" }} />
-          <div>
-            <span style={{ fontSize: "12px", fontWeight: "600", color: "#ccc", display: "block" }}>Recruitment QR Code</span>
-            <a href="/recruitment-qr.png" download="Dronex-Recruitment-QR.png" style={{ color: "#007bff", fontSize: "13px", fontWeight: "600", textDecoration: "none" }}>📥 Download PNG</a>
+        {/* Actions Bar */}
+        <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
+          {/* Download PDF Button */}
+          <button
+            onClick={generatePDF}
+            style={{
+              display: "flex", alignItems: "center", gap: "8px",
+              background: "linear-gradient(135deg, #dfa557, #b87b28)",
+              color: "#09090b", border: "none", padding: "10px 20px",
+              borderRadius: "10px", cursor: "pointer", fontWeight: "700",
+              fontSize: "14px", boxShadow: "0 4px 15px rgba(223,165,87,0.35)"
+            }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="12" y1="18" x2="12" y2="12"></line>
+              <line x1="9" y1="15" x2="12" y2="18"></line>
+              <line x1="15" y1="15" x2="12" y2="18"></line>
+            </svg>
+            Download PDF ({pendingApps.length})
+          </button>
+
+          {/* WhatsApp Bulk Send Button */}
+          <button
+            onClick={() => setShowWAModal(true)}
+            style={{
+              display: "flex", alignItems: "center", gap: "8px",
+              background: "linear-gradient(135deg, #25D366, #128C44)",
+              color: "white", border: "none", padding: "10px 20px",
+              borderRadius: "10px", cursor: "pointer", fontWeight: "700",
+              fontSize: "14px", boxShadow: "0 4px 15px rgba(37,211,102,0.35)"
+            }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="white" width="18" height="18">
+              <path d="M16 0C7.163 0 0 7.163 0 16c0 2.822.736 5.476 2.027 7.782L0 32l8.454-2.012A15.93 15.93 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 01-6.76-1.848l-.485-.287-5.02 1.195 1.235-4.896-.317-.503A13.267 13.267 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.274-9.861c-.398-.199-2.354-1.161-2.719-1.294-.365-.132-.631-.198-.897.2-.266.397-1.03 1.293-1.262 1.56-.232.265-.465.298-.863.099-.398-.2-1.68-.619-3.2-1.974-1.183-1.054-1.98-2.355-2.213-2.752-.232-.398-.025-.613.175-.811.179-.178.398-.465.597-.697.199-.232.265-.398.398-.664.132-.265.066-.497-.033-.696-.1-.2-.897-2.163-1.23-2.96-.324-.778-.653-.672-.897-.684l-.764-.013c-.265 0-.696.1-1.061.497-.365.398-1.394 1.362-1.394 3.32 0 1.959 1.427 3.851 1.626 4.116.2.266 2.806 4.283 6.797 6.007 4.002 1.726 4.002 1.15 4.724 1.077.722-.073 2.354-.962 2.686-1.892.332-.929.332-1.726.232-1.892-.099-.166-.365-.265-.763-.464z"/>
+            </svg>
+            WhatsApp Pending ({pendingApps.length})
+          </button>
+
+          {/* QR Code Quick Download Card for Admin */}
+          <div style={{ display: "flex", alignItems: "center", gap: "15px", background: "rgba(255,255,255,0.03)", padding: "12px 20px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.08)" }}>
+            <img src="/recruitment-qr.png" alt="Recruitment QR Code" style={{ width: "50px", height: "50px", background: "white", padding: "4px", borderRadius: "6px" }} />
+            <div>
+              <span style={{ fontSize: "12px", fontWeight: "600", color: "#ccc", display: "block" }}>Recruitment QR Code</span>
+              <a href="/recruitment-qr.png" download="Dronex-Recruitment-QR.png" style={{ color: "#007bff", fontSize: "13px", fontWeight: "600", textDecoration: "none" }}>📥 Download PNG</a>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* ── WhatsApp Bulk Send Modal ── */}
+      {showWAModal && (
+        <div style={{
+          position: "fixed", inset: 0, background: "rgba(0,0,0,0.85)",
+          zIndex: 1000, display: "flex", alignItems: "center", justifyContent: "center",
+          padding: "20px"
+        }}>
+          <div style={{
+            background: "#111", border: "1px solid rgba(255,255,255,0.1)",
+            borderRadius: "18px", padding: "32px", width: "100%", maxWidth: "700px",
+            maxHeight: "90vh", overflowY: "auto", display: "flex", flexDirection: "column", gap: "20px"
+          }}>
+            {/* Modal Header */}
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div>
+                <h2 style={{ color: "#25D366", fontSize: "22px", fontWeight: "700", margin: 0 }}>📱 Send WhatsApp to Pending Students</h2>
+                <p style={{ color: "#aaa", fontSize: "13px", marginTop: "4px" }}>{pendingApps.length} pending applicant(s) found</p>
+              </div>
+              <button onClick={() => setShowWAModal(false)} style={{
+                background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)",
+                color: "#fff", width: "36px", height: "36px", borderRadius: "50%",
+                cursor: "pointer", fontSize: "18px", display: "flex", alignItems: "center", justifyContent: "center"
+              }}>✕</button>
+            </div>
+
+            {/* Message Editor */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+              <label style={{ fontSize: "12px", color: "#c0c0c0", fontWeight: "700", letterSpacing: "0.8px", textTransform: "uppercase" }}>Message Template (Edit karein)</label>
+              <textarea
+                rows={9}
+                value={waMessage}
+                onChange={(e) => setWaMessage(e.target.value)}
+                style={{
+                  width: "100%", padding: "14px", borderRadius: "10px",
+                  background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)",
+                  color: "#ffffff", fontSize: "14px", fontFamily: "monospace",
+                  lineHeight: "1.6", resize: "vertical", outline: "none"
+                }}
+              />
+            </div>
+
+            {/* Action Bar in Modal */}
+            {pendingApps.length > 0 && (
+              <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                <button
+                  onClick={copyAllNumbers}
+                  style={{
+                    background: copied ? "rgba(40,167,69,0.2)" : "rgba(255,255,255,0.05)",
+                    border: `1px solid ${copied ? "#28a745" : "rgba(255,255,255,0.1)"}`,
+                    color: copied ? "#28a745" : "#ccc", padding: "10px 18px",
+                    borderRadius: "8px", cursor: "pointer", fontWeight: "600", fontSize: "13px",
+                    transition: "all 0.3s"
+                  }}
+                >
+                  {copied ? "✅ Copied!" : "📋 Copy All Phone Numbers"}
+                </button>
+                <button
+                  onClick={generatePDF}
+                  style={{
+                    background: "rgba(223,165,87,0.15)",
+                    border: "1px solid rgba(223,165,87,0.4)",
+                    color: "#dfa557", padding: "10px 18px",
+                    borderRadius: "8px", cursor: "pointer", fontWeight: "600", fontSize: "13px",
+                    display: "flex", alignItems: "center", gap: "6px"
+                  }}
+                >
+                  📄 Download Pending List PDF
+                </button>
+              </div>
+            )}
+
+            {/* Student List */}
+            {pendingApps.length === 0 ? (
+              <p style={{ textAlign: "center", color: "#aaa", padding: "30px" }}>No pending applicants found.</p>
+            ) : (
+              <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                {pendingApps.map((app) => (
+                  <div key={app._id} style={{
+                    display: "flex", alignItems: "center", justifyContent: "space-between",
+                    background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)",
+                    borderRadius: "10px", padding: "14px 18px", gap: "12px", flexWrap: "wrap"
+                  }}>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                      <span style={{ color: "#ffffff", fontWeight: "600", fontSize: "15px" }}>{app.name}</span>
+                      <span style={{ color: "#c0c0c0", fontSize: "13px" }}>{app.phone} &nbsp;|&nbsp; {app.branch} &nbsp;|&nbsp; {app.domain}</span>
+                    </div>
+                    <button
+                      onClick={() => openWhatsApp(app.phone, waMessage)}
+                      style={{
+                        background: "#25D366", color: "white", border: "none",
+                        padding: "9px 18px", borderRadius: "8px", cursor: "pointer",
+                        fontWeight: "700", fontSize: "13px", display: "flex",
+                        alignItems: "center", gap: "6px", whiteSpace: "nowrap"
+                      }}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="white" width="14" height="14">
+                        <path d="M16 0C7.163 0 0 7.163 0 16c0 2.822.736 5.476 2.027 7.782L0 32l8.454-2.012A15.93 15.93 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm7.274 19.472c-.398-.199-2.354-1.161-2.719-1.294-.365-.132-.631-.198-.897.2-.266.397-1.03 1.293-1.262 1.56-.232.265-.465.298-.863.099-.398-.2-1.68-.619-3.2-1.974-1.183-1.054-1.98-2.355-2.213-2.752-.232-.398-.025-.613.175-.811.179-.178.398-.465.597-.697.199-.232.265-.398.398-.664.132-.265.066-.497-.033-.696-.1-.2-.897-2.163-1.23-2.96-.324-.778-.653-.672-.897-.684l-.764-.013c-.265 0-.696.1-1.061.497-.365.398-1.394 1.362-1.394 3.32 0 1.959 1.427 3.851 1.626 4.116.2.266 2.806 4.283 6.797 6.007 4.002 1.726 4.002 1.15 4.724 1.077.722-.073 2.354-.962 2.686-1.892.332-.929.332-1.726.232-1.892-.099-.166-.365-.265-.763-.464z"/>
+                      </svg>
+                      Send WhatsApp
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Batch Interview Scheduler Panel */}
       {applications.length > 0 && (
