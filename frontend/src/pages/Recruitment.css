@@ -552,61 +552,6 @@
   margin: 0;
 }
 
-.closed-hindi-notice {
-  background: rgba(223, 165, 87, 0.08);
-  border: 1px solid rgba(223, 165, 87, 0.25);
-  border-radius: 12px;
-  padding: 16px 22px;
-  color: #f0d6b2;
-  font-size: 14.5px;
-  line-height: 1.6;
-  max-width: 700px;
-  text-align: left;
-}
-
-.closed-info-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  width: 100%;
-  margin-top: 6px;
-}
-
-.closed-info-box {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  padding: 22px 18px;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  transition: transform 0.25s ease, border-color 0.25s ease;
-}
-
-.closed-info-box:hover {
-  transform: translateY(-3px);
-  border-color: rgba(223, 165, 87, 0.35);
-}
-
-.closed-info-icon {
-  font-size: 24px;
-}
-
-.closed-info-box h4 {
-  color: #ffffff;
-  font-size: 15px;
-  font-weight: 700;
-  margin: 0;
-}
-
-.closed-info-box p {
-  color: #9999a5;
-  font-size: 13px;
-  line-height: 1.5;
-  margin: 0;
-}
-
 .closed-action-buttons {
   display: flex;
   gap: 16px;
@@ -626,10 +571,6 @@
 
   .closed-sub-heading {
     font-size: 14px;
-  }
-
-  .closed-info-grid {
-    grid-template-columns: 1fr;
   }
 
   .closed-action-buttons {
