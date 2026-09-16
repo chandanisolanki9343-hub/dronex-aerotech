@@ -192,46 +192,102 @@ export const updateApplicationStatus = async (req, res) => {
         });
       }
 
-      await transporter.sendMail({
-        from: process.env.EMAIL_USER,
-        to: application.email,
-        subject: "Congratulations! You are selected for Dronex AeroTech 🎉",
-        html: `
-          <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff; color: #333333;">
-            <div style="text-align: center; border-bottom: 2px solid #0056b3; padding-bottom: 15px; margin-bottom: 25px;">
-              <h2 style="color: #0056b3; margin: 0; font-size: 24px; letter-spacing: 1px;">CONGRATULATIONS!</h2>
-              <p style="font-size: 14px; color: #666666; margin: 5px 0 0 0;">Dronex AeroTech Club Membership</p>
-            </div>
-            
-            <div style="line-height: 1.6; font-size: 16px;">
-              <p>Dear <strong>${application.name}</strong>,</p>
-              
-              <p>We are absolutely thrilled to inform you that your application to join <strong>Dronex AeroTech</strong> has been <strong>Approved</strong>! 🎉</p>
-              
-              <p>Our recruitment board was highly impressed by your skills and enthusiasm. You are now officially a member of Dronex AeroTech, working under the <strong>${application.domain || application.skills || "Technical"}</strong> department.</p>
-              
-              <div style="background-color: #f0f7ff; border-left: 4px solid #0056b3; padding: 15px; margin: 20px 0; border-radius: 0 4px 4px 0;">
-                <h4 style="margin: 0 0 10px 0; color: #0056b3;">Next Steps</h4>
-                <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #555555;">
-                  <li style="margin-bottom: 8px;"><strong>Onboarding Session:</strong> We will send you an invite for the upcoming induction meeting soon.</li>
-                  <li style="margin-bottom: 8px;"><strong>Slack/Discord Channels:</strong> You will receive a link to join our official communication channels shortly.</li>
-                  <li style="margin-bottom: 0;"><strong>Hardware & Projects:</strong> Get ready to collaborate on building next-generation drones and fixed-wing aircraft!</li>
-                </ul>
+      try {
+        await transporter.sendMail({
+          from: process.env.EMAIL_USER,
+          to: application.email,
+          subject: "Congratulations! You are selected for Dronex AeroTech 🎉",
+          html: `
+            <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff; color: #333333;">
+              <div style="text-align: center; border-bottom: 2px solid #0056b3; padding-bottom: 15px; margin-bottom: 25px;">
+                <h2 style="color: #0056b3; margin: 0; font-size: 24px; letter-spacing: 1px;">CONGRATULATIONS!</h2>
+                <p style="font-size: 14px; color: #666666; margin: 5px 0 0 0;">Dronex AeroTech Club Membership</p>
               </div>
               
-              <p>Once again, welcome to the team! We are excited to build the future of flight together with you.</p>
+              <div style="line-height: 1.6; font-size: 16px;">
+                <p>Dear <strong>${application.name || application.fullName || "Applicant"}</strong>,</p>
+                
+                <p>We are absolutely thrilled to inform you that your application to join <strong>Dronex AeroTech</strong> has been <strong>Approved</strong>! 🎉</p>
+                
+                <p>Our recruitment board was highly impressed by your skills and enthusiasm. You are now officially a member of Dronex AeroTech, working under the <strong>${application.domain || application.skills || "Technical"}</strong> department.</p>
+                
+                <div style="background-color: #f0f7ff; border-left: 4px solid #0056b3; padding: 15px; margin: 20px 0; border-radius: 0 4px 4px 0;">
+                  <h4 style="margin: 0 0 10px 0; color: #0056b3;">Next Steps</h4>
+                  <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #555555;">
+                    <li style="margin-bottom: 8px;"><strong>Onboarding Session:</strong> We will send you an invite for the upcoming induction meeting soon.</li>
+                    <li style="margin-bottom: 8px;"><strong>Slack/Discord Channels:</strong> You will receive a link to join our official communication channels shortly.</li>
+                    <li style="margin-bottom: 0;"><strong>Hardware & Projects:</strong> Get ready to collaborate on building next-generation drones and fixed-wing aircraft!</li>
+                  </ul>
+                </div>
+                
+                <p>Once again, welcome to the team! We are excited to build the future of flight together with you.</p>
+              </div>
+              
+              <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e0e0e0; font-size: 14px; color: #777777;">
+                <p style="margin: 0 0 5px 0;">Clear skies and happy flying,</p>
+                <p style="margin: 0; font-weight: bold; color: #0056b3;">Parth Soni</p>
+                <p style="margin: 0; font-size: 13px; color: #666666;">Club President, Dronex AeroTech</p>
+              </div>
             </div>
-            
-            <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e0e0e0; font-size: 14px; color: #777777;">
-              <p style="margin: 0 0 5px 0;">Clear skies and happy flying,</p>
-              <p style="margin: 0; font-weight: bold; color: #0056b3;">Parth Soni</p>
-              <p style="margin: 0; font-size: 13px; color: #666666;">Club President, Dronex AeroTech</p>
-            </div>
-          </div>
-        `,
-      }).catch((mailError) => {
+          `,
+        });
+      } catch (mailError) {
         console.error("Nodemailer failed to send selection email to candidate:", mailError.message);
-      });
+      }
+    }
+
+    // Send polite & encouraging rejection email to candidate if status is updated to "Rejected"
+    if (req.body.status === "Rejected" && application) {
+      try {
+        await transporter.sendMail({
+          from: process.env.EMAIL_USER,
+          to: application.email,
+          subject: "Application Status Update - Dronex AeroTech",
+          html: `
+            <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff; color: #333333;">
+              <div style="text-align: center; border-bottom: 2px solid #dc3545; padding-bottom: 15px; margin-bottom: 25px;">
+                <h2 style="color: #1a202c; margin: 0; font-size: 24px; letter-spacing: 1px;">DRONEX AEROTECH</h2>
+                <p style="font-size: 14px; color: #666666; margin: 5px 0 0 0;">Recruitment & Membership Update</p>
+              </div>
+              
+              <div style="line-height: 1.6; font-size: 15px; color: #444444;">
+                <p>Dear <strong>${application.name || application.fullName || "Applicant"}</strong>,</p>
+                
+                <p>Thank you for your interest in joining <strong>Dronex AeroTech</strong> and for taking the time to apply for the <strong>${application.domain || application.skills || "club"}</strong> domain during our recent recruitment drive.</p>
+                
+                <p>We received an overwhelming number of applications from many talented and enthusiastic students this cycle. Every submission was reviewed with great care by our technical and recruitment board.</p>
+                
+                <div style="background-color: #fff8f8; border-left: 4px solid #dc3545; padding: 15px 18px; margin: 20px 0; border-radius: 0 6px 6px 0;">
+                  <p style="margin: 0; color: #495057; font-size: 15px; line-height: 1.6;">
+                    Due to limited available slots and specific team requirements for this semester, we regret to inform you that we are <strong>unable to offer you a position</strong> in the club for the current recruitment cycle.
+                  </p>
+                </div>
+                
+                <p>Please know that this decision was difficult given the high caliber of candidates, and not being selected is in no way a reflection of your potential or skills.</p>
+                
+                <div style="background-color: #f8f9fa; border: 1px dashed #ced4da; padding: 16px; margin: 20px 0; border-radius: 6px;">
+                  <h4 style="margin: 0 0 8px 0; color: #0056b3; font-size: 15px;">🚀 Keep Building & Stay Connected:</h4>
+                  <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #555555; line-height: 1.6;">
+                    <li style="margin-bottom: 6px;">Keep developing your passion for drone technology, aeronautics, robotics, and design.</li>
+                    <li style="margin-bottom: 6px;">You are warmly invited to participate in our open club workshops, flight showcases, and upcoming technical events.</li>
+                    <li style="margin-bottom: 0;">We strongly encourage you to re-apply in our future recruitment drives!</li>
+                  </ul>
+                </div>
+                
+                <p>We truly appreciate your enthusiasm for aerospace technology and wish you the very best in your academic journey and future projects.</p>
+              </div>
+              
+              <div style="margin-top: 35px; padding-top: 20px; border-top: 1px solid #e0e0e0; font-size: 14px; color: #777777;">
+                <p style="margin: 0 0 5px 0;">Best regards,</p>
+                <p style="margin: 0; font-weight: bold; color: #1a202c;">The Dronex AeroTech Recruitment Team</p>
+                <p style="margin: 3px 0 0 0; font-size: 12px; color: #888888;">Dronex AeroTech Club &bull; MITS Gwalior</p>
+              </div>
+            </div>
+          `,
+        });
+      } catch (mailError) {
+        console.error("Nodemailer failed to send rejection email to candidate:", mailError.message);
+      }
     }
 
     res.status(200).json({

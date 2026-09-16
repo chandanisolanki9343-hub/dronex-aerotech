@@ -132,7 +132,7 @@ function AdminRecruitment() {
       let alertMsg = `Application successfully updated to ${status}`;
       if (status === "Approved") alertMsg = "Application Shortlisted/Approved for Interview";
       if (status === "Selected") alertMsg = "Application Approved & Selected (Welcome email sent and added to Team!)";
-      if (status === "Rejected") alertMsg = "Application Rejected";
+      if (status === "Rejected") alertMsg = "Application Rejected (Rejection notice email sent to candidate)";
       alert(alertMsg);
       fetchApplications();
     } catch (error) {
